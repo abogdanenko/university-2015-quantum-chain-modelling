@@ -1,0 +1,103 @@
+{{{
+load_attach_path(['/home/abogdanenko/jch_evolution'])
+load 'routines.sage'
+load 'SymbolicComputation.sage'
+load 'SymbolicComputationInteractive.sage'
+load 'NumericalParams.sage'
+load 'NumericalComputation.sage'
+load 'NumericalComputationInteractive.sage'
+}}}
+
+{{{
+sym = SymbolicComputationInteractive()
+}}}
+
+{{{
+sym.ShowBasisStatesTableHTML()
+sym.ShowVarsHTML()
+}}}
+
+{{{
+%time
+sym.ComputeEigenVectors()
+}}}
+
+{{{
+sym.ShowEigenHTML()
+}}}
+
+{{{
+interact(sym.InteractiveEigenValuesLinePlot())
+pass
+}}}
+
+{{{
+interact(sym.InteractiveEigenValuesBarChart())
+pass
+}}}
+
+{{{
+num = NumericalComputationInteractive(sym)
+}}}
+
+{{{
+interact(num.InteractiveParamsSet())
+pass
+}}}
+
+{{{
+num.ComputeHamiltonian()
+}}}
+
+{{{
+num.ComputeEigenVectors()
+show(num.EigenVectorsPlot())
+}}}
+
+{{{
+num.ShowEigenHTML()
+}}}
+
+{{{
+%time
+num.ComputeTimeEvolution()
+}}}
+
+{{{
+interact(num.InteractiveStates())
+pass
+}}}
+
+{{{
+interact(num.InteractiveState())
+pass
+}}}
+
+{{{
+interact(num.InteractiveProbabilityBarChart())
+pass
+}}}
+
+{{{
+interact(num.InteractiveUNorm())
+pass
+}}}
+
+{{{
+interact(num.InteractiveUNorm(basis_e = True))
+pass
+}}}
+
+{{{
+interact(num.InteractiveDiagDist())
+pass
+}}}
+
+{{{
+interact(num.InteractiveReducedStates1())
+pass
+}}}
+
+{{{
+num.PlotEntropy1(3)
+}}}
