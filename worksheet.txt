@@ -1,3 +1,7 @@
+<div style = "color:white;background-color:green">
+<h1>JCH model of two cavities</h1>
+</div>
+
 {{{
 load_attach_path(['/home/abogdanenko/jch_evolution'])
 load 'routines.sage'
@@ -7,6 +11,10 @@ load 'NumericalParams.sage'
 load 'NumericalComputation.sage'
 load 'NumericalComputationInteractive.sage'
 }}}
+
+<div style = "color:white;background-color:green">
+<h2>Symbolic computation</h2>
+</div>
 
 {{{
 sym = SymbolicComputationInteractive()
@@ -35,6 +43,10 @@ pass
 interact(sym.InteractiveEigenValuesBarChart())
 pass
 }}}
+
+<div style = "color:white;background-color:green">
+<h2>Numerical computation</h2>
+</div>
 
 {{{
 num = NumericalComputationInteractive(sym)
