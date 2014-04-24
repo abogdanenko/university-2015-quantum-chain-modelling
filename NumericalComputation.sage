@@ -5,7 +5,7 @@ class NumericalComputation:
 
     def __init__(self, sym):
         self.sym = sym
-        self.params = NumericalParams()
+        self.params = NumericalParams(self.sym.unitary)
 
     def TimeEvolutionMatrix(self, t):
         """
@@ -74,19 +74,45 @@ class NumericalComputation:
         Also, takes squared module of each element of the time evolution matrix
         """
 
-        self.U = [self.TimeEvolutionMatrix(self.IterationTime(t))
-            for t in range(self.params.time_steps)]
+        if self.sym.unitary:
+            self.U = [self.TimeEvolutionMatrix(self.IterationTime(t))
+                for t in range(self.params.time_steps)]
+    
+            self.U_norm = []
+            for m in self.U:
+                n = m.nrows()
+                r = matrix(RDF, n)
+                for i in range(n):
+                    for j in range(n):
+                        r[i, j] = norm(m[i, j])
+                self.U_norm.append(r)
+    
+            self.U_e_norm = [self.sym.ToEnergyBasis(m) for m in self.U_norm]
+        else:
+            rho_initial = []
+            for state in states_list:
+                psi = vector(CDF, states_count)
+                psi[state] = 1
+                c = psi.column()
+                rho = c * c.conjugate_transpose()
+                rho_initial.append(rho)
+            # todo: compute actual evolution
+            rho_list = [rho_initial] * self.params.time_steps
+    
+    def Rho(self, initial_state, t):
+        """
+        Return density matrix at time t
 
-        self.U_norm = []
-        for m in self.U:
-            n = m.nrows()
-            r = matrix(RDF, n, n)
-            for i in range(n):
-                for j in range(n):
-                    r[i, j] = norm(m[i, j])
-            self.U_norm.append(r)
+        Evolution must have been computed beforehand
+        """
 
-        self.U_e_norm = [self.sym.ToEnergyBasis(m) for m in self.U_norm]
+        if self.sym.unitary:
+            U = self.U[t]
+            vec = U.column(initial_state)
+            psi = vec.column()
+            return psi * psi.conjugate_transpose()
+        else:
+            return self.rho_list[t][initial_state]
 
     def DiagDist(self, initial_state, t):
         """
@@ -97,24 +123,20 @@ class NumericalComputation:
         """
 
         s = RDF()
+        rho = self.Rho(initial_state, t)
         for i in states_list:
             for j in states_list:
                 if (i != j):
-                    U = self.U[t]
-                    psi_i = U[i, initial_state]
-                    psi_j = U[j, initial_state]
-                    s += norm(psi_i * psi_j)
+                    s += norm(rho[i, j])
         return sqrt(s)
 
-    def Entropy1(self, t, initial_state):
+    def Entropy1(self, initial_state, t):
         """
         Returnes Von Neumann entropy of reduced density matrix
         """
-        m = self.U[t]
-        c = m.column(initial_state)
-        y = PsiReduced1(c).column()
-        rho = y * y.conjugate_transpose()
+
+        rho = self.Rho(initial_state, t)
+        rho1 = partial_trace1(rho)
         # drop imag part, it should be zero
-        ev = map(lambda z: z.real(), rho.eigenvalues())
-        return sum([xlnx(p) for p in ev])
-    
+        ev = map(abs, rho1.eigenvalues())
+        return -1 * sum([xlnx(p) for p in ev])

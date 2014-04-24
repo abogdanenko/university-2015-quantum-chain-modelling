@@ -111,5 +111,6 @@ pass
 }}}
 
 {{{
-num.PlotEntropy1(3)
+interact(num.InteractiveEntropy1())
+pass
 }}}

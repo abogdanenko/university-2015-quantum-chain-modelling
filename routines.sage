@@ -107,14 +107,20 @@ def show_eigen_html(ev):
                 '({})'.format(''.join(string_list))))
         html.table(l, header = ['eigenvalue', 'eigenvector'])
 
-def PsiReduced1(psi):
+def partial_trace1(rho):
     """
-    Returnes reduced state vector of subsystem 1
+    Returnes reduced density matrix of subsystem 1
     """
-    v = vector(CDF, 4)
+
+    rho1 = matrix(CDF, 4)
     for i1i2 in range(4):
-         v[i1i2] = sum(psi[i1i2 * 4: (i1i2 + 1) * 4])
-    return v
+        for j1j2 in range(4):
+             s = 0
+             for i3i4 in range(4):
+                 s += rho[i1i2 * 4 + i3i4, j1j2 * 4 + i3i4]
+              
+             rho1[i1i2, j1j2] = s
+    return rho1
 
 def xlnx(x):
     """

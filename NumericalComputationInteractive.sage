@@ -15,11 +15,14 @@ class NumericalComputationInteractive(NumericalComputation):
     
         l = []
         for t in range(self.params.time_steps):
-            m = self.U_norm[t]
             x = self.IterationTime(t)
-            y = m[state, initial_state]
+    
+            rho = self.Rho(initial_state, t)
+            y = abs(rho[state, state])
+
             point = (x, y)
             l.append(point)
+
     
         plot_object = line(l,
             ymin = 0,
@@ -56,15 +59,19 @@ class NumericalComputationInteractive(NumericalComputation):
             title = title)
         return plot_object
     
-    def ProbabilityBarChart(self, t, initial_state):
+    def ProbabilityBarChart(self, initial_state, t):
         """
         Returns bar chart of state at time t
         """
 
-        m = self.U_norm[t]
         title = 'time = {:7.2f}, initial_state = {}'.format(
             float(num.IterationTime(t)), initial_state)
-        plot_object = bar_chart(m.column(initial_state),
+
+        rho = self.Rho(initial_state, t)
+        d = rho.diagonal()
+        row = map(abs, d)
+
+        plot_object = bar_chart(row,
             ymin = 0,
             ymax = 1,
             title = title,
@@ -87,7 +94,9 @@ class NumericalComputationInteractive(NumericalComputation):
         Saves bar chart of state as gif animation
         """
 
-        l = [self.ProbabilityBarChart(t, initial_state) for t in range(self.params.time_steps)]
+        l = [self.ProbabilityBarChart(initial_state, t)
+            for t in range(self.params.time_steps)]
+
         animation = animate(l)
         animation.gif(savefile = filename, show_path = True)
     
@@ -98,13 +107,20 @@ class NumericalComputationInteractive(NumericalComputation):
         Prepares default values for inner function
         """
 
-        defaults = NumericalParams()
+        defaults = NumericalParams(self.sym.unitary)
         alpha_box = input_box(defaults.alpha, label = r'$\alpha = $', type = RDF)
         beta_box = input_box(defaults.beta, label = r'$\beta = $', type = RDF)
         omega_a_box = input_box(defaults.omega_a, label = r'$\omega_a = $', type = RDF)
         omega_c_box = input_box(defaults.omega_c, label = r'$\omega_c = $', type = RDF)
         time_steps_box = input_box(defaults.time_steps, label = '$n_t$', type = Integer)
         time_end_box = input_box(defaults.time_end, label = r'$t_{\rm end}$', type = RDF)
+
+        if self.sym.unitary:
+            gamma_box = None
+        else:
+            gamma_box = input_box(defaults.gamma, label = r'$\gamma = $', type = RDF)
+ 
+        # todo: refactor two function definitions into one
 
         def inner(
                 alpha = alpha_box, 
@@ -127,7 +143,33 @@ class NumericalComputationInteractive(NumericalComputation):
             self.params.time_steps = time_steps
             self.params.ShowHTML()
     
-        return inner
+        def inner_not_unitary(
+                alpha = alpha_box, 
+                beta = beta_box,
+                gamma = gamma_box,
+                omega_a = omega_a_box,
+                omega_c = omega_c_box,
+                time_steps = time_steps_box,
+                time_end = time_end_box,
+                auto_update = False):
+            """
+            Sets parameters interactively, display new parameters in html
+
+            Should be passed to interact()
+            """
+            self.params.alpha = alpha
+            self.params.beta = beta
+            self.params.gamma = gamma
+            self.params.omega_a = omega_a
+            self.params.omega_c = omega_c
+            self.params.time_end = time_end
+            self.params.time_steps = time_steps
+            self.params.ShowHTML()
+    
+        if self.sym.unitary:
+            return inner
+        else:
+            return inner_not_unitary
 
     def StateSlider(self):
         return slider(states_list, default = 1)
@@ -142,7 +184,7 @@ class NumericalComputationInteractive(NumericalComputation):
         Prepares default values for inner function
         """
     
-        def inner(t = self.TimeSlider(), initial_state = self.StateSlider()):
+        def inner(initial_state = self.StateSlider(), t = self.TimeSlider()):
 
             """
             Displays state at time t
@@ -151,7 +193,7 @@ class NumericalComputationInteractive(NumericalComputation):
             """
 
             html('<h2>State at a given time</h2>')
-            show(self.ProbabilityBarChart(t, initial_state))
+            show(self.ProbabilityBarChart(initial_state, t))
     
         return inner
     
@@ -197,7 +239,7 @@ class NumericalComputationInteractive(NumericalComputation):
             Should be passed to interact()
             """
 
-            html('<h2>Time evolution of state vector component</h2>')
+            html('<h2>Time evolution of state</h2>')
             show(self.PlotState(state, initial_state))
 
         return inner
@@ -295,10 +337,10 @@ class NumericalComputationInteractive(NumericalComputation):
     
         l = []
         for t in range(self.params.time_steps):
-            m = self.U[t]
             x = self.IterationTime(t)
-            c = m.column(initial_state)
-            y = norm(PsiReduced1(c)[state])
+            rho = self.Rho(initial_state, t)
+            rho1 = partial_trace1(rho)
+            y = abs(rho1[state, state])
             point = (x, y)
             l.append(point)
     
@@ -350,15 +392,34 @@ class NumericalComputationInteractive(NumericalComputation):
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            y = self.Entropy1(t, initial_state)
+            y = self.Entropy1(initial_state, t)
             point = (x, y)
             l.append(point)
     
         plot_object = line(l,
             ymin = 0,
-            ymax = 1,
+            ymax = 2,
             axes_labels = ['t', 'entropy'],
             legend_label = 'initial state = {}'.format(initial_state))
     
         return plot_object
     
+    def InteractiveEntropy1(self):
+        """
+        Returns inner function
+        
+        Prepares default values for inner function
+        """
+
+        def inner(initial_state = self.StateSlider()):
+            """
+            Shows line plot of entropy
+
+            User specifies initial state
+            """
+
+            html('<h2>Entropy of subsystem 1</h2>')
+            show(self.PlotEntropy1(initial_state))
+
+        return inner    
+

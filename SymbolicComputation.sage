@@ -10,7 +10,9 @@ class SymbolicComputation:
 
         return self.T.transpose() * A * self.T
 
-    def __init__(self):
+    def __init__(self, unitary = True):
+        self.unitary = unitary
+
         omega_a = SR.var('omega_a', domain = 'positive')
         omega_c = SR.var('omega_c', domain = 'positive')
         alpha = SR.var('alpha', domain = 'positive')
@@ -52,6 +54,10 @@ class SymbolicComputation:
 
         self.H_e = self.ToEnergyBasis(self.H)
 
+        if not self.unitary:
+            gamma = SR.var('gamma', domain = 'positive')
+            self.L = gamma * I4.tensor_product(self.a).tensor_product(I2)
+
     def ShowVarsHTML(self):
         """
         Prints matrices of quantum-mech. operators used in computations
@@ -83,6 +89,9 @@ class SymbolicComputation:
 
         for E in energy_list:
             l.append((r'H_{}'.format(E), self.H_blocks[E]))
+
+        if not self.unitary:
+            l.append((r'L', self.L))
 
         html_vars(l)
 
