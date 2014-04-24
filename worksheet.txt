@@ -3,13 +3,7 @@
 </div>
 
 {{{
-load_attach_path(['/home/abogdanenko/jch_evolution'])
-load 'routines.sage'
-load 'SymbolicComputation.sage'
-load 'SymbolicComputationInteractive.sage'
-load 'NumericalParams.sage'
-load 'NumericalComputation.sage'
-load 'NumericalComputationInteractive.sage'
+load('main.sage')
 }}}
 
 <div style = "color:white;background-color:green">
