@@ -1,0 +1,56 @@
+<div style = "color:white;background-color:green">
+<h1>JCH model of two cavities</h1>
+</div>
+
+{{{
+load('main.sage')
+}}}
+
+<div style = "color:white;background-color:green">
+<h2>Symbolic computation</h2>
+</div>
+
+{{{
+sym = SymbolicComputationInteractive(unitary = False)
+sym.ComputeEigenVectors()
+}}}
+
+{{{
+sym.ShowBasisStatesTableHTML()
+sym.ShowVarsHTML()
+}}}
+
+{{{
+sym.ShowEigenHTML()
+}}}
+
+{{{
+interact(sym.InteractiveEigenValuesLinePlot())
+pass
+}}}
+
+{{{
+interact(sym.InteractiveEigenValuesBarChart())
+pass
+}}}
+
+<div style = "color:white;background-color:green">
+<h2>Numerical computation</h2>
+</div>
+
+{{{
+num = NumericalComputationInteractive(sym)
+}}}
+
+{{{
+interact(num.InteractiveParamsSet())
+pass
+}}}
+
+{{{
+show(num.EigenVectorsPlot())
+}}}
+
+{{{
+num.ShowEigenHTML()
+}}}

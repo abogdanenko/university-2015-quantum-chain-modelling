@@ -11,31 +11,7 @@ load('main.sage')
 </div>
 
 {{{
-sym = SymbolicComputationInteractive()
-}}}
-
-{{{
-sym.ShowBasisStatesTableHTML()
-sym.ShowVarsHTML()
-}}}
-
-{{{
-%time
-sym.ComputeEigenVectors()
-}}}
-
-{{{
-sym.ShowEigenHTML()
-}}}
-
-{{{
-interact(sym.InteractiveEigenValuesLinePlot())
-pass
-}}}
-
-{{{
-interact(sym.InteractiveEigenValuesBarChart())
-pass
+sym = SymbolicComputationInteractive(unitary = True)
 }}}
 
 <div style = "color:white;background-color:green">
@@ -49,19 +25,6 @@ num = NumericalComputationInteractive(sym)
 {{{
 interact(num.InteractiveParamsSet())
 pass
-}}}
-
-{{{
-num.ComputeHamiltonian()
-}}}
-
-{{{
-num.ComputeEigenVectors()
-show(num.EigenVectorsPlot())
-}}}
-
-{{{
-num.ShowEigenHTML()
 }}}
 
 {{{

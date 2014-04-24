@@ -141,6 +141,8 @@ class NumericalComputationInteractive(NumericalComputation):
             self.params.omega_c = omega_c
             self.params.time_end = time_end
             self.params.time_steps = time_steps
+            self.ComputeHamiltonian()
+            self.ComputeEigenVectors()
             self.params.ShowHTML()
     
         def inner_not_unitary(
@@ -164,6 +166,8 @@ class NumericalComputationInteractive(NumericalComputation):
             self.params.omega_c = omega_c
             self.params.time_end = time_end
             self.params.time_steps = time_steps
+            self.ComputeHamiltonian()
+            self.ComputeEigenVectors()
             self.params.ShowHTML()
     
         if self.sym.unitary:

@@ -6,6 +6,8 @@ class NumericalComputation:
     def __init__(self, sym):
         self.sym = sym
         self.params = NumericalParams(self.sym.unitary)
+        self.ComputeHamiltonian()
+        self.ComputeEigenVectors()
 
     def TimeEvolutionMatrix(self, t):
         """
