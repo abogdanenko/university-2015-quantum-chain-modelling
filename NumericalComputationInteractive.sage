@@ -263,10 +263,15 @@ class NumericalComputationInteractive(NumericalComputation):
             """
 
             html('<h2>Time evolution of state vector {}</h2>'.format(initial_state))
-            E = energy(initial_state)
-            l = self.PlotStates(e_states(E), initial_state)
-            show(sum(l))
-            show(graphics_array(l, 3, 2))
+            if self.sym.unitary:
+                E = energy(initial_state)
+                l = self.PlotStates(e_states(E), initial_state)
+                show(sum(l))
+                show(graphics_array(l, 3, 2))
+            else:
+                l = self.PlotStates(states_list, initial_state)
+                show(sum(l))
+                show(graphics_array(l, 8, 2), figsize = [10, 20])
 
         return inner    
 

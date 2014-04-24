@@ -99,7 +99,7 @@ class NumericalComputation:
                 rho = c * c.conjugate_transpose()
                 rho_initial.append(rho)
             # todo: compute actual evolution
-            rho_list = [rho_initial] * self.params.time_steps
+            self.rho_list = [rho_initial] * self.params.time_steps
     
     def Rho(self, initial_state, t):
         """
