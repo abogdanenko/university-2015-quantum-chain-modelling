@@ -9,7 +9,7 @@ class NumericalComputation:
     def __init__(self, sym):
         self.sym = sym
         self.params = NumericalParams(self.sym.unitary)
-        self.ComputeHamiltonian()
+        self.InitOperators()
         self.ComputeEigenVectors()
 
     def TimeEvolutionMatrix(self, t):
@@ -45,14 +45,17 @@ class NumericalComputation:
 
         return self.Subs(expr).change_ring(CDF)
 
-    def ComputeHamiltonian(self):
+    def InitOperators(self):
         """
-        Computes H, H_blocks, H_e by simple substitution
+        Computes H, H_blocks, H_e, L by simple substitution
         """ 
 
         self.H = self.SubsNum(self.sym.H)
         self.H_blocks = [self.SubsNum(B) for B in self.sym.H_blocks]
         self.H_e = self.SubsNum(self.sym.H_e)
+
+        if not self.sym.unitary:
+            self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
 
     def ComputeEigenVectors(self):
         """
@@ -80,7 +83,12 @@ class NumericalComputation:
         """
 
         unitary_term = CDF(-I) * self.H.commutator(rho)
-        return unitary_term
+
+        L = self.L
+        Lc = L.conjugate_transpose()
+        lindblad_term = L * rho * Lc - 0.5 * rho.anticommutator(Lc * L)
+
+        return unitary_term + lindblad_term
 
     def METimeStep(self, rho):
         """

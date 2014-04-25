@@ -141,7 +141,7 @@ class NumericalComputationInteractive(NumericalComputation):
             self.params.omega_c = omega_c
             self.params.time_end = time_end
             self.params.time_steps = time_steps
-            self.ComputeHamiltonian()
+            self.InitOperators()
             self.ComputeEigenVectors()
             self.params.ShowHTML()
     
@@ -166,7 +166,7 @@ class NumericalComputationInteractive(NumericalComputation):
             self.params.omega_c = omega_c
             self.params.time_end = time_end
             self.params.time_steps = time_steps
-            self.ComputeHamiltonian()
+            self.InitOperators()
             self.ComputeEigenVectors()
             self.params.ShowHTML()
     
