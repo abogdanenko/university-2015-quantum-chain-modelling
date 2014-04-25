@@ -12,6 +12,23 @@ def e_states(E):
 
     return [i for i in states_list if energy(i) == E]
 
+def vec2dm(psi):
+    """
+    Returns density matrix corresponding to state vector psi
+    """
+
+    c = psi.column()
+    return c * c.conjugate_transpose()
+
+def basis_state(state):
+    """
+    Returns basis state number ``state``
+    """
+
+    psi = vector(CDF, states_count)
+    psi[state] = 1
+    return psi
+
 def coordinate_change_matrix():
     """
     Returns coordinate change matrix to energy basis

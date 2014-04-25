@@ -29,7 +29,7 @@ pass
 
 {{{
 %time
-num.ComputeTimeEvolution()
+num.ComputeTimeEvolution([1])
 }}}
 
 {{{

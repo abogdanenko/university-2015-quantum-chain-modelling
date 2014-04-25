@@ -1,3 +1,6 @@
+from scipy.integrate import ode
+from numpy import array
+
 class NumericalComputation:
     """
     Computes time evolution numerically
@@ -39,6 +42,7 @@ class NumericalComputation:
         """
         Returns expr coerced to CDF with variables substituted with numbers
         """
+
         return self.Subs(expr).change_ring(CDF)
 
     def ComputeHamiltonian(self):
@@ -69,37 +73,91 @@ class NumericalComputation:
                 ).format(E))
             show_eigen_html(self.ev_blocks[E])
 
-    def ComputeTimeEvolution(self):
-        """
-        Computes time evolution matrix at each time t
 
-        Also, takes squared module of each element of the time evolution matrix
+    def RHS(self, rho):
+        """
+        Defines right-hand side of master equation ode
+        """
+
+        unitary_term = CDF(-I) * self.H.commutator(rho)
+        return unitary_term
+
+    def METimeStep(self, rho):
+        """
+        Computes time evolution of rho over time dt
+        """
+
+        rho = array(rho)
+        matshape = rho.shape
+        rho = rho.ravel()
+
+        def f(t, y):
+            """
+            Defines right-hand side of master equation ode
+
+            Can be used with scipy.integrate.ode ode solver
+            """
+
+            rho = matrix(y.reshape(matshape))
+            rhs = self.RHS(rho)
+            return array(rhs).ravel()
+
+        dt = RDF(self.params.time_end / self.params.time_steps)
+
+        r = ode(f)
+        r.set_integrator('zvode')
+        r.set_initial_value(rho)
+        r.integrate(dt)
+
+        rho = r.y.reshape(matshape)
+
+        return matrix(rho)
+
+    def InitUNorm(self):
+        """
+        Takes squared module of each element of the time evolution matrix
+ 
+        Also, computes the same matrix in energy basis
+        """
+
+        self.U_norm = []
+        for m in self.U:
+            n = m.nrows()
+            r = matrix(RDF, n)
+            for i in range(n):
+                for j in range(n):
+                    r[i, j] = norm(m[i, j])
+            self.U_norm.append(r)
+
+        self.U_e_norm = [self.sym.ToEnergyBasis(m) for m in self.U_norm]
+
+    def ComputeTimeEvolution(self, initial_states = []):
+        """
+        Computes time evolution
+
+        Accepts a set of initial states to compute evolution for in master
+        equation case
         """
 
         if self.sym.unitary:
             self.U = [self.TimeEvolutionMatrix(self.IterationTime(t))
                 for t in range(self.params.time_steps)]
+            self.InitUNorm()
     
-            self.U_norm = []
-            for m in self.U:
-                n = m.nrows()
-                r = matrix(RDF, n)
-                for i in range(n):
-                    for j in range(n):
-                        r[i, j] = norm(m[i, j])
-                self.U_norm.append(r)
-    
-            self.U_e_norm = [self.sym.ToEnergyBasis(m) for m in self.U_norm]
         else:
-            rho_initial = []
-            for state in states_list:
-                psi = vector(CDF, states_count)
-                psi[state] = 1
-                c = psi.column()
-                rho = c * c.conjugate_transpose()
-                rho_initial.append(rho)
-            # todo: compute actual evolution
-            self.rho_list = [rho_initial] * self.params.time_steps
+            rho_initial = [vec2dm(basis_state(state)) for state in states_list]
+
+            self.rho_list = [rho_initial]
+            for t in range(1, self.params.time_steps):
+                l = []
+                for state in states_list:
+                    rho = self.rho_list[-1][state]
+                    if state in initial_states:
+                        rho = self.METimeStep(rho)
+                    l.append(rho)
+                
+                self.rho_list.append(l)
+                
     
     def Rho(self, initial_state, t):
         """
