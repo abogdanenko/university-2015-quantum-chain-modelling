@@ -53,12 +53,7 @@ pass
 }}}
 
 {{{
-interact(num.InteractiveUNorm())
-pass
-}}}
-
-{{{
-interact(num.InteractiveUNorm(basis_e = True))
+interact(num.InteractiveUnitaryEvolutionMatrix())
 pass
 }}}
 

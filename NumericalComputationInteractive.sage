@@ -45,12 +45,14 @@ class NumericalComputationInteractive(NumericalComputation):
         return [self.PlotState(s, initial_state, c) for s, c \
             in zip(states, colors)]
     
-    def PlotUNorm(self, t, basis_e = False):
+    def PlotUnitaryEvolutionMatrix(self, t, basis_e = False):
         """
-        Return matrix plot of U_norm or U_e_norm at time t
+        Return matrix plot of U at time t
         """
 
-        m = self.U_e_norm[t] if basis_e else self.U_norm[t]
+        m = self.U[t].apply_map(norm)
+        if basis_e:
+            m = self.sym.ToEnergyBasis(m)
         title = 'time = {:7.2f}'.format(float(self.IterationTime(t)))
         plot_object = matrix_plot(m,
             cmap = 'gist_heat',
@@ -80,12 +82,13 @@ class NumericalComputationInteractive(NumericalComputation):
             gridlines = True)
         return plot_object
         
-    def SaveUNormAnimation(self, filename, basis_e = False):
+    def SaveUnitaryEvolutionMatrixAnimation(self, filename, basis_e = False):
         """
-        Saves matrix plots of U_norm or U_e_norm as gif animation
+        Saves matrix plots of U as gif animation
         """
 
-        l = [self.PlotUNorm(t, basis_e) for t in range(self.params.time_steps)]
+        l = [self.PlotUnitaryEvolutionMatrix(t, basis_e)
+            for t in range(self.params.time_steps)]
         animation = animate(l)
         animation.gif(savefile = filename, show_path = True)
     
@@ -201,15 +204,16 @@ class NumericalComputationInteractive(NumericalComputation):
     
         return inner
     
-    def InteractiveUNorm(self, basis_e = False):
+    def InteractiveUnitaryEvolutionMatrix(self):
         """
         Returns inner function
         
         Prepares default values for inner function
         """
 
-        def inner(t = self.TimeSlider()):
-
+        def inner(
+                t = self.TimeSlider(),
+                basis_e = [True, False]):
             """
             Displays time evolution matrix at time t
 
@@ -221,7 +225,7 @@ class NumericalComputationInteractive(NumericalComputation):
                     'at a given time</h2>')
             else:
                 html('<h2>Time evolution matrix at a given time</h2>')
-            show(self.PlotUNorm(t, basis_e))
+            show(self.PlotUnitaryEvolutionMatrix(t, basis_e))
     
         return inner
     

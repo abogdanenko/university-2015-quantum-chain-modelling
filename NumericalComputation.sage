@@ -121,24 +121,6 @@ class NumericalComputation:
 
         return matrix(rho)
 
-    def InitUNorm(self):
-        """
-        Takes squared module of each element of the time evolution matrix
- 
-        Also, computes the same matrix in energy basis
-        """
-
-        self.U_norm = []
-        for m in self.U:
-            n = m.nrows()
-            r = matrix(RDF, n)
-            for i in range(n):
-                for j in range(n):
-                    r[i, j] = norm(m[i, j])
-            self.U_norm.append(r)
-
-        self.U_e_norm = [self.sym.ToEnergyBasis(m) for m in self.U_norm]
-
     def ComputeTimeEvolution(self, initial_states = []):
         """
         Computes time evolution
@@ -150,7 +132,6 @@ class NumericalComputation:
         if self.sym.unitary:
             self.U = [self.TimeEvolutionMatrix(self.IterationTime(t))
                 for t in range(self.params.time_steps)]
-            self.InitUNorm()
     
         else:
             rho_initial = [vec2dm(basis_state(state)) for state in states_list]
