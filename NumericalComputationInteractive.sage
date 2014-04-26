@@ -432,3 +432,42 @@ class NumericalComputationInteractive(NumericalComputation):
 
         return inner    
 
+    def PlotRho(self, initial_state, t, basis_e = False):
+        """
+        Return matrix plot of rho at time t
+        """
+
+        rho = self.Rho(initial_state, t)
+        if basis_e:
+            rho = self.sym.ToEnergyBasis(rho)
+        title = 'time = {:7.2f}'.format(float(self.IterationTime(t)))
+        plot_object = matrix_plot(matrix(abs(array(rho))),
+            cmap = 'spectral',
+            vmin = 0,
+            vmax = 1,
+            colorbar = True,
+            title = title)
+        return plot_object
+    
+    def InteractiveRho(self):
+        """
+        Returns inner function
+        
+        Prepares default values for inner function
+        """
+
+        def inner(
+                initial_state = self.StateSlider(),
+                t = self.TimeSlider(),
+                basis_e = [True, False]):
+            """
+            Displays density matrix at time t
+
+            Should be passed to interact()
+            """
+
+            html('<h2>Density matrix at a given time</h2>')
+            show(self.PlotRho(initial_state, t, basis_e))
+    
+        return inner
+    

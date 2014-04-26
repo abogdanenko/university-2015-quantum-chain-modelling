@@ -33,6 +33,11 @@ num.ComputeTimeEvolution([1])
 }}}
 
 {{{
+interact(num.InteractiveRho())
+pass
+}}}
+
+{{{
 interact(num.InteractiveStates())
 pass
 }}}
