@@ -14,7 +14,7 @@ class NumericalParams(object):
         self.time_end = RDF(40)
 
         if not unitary:
-            self.gamma = RDF(0.1)
+            self.gamma = RDF(0.5)
 
     def ShowHTML(self):
         """

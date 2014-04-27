@@ -91,8 +91,10 @@ class NumericalComputationInteractive(object):
         Prepares default values for inner function
         """
     
-        def inner(initial_state = self.StateSlider(), t = self.TimeSlider()):
-
+        def inner(
+                initial_state = self.StateSlider(),
+                t = self.TimeSlider(),
+                basis_e = [True, False]):
             """
             Displays state at time t
 
@@ -100,7 +102,7 @@ class NumericalComputationInteractive(object):
             """
 
             html('<h2>State at a given time</h2>')
-            show(self.ProbabilityBarChart(initial_state, t))
+            show(self.ProbabilityBarChart(initial_state, t, basis_e))
     
         return inner
     

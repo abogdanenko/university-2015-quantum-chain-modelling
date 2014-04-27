@@ -23,12 +23,12 @@ class NumericalComputationAnimation(object):
         animation = animate(l)
         animation.gif(savefile = filename, show_path = True)
     
-    def SaveProbabilityBarChartAnimation(self, filename, initial_state):
+    def SaveProbabilityBarChartAnimation(self, filename, initial_state, basis_e = False):
         """
         Saves bar chart of state as gif animation
         """
 
-        l = [self.ProbabilityBarChart(initial_state, t)
+        l = [self.ProbabilityBarChart(initial_state, t, basis_e)
             for t in range(self.params.time_steps)]
 
         animation = animate(l)

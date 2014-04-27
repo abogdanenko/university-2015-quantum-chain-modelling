@@ -60,7 +60,7 @@ class NumericalComputationPlots(object):
             title = title)
         return plot_object
     
-    def ProbabilityBarChart(self, initial_state, t):
+    def ProbabilityBarChart(self, initial_state, t, basis_e = False):
         """
         Returns bar chart of state at time t
         """
@@ -69,6 +69,8 @@ class NumericalComputationPlots(object):
             float(num.IterationTime(t)), initial_state)
 
         rho = self.Rho(initial_state, t)
+        if basis_e:
+            rho = self.sym.ToEnergyBasis(rho)
         d = map(abs, rho.diagonal())
 
         plot_object = bar_chart(d,
