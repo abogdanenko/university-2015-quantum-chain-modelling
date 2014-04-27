@@ -1,9 +1,14 @@
 load('routines.sage')
-load('SymbolicComputation.sage')
+load('SymbolicComputationBase.sage')
+load('SymbolicComputationPlots.sage')
 load('SymbolicComputationInteractive.sage')
+load('SymbolicComputation.sage')
 load('NumericalParams.sage')
-load('NumericalComputation.sage')
+load('NumericalComputationBase.sage')
+load('NumericalComputationPlots.sage')
 load('NumericalComputationInteractive.sage')
+load('NumericalComputationAnimation.sage')
+load('NumericalComputation.sage')
 
 qubits_count = 4
 states_count = 2^qubits_count

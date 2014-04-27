@@ -11,7 +11,7 @@ load('main.sage')
 </div>
 
 {{{
-sym = SymbolicComputationInteractive(unitary = False)
+sym = SymbolicComputation(unitary = False)
 sym.ComputeEigenVectors()
 }}}
 
@@ -39,7 +39,7 @@ pass
 </div>
 
 {{{
-num = NumericalComputationInteractive(sym)
+num = NumericalComputation(sym)
 }}}
 
 {{{
@@ -48,7 +48,7 @@ pass
 }}}
 
 {{{
-show(num.EigenVectorsPlot())
+show(num.PlotEigenVectors())
 }}}
 
 {{{

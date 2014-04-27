@@ -1,4 +1,4 @@
-class NumericalParams:
+class NumericalParams(object):
     """
     Initializes, stores and prints current values of computation parameters
     """
@@ -10,7 +10,7 @@ class NumericalParams:
         self.beta = RDF(1)
         self.omega_a = RDF(1)
         self.omega_c = RDF(1)
-        self.time_steps = 1000
+        self.time_steps = 500
         self.time_end = RDF(40)
 
         if not unitary:
