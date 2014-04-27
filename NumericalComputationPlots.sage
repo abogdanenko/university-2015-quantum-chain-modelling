@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 class NumericalComputationPlots(object):
     """
     Makes plots for class NumericalComputation
@@ -73,13 +75,29 @@ class NumericalComputationPlots(object):
             rho = self.sym.ToEnergyBasis(rho)
         d = map(abs, rho.diagonal())
 
-        plot_object = bar_chart(d,
-            ymin = 0,
-            ymax = 1,
-            title = title,
-            ticks = 1,
-            gridlines = True)
-        return plot_object
+        colors = []
+        if basis_e:
+            for E in energy_list:
+                colors.extend(block_sizes[E] * [energy_rainbow[E]])
+        else:
+            for state in states_list:
+                colors.append(energy_rainbow[energy(state)])
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111r)
+        ax.set_title('Diagonal of density matrix')
+        ax.set_xlim(left = -0.5, right = states_count - 0.5)
+        ax.set_ylim(bottom = 0, top = 1.1)
+        ax.set_ylabel('Probability')
+        
+        b = ax.bar(states_list, d, color = colors, align = 'center')
+
+        plt.xticks(states_list, states_list)
+        indices = left_indices if basis_e else first_indices
+        labels = ['E = {}'.format(E) for E in energy_list]
+        points = [b[indices[E]] for E in energy_list]
+        ax.legend(points, labels, loc = 'upper center')
+        fig.savefig('ProbabilityBarChartPyPlt')        
         
     def PlotEigenVectors(self):
         """

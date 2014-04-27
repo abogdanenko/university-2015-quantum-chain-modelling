@@ -102,7 +102,7 @@ class NumericalComputationInteractive(object):
             """
 
             html('<h2>State at a given time</h2>')
-            show(self.ProbabilityBarChart(initial_state, t, basis_e))
+            self.ProbabilityBarChart(initial_state, t, basis_e)
     
         return inner
     
