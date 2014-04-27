@@ -62,7 +62,7 @@ class NumericalComputationPlots(object):
             title = title)
         return plot_object
     
-    def ProbabilityBarChart(self, initial_state, t, basis_e = False):
+    def ProbabilityBarChart(self, initial_state, t, basis_e = False, filename = 'ProbabilityBarChart'):
         """
         Returns bar chart of state at time t
         """
@@ -97,7 +97,7 @@ class NumericalComputationPlots(object):
         labels = ['E = {}'.format(E) for E in energy_list]
         points = [b[indices[E]] for E in energy_list]
         ax.legend(points, labels, loc = 'upper center')
-        fig.savefig('ProbabilityBarChartPyPlt')        
+        fig.savefig(filename)        
         
     def PlotEigenVectors(self):
         """
