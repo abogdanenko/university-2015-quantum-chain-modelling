@@ -1,8 +1,8 @@
 class NumericalParams(object):
     """
     Initializes, stores and prints current values of computation parameters
-    """
 
+    """
     def __init__(self, unitary = True):
         self.unitary = unitary
 
@@ -21,8 +21,8 @@ class NumericalParams(object):
         Print values of parameters
 
         Works inside notebook interface
-        """
 
+        """
         l = []
 
         l.append((r'\alpha', self.alpha))
@@ -34,6 +34,6 @@ class NumericalParams(object):
         l.append((r'\omega_a', self.omega_a))
         l.append((r'\omega_c', self.omega_c))
         l.append((r'n_t', self.time_steps))
-        l.append((r't_{\rm end}', self.time_end)) 
+        l.append((r't_{\rm end}', self.time_end))
 
         html_vars(l)

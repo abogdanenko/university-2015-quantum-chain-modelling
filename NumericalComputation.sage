@@ -5,6 +5,6 @@ class NumericalComputation(
     NumericalComputationAnimation):
     """
     Computes time evolution numerically, makes interactive plots and animation
-    """
 
+    """
     pass

@@ -1,13 +1,13 @@
 class SymbolicComputationBase(object):
     """
     Computes hamiltonian, eigenvectors symbolically
-    """
 
+    """
     def ToEnergyBasis(self, A):
         """
         Returnes matrix A in energy basis
-        """
 
+        """
         return self.T.transpose() * A * self.T
 
     def __init__(self, unitary = True):
@@ -17,7 +17,7 @@ class SymbolicComputationBase(object):
         omega_c = SR.var('omega_c', domain = 'positive')
         alpha = SR.var('alpha', domain = 'positive')
         beta = SR.var('beta', domain = 'positive')
-    
+
         self.psi_g = matrix(SR, 2, 1, [1, 0])
         self.psi_e = matrix(SR, 2, 1, [0, 1])
         self.psi_ph0 = self.psi_g
@@ -44,7 +44,7 @@ class SymbolicComputationBase(object):
         self.H = self.H_sum.tensor_product(I4) \
             + I4.tensor_product(self.H_sum) \
             + self.H_tun
-    
+
         self.H_blocks = []
         for E in energy_list:
             I = J = e_states(E)
@@ -63,8 +63,8 @@ class SymbolicComputationBase(object):
         Prints matrices of quantum-mech. operators used in computations
 
         Works inside notebook interface
-        """
 
+        """
         l = []
 
         l.append((r'|g\rangle', self.psi_g))
@@ -76,16 +76,16 @@ class SymbolicComputationBase(object):
         l.append((r'a^{+}', self.a_plus))
         l.append((r'\sigma^{-}', self.sigma_minus))
         l.append((r'\sigma^{+}', self.sigma_plus))
-        
+
         l.append((r'H_{\rm field}', self.H_field))
         l.append((r'H_{\rm at}', self.H_at))
         l.append((r'H_{\rm field,at}', self.H_field_at))
         l.append((r'H_{\rm sum}', self.H_sum))
         l.append((r'H_{\rm tun}', self.H_tun))
         l.append((r'H', self.H))
-        
+
         l.append((r'T', self.T))
-        l.append((r'H^e', self.H_e))        
+        l.append((r'H^e', self.H_e))
 
         for E in energy_list:
             l.append((r'H_{}'.format(E), self.H_blocks[E]))
@@ -100,13 +100,13 @@ class SymbolicComputationBase(object):
         Prints hilbert space basis vectors and their energies
 
         Works inside notebook interface
-        """
 
+        """
         header = ['state', 'ph1', 'at1', 'ph2', 'at2', r'$E_{\rm total}$']
         header_e = header + [r'$\langle E \rangle$']
-            
+
         html('<h2>Basis states</h2>')
-        
+
         rows = []
         for i in states_list:
             row = [i]
@@ -116,7 +116,7 @@ class SymbolicComputationBase(object):
             rows.append(row)
 
         html.table(rows, header = header_e)
-        
+
         rows = []
         for E in energy_list:
             html('<h2>Subspace (E = {})</h2>'.format(E))
@@ -131,10 +131,10 @@ class SymbolicComputationBase(object):
     def ComputeEigenVectors(self):
         """
         Computes eigenvalues and eigenvectors of each block
-  
-        Assumes omega_a = omega_c = omega
-        """
 
+        Assumes omega_a = omega_c = omega
+
+        """
         omega = SR.var('omega', domain = 'real')
 
         self.ev_blocks = []
@@ -157,16 +157,15 @@ class SymbolicComputationBase(object):
             row += len(vector)
 
 
-            
+
     def ShowEigenHTML(self):
         """
         Prints eigenvalues and eigenvectors of each block in HTML
 
         Works in notebook interface.
-        """
 
+        """
         for E in energy_list:
             html(('<h3>Eigenvalues and eigenvectors of'
                 ' $H_{}$: </h3>').format(E))
             show_eigen_html(self.ev_blocks[E])
-

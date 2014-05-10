@@ -1,15 +1,15 @@
 class SymbolicComputationInteractive(object):
     """
     Makes interactive plots for class SymbolicComputation
-    """
 
+    """
     def InteractiveEigenValuesLinePlot(self):
         """
         Returns inner function
-        
-        Prepares default values for inner function
-        """
 
+        Prepares default values for inner function
+
+        """
         values = [RealField(10)(k / 10.0) for k in range(41)]
         defaults = NumericalParams()
 
@@ -26,8 +26,8 @@ class SymbolicComputationInteractive(object):
             User specifies a variable (alpha or beta) and a value
 
             Should be passed to interact()
-            """
 
+            """
             def eigenvalues(E):
                 kwds = {'omega': defaults.omega_a}
                 key = 'alpha' if name == r'$\alpha$' else 'beta'
@@ -55,10 +55,10 @@ class SymbolicComputationInteractive(object):
     def InteractiveEigenValuesBarChart(self):
         """
         Returns inner function
-        
-        Prepares default values for inner function
-        """
 
+        Prepares default values for inner function
+
+        """
         values = [RealField(10)(k / 10.0) for k in range(41)]
         defaults = NumericalParams()
 
@@ -78,8 +78,8 @@ class SymbolicComputationInteractive(object):
             User specifies alpha and beta
 
             Should be passed to interact()
-            """
 
+            """
             self.EigenValuesBarChart(alpha, beta)
 
         return inner

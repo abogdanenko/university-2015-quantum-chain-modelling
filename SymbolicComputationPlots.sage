@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 class SymbolicComputationPlots(object):
     """
     Makes plots for class SymbolicComputation
-    """
 
+    """
     def EigenValuesBarChart(self, alpha, beta):
         """
         Displays bar chart of eigenvalues grouped by energy
+
         """
-        
         values = []
         colors = []
         for E in energy_list:
@@ -23,7 +23,7 @@ class SymbolicComputationPlots(object):
 
 
         fig = plt.figure()
-        ax = fig.add_subplot(111r)
+        ax = fig.add_subplot(1, 1, 1)
         ax.set_title('Eigen values of H (grouped by E)')
         ax.set_xticklabels([])
         ax.set_xlim(left = 0, right = states_count)
@@ -33,5 +33,4 @@ class SymbolicComputationPlots(object):
         labels = ['E = {}'.format(E) for E in energy_list]
         ax.legend(points, labels, loc = 'upper left')
         ax.grid(True)
-        fig.savefig('EigenValuesBarChartPyPlt')        
-
+        fig.savefig('EigenValuesBarChartPyPlt')
