@@ -45,7 +45,7 @@ class SymbolicComputationInteractive(object):
                     xmax = 4,
                     color = exc_number_rainbow[E],
                     legend_label = r'$N_{{\rm E}}$ = {}'.format(E),
-                    axes_labels = [xlabel, 'Energy'],
+                    axes_labels = [xlabel, '$E$'],
                     title = r'Eigen values of H (grouped by $N_{\rm E}$)')
                 for E in exc_list]
             show(sum(plots))

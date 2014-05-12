@@ -32,7 +32,7 @@ def basis_state(state):
 
 def coordinate_change_matrix():
     """
-    Returns coordinate change matrix to energy basis
+    Returns coordinate change matrix to excitation basis
 
     """
     T = matrix(states_count)

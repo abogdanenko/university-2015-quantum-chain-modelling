@@ -5,7 +5,7 @@ class SymbolicComputationBase(object):
     """
     def ToExcBasis(self, A):
         """
-        Returnes matrix A in energy basis
+        Returnes matrix A in excitation basis
 
         """
         return self.T.transpose() * A * self.T
@@ -97,7 +97,7 @@ class SymbolicComputationBase(object):
 
     def ShowBasisStatesTableHTML(self):
         """
-        Prints hilbert space basis vectors and their energies
+        Prints hilbert space basis vectors, excitation numbers and energies
 
         Works inside notebook interface
 

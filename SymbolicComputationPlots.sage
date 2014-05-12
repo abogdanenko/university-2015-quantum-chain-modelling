@@ -26,7 +26,7 @@ class SymbolicComputationPlots(object):
         ax.set_title(r'Eigen values of H (grouped by $N_{\rm E}$)')
         ax.set_xticklabels([])
         ax.set_xlim(left = 0, right = states_count)
-        ax.set_ylabel('Energy')
+        ax.set_ylabel('$E$')
         b = ax.bar(states_list, values, color = colors, linewidth = 4)
         points = [b[left_indices[E]] for E in exc_list]
         labels = [r'$N_{{\rm E}} = {}$'.format(E) for E in exc_list]
