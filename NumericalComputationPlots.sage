@@ -99,7 +99,7 @@ class NumericalComputationPlots(object):
 
         plt.xticks(states_list, states_list)
         indices = left_indices if basis_e else first_indices
-        labels = [r'$N_{{\rm E}} = {}$'.format(E) for E in exc_list]
+        labels = [r'$N_{{\rm ex}} = {}$'.format(E) for E in exc_list]
         points = [b[indices[E]] for E in exc_list]
         ax.legend(points, labels, loc = 'upper center')
         fig.savefig(filename)
@@ -126,7 +126,7 @@ class NumericalComputationPlots(object):
             vmin = -1,
             vmax = 1,
             colorbar = True,
-            title = r'Eigen vectors of H (in columns, grouped by $N_{\rm E}$)')
+            title = r'Eigen vectors of H (in columns, grouped by $N_{\rm ex}$)')
         return plot_object
 
     def PlotDiagDist(self, initial_state):
