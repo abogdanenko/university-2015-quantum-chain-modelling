@@ -174,7 +174,8 @@ class NumericalComputationInteractive(object):
             Should be passed to interact()
 
             """
-            html('<h2>Time evolution of state</h2>')
+            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
+                initial_state))
             show(self.PlotState(state, initial_state))
 
         return inner
@@ -193,7 +194,7 @@ class NumericalComputationInteractive(object):
             User specifies initial state
 
             """
-            html('<h2>Time evolution of state vector {}</h2>'.format(
+            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
                 initial_state))
             if self.sym.unitary:
                 E = exc_number(initial_state)
