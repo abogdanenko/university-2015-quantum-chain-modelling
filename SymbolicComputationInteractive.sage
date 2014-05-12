@@ -35,19 +35,24 @@ class SymbolicComputationInteractive(object):
                 return [value.subs(**kwds)
                     for value in self.eigenvalues_blocks[E]]
 
+            html(r'<h3>Eigen values of H (grouped by $N_{\rm ex}$)</h3>')
             xlabel = r'$\alpha$' if name == r'$\beta$' else r'$\beta$'
 
-            plots = [plot(
-                    eigenvalues(E),
-                    ymin = -6,
-                    ymax = 8,
-                    xmin = 0,
-                    xmax = 4,
-                    color = exc_number_rainbow[E],
-                    legend_label = r'$N_{{\rm ex}}$ = {}'.format(E),
-                    axes_labels = [xlabel, '$E$'],
-                    title = r'Eigen values of H (grouped by $N_{\rm ex}$)')
-                for E in exc_list]
+            plots = []
+            for E in exc_list:
+                p = plot(
+                        eigenvalues(E),
+                        ymin = -6,
+                        ymax = 8,
+                        xmin = 0,
+                        xmax = 4,
+                        color = exc_number_rainbow[E],
+                        legend_label = r'$N_{{\rm ex}}$ = {}'.format(E),
+                        axes_labels = [xlabel, '$E$'])
+                p.set_legend_options(back_color = 'white')
+                p.set_legend_options(loc = 'lower center')
+                p.set_legend_options(ncol = len(exc_list))
+                plots.append(p)
             show(sum(plots))
 
         return inner
