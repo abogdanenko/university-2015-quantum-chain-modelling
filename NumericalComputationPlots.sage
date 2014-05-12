@@ -53,9 +53,14 @@ class NumericalComputationPlots(object):
 
         """
         m = self.U[t].apply_map(norm)
+        title1 = 'U'
         if basis_e:
             m = self.sym.ToExcBasis(m)
-        title = 'time = {:7.2f}'.format(float(self.IterationTime(t)))
+            title1 = r'U^{\rm ex}'
+
+        title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
+        title = r'${},\ {}$'.format(title1, title2)
+
         plot_object = matrix_plot(m,
             cmap = 'gist_heat',
             vmin = 0,

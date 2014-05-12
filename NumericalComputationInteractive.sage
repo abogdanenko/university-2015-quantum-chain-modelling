@@ -150,7 +150,7 @@ class NumericalComputationInteractive(object):
             Should be passed to interact()
 
             """
-            html('<h2>Time evolution matrix at a given time</h2>')
+            html('<h2>Time evolution matrix</h2>')
             show(self.PlotUnitaryEvolutionMatrix(t, basis_e))
 
         return inner
