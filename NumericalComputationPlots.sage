@@ -125,8 +125,7 @@ class NumericalComputationPlots(object):
             cmap = 'bwr',
             vmin = -1,
             vmax = 1,
-            colorbar = True,
-            title = r'Eigen vectors of H (in columns, grouped by $N_{\rm ex}$)')
+            colorbar = True)
         return plot_object
 
     def PlotDiagDist(self, initial_state):

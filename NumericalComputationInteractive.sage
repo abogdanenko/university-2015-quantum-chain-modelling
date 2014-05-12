@@ -288,3 +288,7 @@ class NumericalComputationInteractive(object):
             show(self.PlotRho(initial_state, t, basis_e))
 
         return inner
+
+    def ShowEigenVectorsPlot(self):
+        html(r'<h3>Eigen vectors of H (in columns, grouped by $N_{\rm ex}$)</h3>')
+        show(self.PlotEigenVectors())
