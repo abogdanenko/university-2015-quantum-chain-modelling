@@ -74,9 +74,6 @@ class NumericalComputationPlots(object):
         Returns bar chart of state at time t
 
         """
-        title = 'time = {:7.2f}, initial_state = {}'.format(
-            float(num.IterationTime(t)), initial_state)
-
         rho = self.Rho(initial_state, t)
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
@@ -84,18 +81,27 @@ class NumericalComputationPlots(object):
 
         colors = []
         if basis_e:
+            ylabel = r'$\rho_{j,j}^{\rm ex}$'
             for E in exc_list:
                 colors.extend(block_sizes[E] * [exc_number_rainbow[E]])
         else:
+            ylabel = r'$\rho_{j,j}$'
             for state in states_list:
                 colors.append(exc_number_rainbow[exc_number(state)])
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
-        ax.set_title('Diagonal of density matrix')
+
+        title1 = 't = {:7.2f}'.format(float(num.IterationTime(t)))
+        title2 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
+                 initial_state)
+        title = r'${},\ {}$'.format(title1, title2)
+        ax.set_title(title)
+
         ax.set_xlim(left = -0.5, right = states_count - 0.5)
         ax.set_ylim(bottom = 0, top = 1.1)
-        ax.set_ylabel('Probability')
+        ax.set_xlabel('$j$')
+        ax.set_ylabel(ylabel)
 
         b = ax.bar(states_list, d, color = colors, align = 'center')
 

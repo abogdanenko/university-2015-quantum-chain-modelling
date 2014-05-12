@@ -130,7 +130,6 @@ class NumericalComputationInteractive(object):
             Should be passed to interact()
 
             """
-            html('<h2>State at a given time</h2>')
             self.ProbabilityBarChart(initial_state, t, basis_e)
 
         return inner
