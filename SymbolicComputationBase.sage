@@ -3,7 +3,7 @@ class SymbolicComputationBase(object):
     Computes hamiltonian, eigenvectors symbolically
 
     """
-    def ToEnergyBasis(self, A):
+    def ToExcBasis(self, A):
         """
         Returnes matrix A in energy basis
 
@@ -52,7 +52,7 @@ class SymbolicComputationBase(object):
 
         self.T = coordinate_change_matrix()
 
-        self.H_e = self.ToEnergyBasis(self.H)
+        self.H_e = self.ToExcBasis(self.H)
 
         if not self.unitary:
             gamma = SR.var('gamma', domain = 'positive')

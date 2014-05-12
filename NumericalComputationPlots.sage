@@ -52,7 +52,7 @@ class NumericalComputationPlots(object):
         """
         m = self.U[t].apply_map(norm)
         if basis_e:
-            m = self.sym.ToEnergyBasis(m)
+            m = self.sym.ToExcBasis(m)
         title = 'time = {:7.2f}'.format(float(self.IterationTime(t)))
         plot_object = matrix_plot(m,
             cmap = 'gist_heat',
@@ -77,7 +77,7 @@ class NumericalComputationPlots(object):
 
         rho = self.Rho(initial_state, t)
         if basis_e:
-            rho = self.sym.ToEnergyBasis(rho)
+            rho = self.sym.ToExcBasis(rho)
         d = map(abs, rho.diagonal())
 
         colors = []
@@ -208,7 +208,7 @@ class NumericalComputationPlots(object):
         """
         rho = self.Rho(initial_state, t)
         if basis_e:
-            rho = self.sym.ToEnergyBasis(rho)
+            rho = self.sym.ToExcBasis(rho)
         title = 'time = {:7.2f}'.format(float(self.IterationTime(t)))
         plot_object = matrix_plot(matrix(abs(array(rho))),
             cmap = 'spectral',
