@@ -284,7 +284,6 @@ class NumericalComputationInteractive(object):
             Should be passed to interact()
 
             """
-            html('<h2>Density matrix at a given time</h2>')
             show(self.PlotRho(initial_state, t, basis_e))
 
         return inner

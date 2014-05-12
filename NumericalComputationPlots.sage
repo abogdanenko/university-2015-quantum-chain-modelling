@@ -208,7 +208,7 @@ class NumericalComputationPlots(object):
         rho = self.Rho(initial_state, t)
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
-        title = 'time = {:7.2f}'.format(float(self.IterationTime(t)))
+        title = r'$\rho,\ t = {:7.2f}$'.format(float(self.IterationTime(t)))
         plot_object = matrix_plot(matrix(abs(array(rho))),
             cmap = 'spectral',
             vmin = 0,
