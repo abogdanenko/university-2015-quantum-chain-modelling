@@ -71,7 +71,7 @@ class NumericalComputationBase(object):
         Works in notebook interface.
 
         """
-        for E in energy_list:
+        for E in exc_list:
             html(('<h3>Eigenvalues and eigenvectors of $H_{}$: </h3>'
                 ).format(E))
             show_eigen_html(self.ev_blocks[E])

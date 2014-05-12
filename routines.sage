@@ -37,7 +37,7 @@ def coordinate_change_matrix():
     """
     T = matrix(states_count)
     rows = []
-    for E in energy_list:
+    for E in exc_list:
         rows.extend(e_states(E))
     for j in states_list:
         i = rows[j]

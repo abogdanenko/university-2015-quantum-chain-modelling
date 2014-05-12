@@ -82,7 +82,7 @@ class NumericalComputationPlots(object):
 
         colors = []
         if basis_e:
-            for E in energy_list:
+            for E in exc_list:
                 colors.extend(block_sizes[E] * [energy_rainbow[E]])
         else:
             for state in states_list:
@@ -99,8 +99,8 @@ class NumericalComputationPlots(object):
 
         plt.xticks(states_list, states_list)
         indices = left_indices if basis_e else first_indices
-        labels = [r'$N_{{\rm E}} = {}$'.format(E) for E in energy_list]
-        points = [b[indices[E]] for E in energy_list]
+        labels = [r'$N_{{\rm E}} = {}$'.format(E) for E in exc_list]
+        points = [b[indices[E]] for E in exc_list]
         ax.legend(points, labels, loc = 'upper center')
         fig.savefig(filename)
 

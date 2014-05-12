@@ -12,7 +12,7 @@ class SymbolicComputationPlots(object):
         """
         values = []
         colors = []
-        for E in energy_list:
+        for E in exc_list:
             for value in self.eigenvalues_blocks[E]:
                 v = value.subs(
                     omega = NumericalParams().omega_a,
@@ -28,8 +28,8 @@ class SymbolicComputationPlots(object):
         ax.set_xlim(left = 0, right = states_count)
         ax.set_ylabel('Energy')
         b = ax.bar(states_list, values, color = colors, linewidth = 4)
-        points = [b[left_indices[E]] for E in energy_list]
-        labels = [r'$N_{{\rm E}} = {}$'.format(E) for E in energy_list]
+        points = [b[left_indices[E]] for E in exc_list]
+        labels = [r'$N_{{\rm E}} = {}$'.format(E) for E in exc_list]
         ax.legend(points, labels, loc = 'upper left')
         ax.grid(True)
         fig.savefig('EigenValuesBarChartPyPlt')

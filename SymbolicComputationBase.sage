@@ -46,7 +46,7 @@ class SymbolicComputationBase(object):
             + self.H_tun
 
         self.H_blocks = []
-        for E in energy_list:
+        for E in exc_list:
             I = J = e_states(E)
             self.H_blocks.append(self.H[I, J])
 
@@ -87,7 +87,7 @@ class SymbolicComputationBase(object):
         l.append((r'T', self.T))
         l.append((r'H^{\rm E}', self.H_e))
 
-        for E in energy_list:
+        for E in exc_list:
             l.append((r'H_{}'.format(E), self.H_blocks[E]))
 
         if not self.unitary:
@@ -118,7 +118,7 @@ class SymbolicComputationBase(object):
         html.table(rows, header = header_e)
 
         rows = []
-        for E in energy_list:
+        for E in exc_list:
             html(r'<h2>Subspace ($N_{{\rm E}} = {}$)</h2>'.format(E))
             rows = []
             for i in e_states(E):
@@ -165,7 +165,7 @@ class SymbolicComputationBase(object):
         Works in notebook interface.
 
         """
-        for E in energy_list:
+        for E in exc_list:
             html(('<h3>Eigenvalues and eigenvectors of'
                 ' $H_{}$: </h3>').format(E))
             show_eigen_html(self.ev_blocks[E])

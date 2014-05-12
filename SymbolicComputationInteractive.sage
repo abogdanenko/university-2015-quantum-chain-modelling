@@ -47,7 +47,7 @@ class SymbolicComputationInteractive(object):
                     legend_label = r'$N_{{\rm E}}$ = {}'.format(E),
                     axes_labels = [xlabel, 'Energy'],
                     title = r'Eigen values of H (grouped by $N_{\rm E}$)')
-                for E in energy_list]
+                for E in exc_list]
             show(sum(plots))
 
         return inner
