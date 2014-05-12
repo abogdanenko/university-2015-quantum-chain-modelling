@@ -214,9 +214,16 @@ class NumericalComputationPlots(object):
 
         """
         rho = self.Rho(initial_state, t)
+        title1 = r'\rho'
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
-        title = r'$\rho,\ t = {:7.2f}$'.format(float(self.IterationTime(t)))
+            title1 = r'\rho^{\rm ex}'
+
+        title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
+        title3 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
+                 initial_state)
+        title = r'${},\ {},\ {}$'.format(title1, title2, title3)
+
         plot_object = matrix_plot(matrix(abs(array(rho))),
             cmap = 'spectral',
             vmin = 0,
