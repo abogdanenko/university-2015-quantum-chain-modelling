@@ -2,12 +2,13 @@ def energy(i):
     """
     Returns number of ones in binary notation of i
 
+    Which is coincidentally total number of excitations
     """
     return Integer(i).bits().count(1)
 
 def e_states(E):
     """
-    Returns a list of states with energy E
+    Returns a list of states with total number of excitations E
 
     """
     return [i for i in states_list if energy(i) == E]

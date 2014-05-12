@@ -85,7 +85,7 @@ class SymbolicComputationBase(object):
         l.append((r'H', self.H))
 
         l.append((r'T', self.T))
-        l.append((r'H^e', self.H_e))
+        l.append((r'H^{\rm E}', self.H_e))
 
         for E in energy_list:
             l.append((r'H_{}'.format(E), self.H_blocks[E]))
@@ -102,8 +102,8 @@ class SymbolicComputationBase(object):
         Works inside notebook interface
 
         """
-        header = ['state', 'ph1', 'at1', 'ph2', 'at2', r'$E_{\rm total}$']
-        header_e = header + [r'$\langle E \rangle$']
+        header = ['state', 'ph1', 'at1', 'ph2', 'at2', r'$N_{\rm E}$']
+        header_e = header + [r'$\langle H \rangle$']
 
         html('<h2>Basis states</h2>')
 
@@ -119,7 +119,7 @@ class SymbolicComputationBase(object):
 
         rows = []
         for E in energy_list:
-            html('<h2>Subspace (E = {})</h2>'.format(E))
+            html(r'<h2>Subspace ($N_{{\rm E}} = {}$)</h2>'.format(E))
             rows = []
             for i in e_states(E):
                 row = [i]
