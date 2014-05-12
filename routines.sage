@@ -1,4 +1,4 @@
-def energy(i):
+def exc_number(i):
     """
     Returns number of ones in binary notation of i
 
@@ -11,7 +11,7 @@ def e_states(E):
     Returns a list of states with total number of excitations E
 
     """
-    return [i for i in states_list if energy(i) == E]
+    return [i for i in states_list if exc_number(i) == E]
 
 def vec2dm(psi):
     """

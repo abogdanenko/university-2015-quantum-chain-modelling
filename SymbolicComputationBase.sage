@@ -111,7 +111,7 @@ class SymbolicComputationBase(object):
         for i in states_list:
             row = [i]
             row.extend(bits(i, qubits_count))
-            row.append(energy(i))
+            row.append(exc_number(i))
             row.append(self.H[i, i])
             rows.append(row)
 
@@ -124,7 +124,7 @@ class SymbolicComputationBase(object):
             for i in e_states(E):
                 row = [i]
                 row.extend(bits(i, qubits_count))
-                row.append(energy(i))
+                row.append(exc_number(i))
                 rows.append(row)
             html.table(rows, header = header)
 

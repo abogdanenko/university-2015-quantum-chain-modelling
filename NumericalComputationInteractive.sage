@@ -196,7 +196,7 @@ class NumericalComputationInteractive(object):
             html('<h2>Time evolution of state vector {}</h2>'.format(
                 initial_state))
             if self.sym.unitary:
-                E = energy(initial_state)
+                E = exc_number(initial_state)
                 l = self.PlotStates(e_states(E), initial_state)
                 show(sum(l))
                 show(graphics_array(l, 3, 2))
