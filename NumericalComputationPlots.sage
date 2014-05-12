@@ -83,10 +83,10 @@ class NumericalComputationPlots(object):
         colors = []
         if basis_e:
             for E in exc_list:
-                colors.extend(block_sizes[E] * [energy_rainbow[E]])
+                colors.extend(block_sizes[E] * [exc_number_rainbow[E]])
         else:
             for state in states_list:
-                colors.append(energy_rainbow[exc_number(state)])
+                colors.append(exc_number_rainbow[exc_number(state)])
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)

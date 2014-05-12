@@ -19,7 +19,7 @@ class SymbolicComputationPlots(object):
                     alpha = alpha,
                     beta = beta)
                 values.append(v)
-                colors.append(energy_rainbow[E])
+                colors.append(exc_number_rainbow[E])
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)

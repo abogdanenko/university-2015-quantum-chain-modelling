@@ -22,4 +22,4 @@ right_indices = [left_indices[E] + block_sizes[E]
     for E in exc_list]
 # first state with energy E
 first_indices = [2 ** E - 1 for E in exc_list]
-energy_rainbow = rainbow(qubits_count + 1)
+exc_number_rainbow = rainbow(qubits_count + 1)

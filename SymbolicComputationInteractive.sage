@@ -43,7 +43,7 @@ class SymbolicComputationInteractive(object):
                     ymax = 8,
                     xmin = 0,
                     xmax = 4,
-                    color = energy_rainbow[E],
+                    color = exc_number_rainbow[E],
                     legend_label = r'$N_{{\rm E}}$ = {}'.format(E),
                     axes_labels = [xlabel, 'Energy'],
                     title = r'Eigen values of H (grouped by $N_{\rm E}$)')
