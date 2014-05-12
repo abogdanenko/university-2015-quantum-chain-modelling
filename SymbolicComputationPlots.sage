@@ -23,7 +23,6 @@ class SymbolicComputationPlots(object):
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
-        ax.set_title(r'Eigen values of H (grouped by $N_{\rm ex}$)')
         ax.set_xticklabels([])
         ax.set_xlim(left = 0, right = states_count)
         ax.set_ylabel('$E$')

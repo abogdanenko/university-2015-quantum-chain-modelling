@@ -80,6 +80,7 @@ class SymbolicComputationInteractive(object):
             Should be passed to interact()
 
             """
+            html(r'<h3>Eigen values of H (grouped by $N_{\rm ex}$)</h3>')
             self.EigenValuesBarChart(alpha, beta)
 
         return inner
