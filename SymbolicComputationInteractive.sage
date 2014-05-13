@@ -40,6 +40,9 @@ class SymbolicComputationInteractive(object):
 
             plots = []
             for E in exc_list:
+                k = range(block_sizes[E])
+                k_str = ','.join(map(str, k))
+                label = r'$E_{{{}}}^{}$'.format(k_str, E)
                 p = plot(
                         eigenvalues(E),
                         ymin = -6,
@@ -48,10 +51,10 @@ class SymbolicComputationInteractive(object):
                         xmax = 4,
                         tick_formatter = 'latex',
                         color = exc_number_rainbow[E],
-                        legend_label = r'$N_{{\rm ex}} = {}$'.format(E),
+                        legend_label = label,
                         axes_labels = [xlabel, '$E$'])
                 p.set_legend_options(back_color = 'white')
-                p.set_legend_options(loc = 'lower center')
+                p.set_legend_options(loc = 'upper center')
                 p.set_legend_options(ncol = len(exc_list))
                 plots.append(p)
             show(sum(plots))
