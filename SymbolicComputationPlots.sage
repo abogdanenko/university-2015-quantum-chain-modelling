@@ -39,10 +39,15 @@ class SymbolicComputationPlots(SymbolicComputationBase):
             plots.append(p)
         return sum(plots)
 
-    def EigenValuesBarChart(self, alpha, beta):
+    def EigenValuesBarChart(
+            self,
+            alpha,
+            beta,
+            filename = 'EigenValuesBarChartPyPlt'):
         """
         Displays bar chart of eigenvalues grouped by total number of excitations
 
+        Use filename parameter to export the plot to file
         """
         values = []
         colors = []
@@ -79,4 +84,4 @@ class SymbolicComputationPlots(SymbolicComputationBase):
         labels = [r'$E_k^{}$'.format(E) for E in exc_list]
         ax.legend(points, labels, loc = 'upper left')
         ax.grid(True)
-        fig.savefig('EigenValuesBarChartPyPlt')
+        fig.savefig(filename)
