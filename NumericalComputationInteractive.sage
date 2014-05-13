@@ -222,6 +222,8 @@ class NumericalComputationInteractive(object):
 
             """
             html('<h2>Distance to diagonal matrices</h2>')
+            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
+                initial_state))
             show(self.PlotDiagDist(initial_state))
 
         return inner

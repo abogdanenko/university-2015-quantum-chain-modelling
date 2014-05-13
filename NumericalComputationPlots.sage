@@ -156,8 +156,7 @@ class NumericalComputationPlots(object):
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
-            axes_labels = ['t', r'$d(\rho, D)$'],
-            legend_label = 'initial_state = {}'.format(initial_state))
+            axes_labels = ['$t$', r'$d(\rho, D)$'])
 
         return plot_object
 
