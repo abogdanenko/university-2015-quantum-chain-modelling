@@ -208,9 +208,7 @@ class NumericalComputationPlots(object):
 
         plot_object = line(l,
             ymin = 0,
-            ymax = 2,
-            axes_labels = ['t', 'entropy'],
-            legend_label = 'initial state = {}'.format(initial_state))
+            axes_labels = ['$t$', r'$S(\rho^1)$'])
 
         return plot_object
 

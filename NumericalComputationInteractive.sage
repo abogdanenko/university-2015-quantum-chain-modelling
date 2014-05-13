@@ -265,6 +265,8 @@ class NumericalComputationInteractive(object):
 
             """
             html('<h2>Entropy of subsystem 1</h2>')
+            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
+                initial_state))
             show(self.PlotEntropy1(initial_state))
 
         return inner
