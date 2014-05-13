@@ -110,9 +110,11 @@ class NumericalComputationPlots(object):
         ax.set_xlabel('$j$')
         ax.set_ylabel(ylabel)
 
+        ax.set_xticks(states_list)
+        ax.set_xticklabels(states_list)
+
         b = ax.bar(states_list, d, color = colors, align = 'center')
 
-        plt.xticks(states_list, states_list)
         indices = left_indices if basis_e else first_indices
         labels = [r'$N_{{\rm ex}} = {}$'.format(E) for E in exc_list]
         points = [b[indices[E]] for E in exc_list]
