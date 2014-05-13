@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 
-class SymbolicComputationPlots(object):
+class SymbolicComputationPlots(SymbolicComputationBase):
     """
-    Makes plots for class SymbolicComputation
+    Makes plots
 
     """
     def EigenValuesBarChart(self, alpha, beta):

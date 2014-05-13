@@ -1,6 +1,6 @@
-class SymbolicComputationInteractive(object):
+class SymbolicComputationInteractive(SymbolicComputationPlots):
     """
-    Makes interactive plots for class SymbolicComputation
+    Makes interactive plots
 
     """
     def InteractiveEigenValuesLinePlot(self):
