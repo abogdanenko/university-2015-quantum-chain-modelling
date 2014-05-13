@@ -28,36 +28,17 @@ class SymbolicComputationInteractive(SymbolicComputationPlots):
             Should be passed to interact()
 
             """
-            def eigenvalues(E):
-                kwds = {'omega': defaults.omega_a}
-                key = 'alpha' if name == r'$\alpha$' else 'beta'
-                kwds[key] = alphabeta
-                return [value.subs(**kwds)
-                    for value in self.eigenvalues_blocks[E]]
-
             html(r'<h3>Eigen values of H (grouped by $N_{\rm ex}$)</h3>')
-            xlabel = r'$\alpha$' if name == r'$\beta$' else r'$\beta$'
+            if name == r'$\alpha$':
+                p = self.EigenValuesLinePlot(
+                    omega = defaults.omega_a,
+                    alpha = alphabeta)
+            else:
+                p = self.EigenValuesLinePlot(
+                    omega = defaults.omega_a,
+                    beta = alphabeta)
 
-            plots = []
-            for E in exc_list:
-                k = range(block_sizes[E])
-                k_str = ','.join(map(str, k))
-                label = r'$E_{{{}}}^{}$'.format(k_str, E)
-                p = plot(
-                        eigenvalues(E),
-                        ymin = -6,
-                        ymax = 8,
-                        xmin = 0,
-                        xmax = 4,
-                        tick_formatter = 'latex',
-                        color = exc_number_rainbow[E],
-                        legend_label = label,
-                        axes_labels = [xlabel, '$E$'])
-                p.set_legend_options(back_color = 'white')
-                p.set_legend_options(loc = 'upper center')
-                p.set_legend_options(ncol = len(exc_list))
-                plots.append(p)
-            show(sum(plots))
+            show(p)
 
         return inner
 
