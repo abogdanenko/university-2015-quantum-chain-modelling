@@ -1,6 +1,6 @@
-class NumericalComputationAnimation(object):
+class NumericalComputationAnimation(NumericalComputationPlots):
     """
-    Saves animated plots as files for class NumericalComputation
+    Saves animated plots as files
 
     """
     def SaveUnitaryEvolutionMatrixAnimation(self, basis_e = False):

@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 
-class NumericalComputationPlots(object):
+class NumericalComputationPlots(NumericalComputationBase):
     """
-    Makes plots for class NumericalComputation
+    Makes plots
 
     """
     def PlotState(self, state, initial_state = None, color = 'red'):

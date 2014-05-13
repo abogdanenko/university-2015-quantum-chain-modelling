@@ -1,6 +1,6 @@
-class NumericalComputationInteractive(object):
+class NumericalComputationInteractive(NumericalComputationPlots):
     """
-    Makes interactive plots for class NumericalComputation
+    Makes interactive plots
 
     """
     def InteractiveParamsSet(self):

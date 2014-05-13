@@ -1,6 +1,4 @@
 class NumericalComputation(
-    NumericalComputationBase,
-    NumericalComputationPlots,
     NumericalComputationInteractive,
     NumericalComputationAnimation):
     """
