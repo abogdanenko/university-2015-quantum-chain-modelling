@@ -28,6 +28,7 @@ class NumericalComputationPlots(object):
             ymin = 0,
             ymax = 1,
             color = color,
+            tick_formatter = 'latex',
             axes_labels = ['$t$', '$P$'],
             legend_label = r'$\rho_{{{0},{0}}}(t)$'.format(state))
 
@@ -65,6 +66,7 @@ class NumericalComputationPlots(object):
             cmap = 'gist_heat',
             vmin = 0,
             vmax = 1,
+            tick_formatter = 'latex',
             colorbar = True,
             title = title)
         return plot_object
@@ -138,6 +140,7 @@ class NumericalComputationPlots(object):
             cmap = 'bwr',
             vmin = -1,
             vmax = 1,
+            tick_formatter = 'latex',
             colorbar = True)
         return plot_object
 
@@ -156,6 +159,7 @@ class NumericalComputationPlots(object):
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
+            tick_formatter = 'latex',
             axes_labels = ['$t$', r'$d(\rho, D)$'])
 
         return plot_object
@@ -178,6 +182,7 @@ class NumericalComputationPlots(object):
             ymin = 0,
             ymax = 1,
             color = color,
+            tick_formatter = 'latex',
             axes_labels = ['$t$', '$P$'],
             legend_label = r'$\rho^1_{{{0},{0}}}(t)$'.format(state))
 
@@ -208,6 +213,7 @@ class NumericalComputationPlots(object):
 
         plot_object = line(l,
             ymin = 0,
+            tick_formatter = 'latex',
             axes_labels = ['$t$', r'$S(\rho^1)$'])
 
         return plot_object
@@ -232,6 +238,7 @@ class NumericalComputationPlots(object):
             cmap = 'spectral',
             vmin = 0,
             vmax = 1,
+            tick_formatter = 'latex',
             colorbar = True,
             title = title)
         return plot_object

@@ -46,6 +46,7 @@ class SymbolicComputationInteractive(object):
                         ymax = 8,
                         xmin = 0,
                         xmax = 4,
+                        tick_formatter = 'latex',
                         color = exc_number_rainbow[E],
                         legend_label = r'$N_{{\rm ex}}$ = {}'.format(E),
                         axes_labels = [xlabel, '$E$'])
