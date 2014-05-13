@@ -48,7 +48,7 @@ class SymbolicComputationInteractive(object):
                         xmax = 4,
                         tick_formatter = 'latex',
                         color = exc_number_rainbow[E],
-                        legend_label = r'$N_{{\rm ex}}$ = {}'.format(E),
+                        legend_label = r'$N_{{\rm ex}} = {}$'.format(E),
                         axes_labels = [xlabel, '$E$'])
                 p.set_legend_options(back_color = 'white')
                 p.set_legend_options(loc = 'lower center')
