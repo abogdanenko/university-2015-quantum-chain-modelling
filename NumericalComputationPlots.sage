@@ -178,8 +178,10 @@ class NumericalComputationPlots(object):
             ymin = 0,
             ymax = 1,
             color = color,
-            axes_labels = ['t', 'probability'],
-            legend_label = 'state_number = {}'.format(state))
+            axes_labels = ['$t$', '$P$'],
+            legend_label = r'$\rho^1_{{{0},{0}}}(t)$'.format(state))
+
+        plot_object.set_legend_options(back_color = 'white')
 
         return plot_object
 

@@ -242,8 +242,8 @@ class NumericalComputationInteractive(object):
             User specifies initial state
 
             """
-            html(('<h2>Time evolution of reduced state vector'
-                ' (initial state is {})</h2>').format(initial_state))
+            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
+                initial_state))
             l = self.PlotReducedStates1(initial_state)
             show(sum(l))
             show(graphics_array(l, 2, 2))
