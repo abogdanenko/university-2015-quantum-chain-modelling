@@ -120,6 +120,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         points = [b[indices[E]] for E in exc_list]
         ax.legend(points, labels, loc = 'upper center')
         fig.savefig(filename)
+        plt.close(fig)
 
     def PlotEigenVectors(self):
         """

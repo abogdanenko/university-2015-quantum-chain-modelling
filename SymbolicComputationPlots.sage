@@ -85,3 +85,4 @@ class SymbolicComputationPlots(SymbolicComputationBase):
         ax.legend(points, labels, loc = 'upper left')
         ax.grid(True)
         fig.savefig(filename)
+        plt.close(fig)
