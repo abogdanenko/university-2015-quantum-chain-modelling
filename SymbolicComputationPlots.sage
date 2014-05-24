@@ -52,13 +52,15 @@ class SymbolicComputationPlots(SymbolicComputationBase):
         values = []
         colors = []
         for E in exc_list:
+            block = []
             for value in self.eigenvalues_blocks[E]:
                 v = value.subs(
                     omega = NumericalParams().omega_a,
                     alpha = alpha,
                     beta = beta)
-                values.append(v)
+                block.append(v)
                 colors.append(exc_number_rainbow[E])
+            values.extend(sorted(block))
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
