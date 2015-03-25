@@ -122,31 +122,6 @@ class NumericalComputationPlots(NumericalComputationBase):
         fig.savefig(filename)
         plt.close(fig)
 
-    def PlotEigenVectors(self):
-        """
-        Return eigen matrix plot
-
-        todo: make matrix m in NumericalComputation.ComputeEigenVectors
-
-        """
-        m = matrix(RDF, states_count)
-        column = 0
-        row = 0
-        for ev in self.ev_blocks:
-            for value, vector in ev:
-                for i in range(len(vector)):
-                    m[row + i, column] = vector[i]
-                column += 1
-            row += len(vector)
-
-        plot_object = matrix_plot(m,
-            cmap = 'bwr',
-            vmin = -1,
-            vmax = 1,
-            tick_formatter = 'latex',
-            colorbar = True)
-        return plot_object
-
     def PlotDiagDist(self, initial_state):
         """
         Returns line plot of DiagDist(initial_state, t)

@@ -10,7 +10,6 @@ class NumericalComputationBase(object):
         self.sym = sym
         self.params = NumericalParams(self.sym.unitary)
         self.InitOperators()
-        self.ComputeEigenVectors()
 
     def TimeEvolutionMatrix(self, t):
         """
@@ -56,26 +55,6 @@ class NumericalComputationBase(object):
 
         if not self.sym.unitary:
             self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
-
-    def ComputeEigenVectors(self):
-        """
-        Computes eigenvalues and eigenvectors of each block
-
-        """
-        self.ev_blocks = [ev_flat_sorted(B) for B in self.H_blocks]
-
-    def ShowEigenHTML(self):
-        """
-        Prints eigenvalues and eigenvectors of each block in HTML
-
-        Works in notebook interface.
-
-        """
-        for E in exc_list:
-            html(('<h3>Eigenvalues and eigenvectors of $H_{}$: </h3>'
-                ).format(E))
-            show_eigen_html(self.ev_blocks[E])
-
 
     def RHS(self, rho):
         """

@@ -66,53 +66,6 @@ def html_vars(l):
     for x in l:
         html('${} = {}$'.format(x[0], latex(x[1])))
 
-def flatten_eigen(ev):
-    """
-    Returnes a list of eigenvalue, eigenvector pairs
-
-    ev should be in fmt. returned by Matrix_symbolic_dense.eigenvectors_right()
-
-    """
-    l = []
-    for value, vectors, multiplicity in ev:
-        for vector in vectors:
-            t = (value, vector)
-            l.append(t)
-    return l
-
-def ev_flat_sorted(A):
-    """
-    Returnes a sorted list of eigenvalue, eigenvector pairs of matrix A
-
-    """
-    ev = A.eigenvectors_right()
-    ev = flatten_eigen(ev)
-    return sorted(ev)
-
-def show_eigen_html(ev):
-    """
-    Prints eigenvalues and eigenvectors
-
-    Works in notebook interface.
-
-    """
-    def sparse_format(x):
-        epsilon = 1e-10
-        if (abs(x) < epsilon):
-            return ' ' * 7
-        else:
-            return '{:7.2f}'.format(float(x))
-
-    if (ev[0][0].base_ring() == SR):
-        html.table(ev, header = ['eigenvalue', 'eigenvector'])
-    else:
-        l = []
-        for value, vector in ev:
-            string_list = [sparse_format(x) for x in vector]
-            l.append(('{:7.2f}'.format(float(value)),
-                '({})'.format(''.join(string_list))))
-        html.table(l, header = ['eigenvalue', 'eigenvector'])
-
 def partial_trace1(rho):
     """
     Returnes reduced density matrix of subsystem 1

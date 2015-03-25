@@ -73,7 +73,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.time_end = time_end
             self.params.time_steps = time_steps
             self.InitOperators()
-            self.ComputeEigenVectors()
             self.params.ShowHTML()
 
         def inner_not_unitary(
@@ -99,7 +98,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.time_end = time_end
             self.params.time_steps = time_steps
             self.InitOperators()
-            self.ComputeEigenVectors()
             self.params.ShowHTML()
 
         if self.sym.unitary:
@@ -291,7 +289,3 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             show(self.PlotRho(initial_state, t, basis_e))
 
         return inner
-
-    def ShowEigenVectorsPlot(self):
-        html(r'<h3>Eigen vectors of H (in columns, grouped by $N_{\rm ex}$)</h3>')
-        show(self.PlotEigenVectors())

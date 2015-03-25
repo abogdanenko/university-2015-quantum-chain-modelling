@@ -1,7 +1,5 @@
 load('routines.sage')
 load('SymbolicComputationBase.sage')
-load('SymbolicComputationPlots.sage')
-load('SymbolicComputationInteractive.sage')
 load('NumericalParams.sage')
 load('NumericalComputationBase.sage')
 load('NumericalComputationPlots.sage')
@@ -24,4 +22,4 @@ first_indices = [2 ** E - 1 for E in exc_list]
 exc_number_rainbow = rainbow(qubits_count + 1)
 
 # alias
-SymbolicComputation = SymbolicComputationInteractive
+SymbolicComputation = SymbolicComputationBase

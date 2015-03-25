@@ -1,6 +1,6 @@
 class SymbolicComputationBase(object):
     """
-    Computes hamiltonian, eigenvectors symbolically
+    Computes hamiltonian symbolically
 
     """
     def ToExcBasis(self, A):
@@ -128,44 +128,3 @@ class SymbolicComputationBase(object):
                 rows.append(row)
             html.table(rows, header = header)
 
-    def ComputeEigenVectors(self):
-        """
-        Computes eigenvalues and eigenvectors of each block
-
-        Assumes omega_a = omega_c = omega
-
-        """
-        omega = SR.var('omega', domain = 'real')
-
-        self.ev_blocks = []
-        self.eigenvalues_blocks =[]
-        for B in self.H_blocks:
-            B1 = B.subs(omega_a = omega, omega_c = omega)
-            ev = B1.eigenvectors_right()
-            ev = flatten_eigen(ev)
-            self.ev_blocks.append(ev)
-            self.eigenvalues_blocks.append([value for value, vector in ev])
-
-        self.ev_matrix = matrix(SR, states_count)
-        column = 0
-        row = 0
-        for ev in self.ev_blocks:
-            for value, vector in ev:
-                for i in range(len(vector)):
-                    self.ev_matrix[row + i, column] = vector[i]
-                column += 1
-            row += len(vector)
-
-
-
-    def ShowEigenHTML(self):
-        """
-        Prints eigenvalues and eigenvectors of each block in HTML
-
-        Works in notebook interface.
-
-        """
-        for E in exc_list:
-            html(('<h3>Eigenvalues and eigenvectors of'
-                ' $H_{}$: </h3>').format(E))
-            show_eigen_html(self.ev_blocks[E])
