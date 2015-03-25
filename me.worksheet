@@ -11,7 +11,7 @@ load('main.sage')
 </div>
 
 {{{
-sym = SymbolicComputation(unitary = False)
+sym = SymbolicComputation()
 }}}
 
 <div style = "color:white;background-color:green">

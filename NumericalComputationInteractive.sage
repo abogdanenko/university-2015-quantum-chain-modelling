@@ -10,7 +10,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
-        defaults = NumericalParams(self.sym.unitary)
+        defaults = NumericalParams()
 
         alpha_box = input_box(
             defaults.alpha,
@@ -42,40 +42,12 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             label = r'$t_{\rm end}$',
             type = RDF)
 
-        if self.sym.unitary:
-            gamma_box = None
-        else:
-            gamma_box = input_box(
-                defaults.gamma,
-                label = r'$\gamma = $',
-                type = RDF)
-
-        # todo: refactor two function definitions into one
+        gamma_box = input_box(
+            defaults.gamma,
+            label = r'$\gamma = $',
+            type = RDF)
 
         def inner(
-                alpha = alpha_box,
-                beta = beta_box,
-                omega_a = omega_a_box,
-                omega_c = omega_c_box,
-                time_steps = time_steps_box,
-                time_end = time_end_box,
-                auto_update = False):
-            """
-            Sets parameters interactively, display new parameters in html
-
-            Should be passed to interact()
-
-            """
-            self.params.alpha = alpha
-            self.params.beta = beta
-            self.params.omega_a = omega_a
-            self.params.omega_c = omega_c
-            self.params.time_end = time_end
-            self.params.time_steps = time_steps
-            self.InitOperators()
-            self.params.ShowHTML()
-
-        def inner_not_unitary(
                 alpha = alpha_box,
                 beta = beta_box,
                 gamma = gamma_box,
@@ -100,10 +72,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.InitOperators()
             self.params.ShowHTML()
 
-        if self.sym.unitary:
-            return inner
-        else:
-            return inner_not_unitary
+        return inner
 
     def StateSlider(self):
         return slider(states_list, default = 1)
@@ -129,27 +98,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
             """
             self.ProbabilityBarChart(initial_state, t, basis_e)
-
-        return inner
-
-    def InteractiveUnitaryEvolutionMatrix(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(
-                t = self.TimeSlider(),
-                basis_e = [True, False]):
-            """
-            Displays time evolution matrix at time t
-
-            Should be passed to interact()
-
-            """
-            html('<h2>Time evolution matrix</h2>')
-            show(self.PlotUnitaryEvolutionMatrix(t, basis_e))
 
         return inner
 
@@ -193,15 +141,9 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             """
             html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
                 initial_state))
-            if self.sym.unitary:
-                E = exc_number(initial_state)
-                l = self.PlotStates(e_states(E), initial_state)
-                show(sum(l))
-                show(graphics_array(l, 3, 2))
-            else:
-                l = self.PlotStates(states_list, initial_state)
-                show(sum(l))
-                show(graphics_array(l, 8, 2), figsize = [10, 20])
+            l = self.PlotStates(states_list, initial_state)
+            show(sum(l))
+            show(graphics_array(l, 8, 2), figsize = [10, 20])
 
         return inner
 

@@ -10,9 +10,7 @@ class SymbolicComputationBase(object):
         """
         return self.T.transpose() * A * self.T
 
-    def __init__(self, unitary = True):
-        self.unitary = unitary
-
+    def __init__(self):
         omega_a = SR.var('omega_a', domain = 'positive')
         omega_c = SR.var('omega_c', domain = 'positive')
         alpha = SR.var('alpha', domain = 'positive')
@@ -54,9 +52,8 @@ class SymbolicComputationBase(object):
 
         self.H_e = self.ToExcBasis(self.H)
 
-        if not self.unitary:
-            gamma = SR.var('gamma', domain = 'positive')
-            self.L = gamma * I4.tensor_product(self.a).tensor_product(I2)
+        gamma = SR.var('gamma', domain = 'positive')
+        self.L = gamma * I4.tensor_product(self.a).tensor_product(I2)
 
     def ShowVarsHTML(self):
         """
@@ -90,8 +87,7 @@ class SymbolicComputationBase(object):
         for E in exc_list:
             l.append((r'H_{}'.format(E), self.H_blocks[E]))
 
-        if not self.unitary:
-            l.append((r'L', self.L))
+        l.append((r'L', self.L))
 
         html_vars(l)
 

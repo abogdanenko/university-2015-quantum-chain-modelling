@@ -8,7 +8,7 @@ class NumericalComputationBase(object):
     """
     def __init__(self, sym):
         self.sym = sym
-        self.params = NumericalParams(self.sym.unitary)
+        self.params = NumericalParams()
         self.InitOperators()
 
     def TimeEvolutionMatrix(self, t):
@@ -52,9 +52,7 @@ class NumericalComputationBase(object):
         self.H = self.SubsNum(self.sym.H)
         self.H_blocks = [self.SubsNum(B) for B in self.sym.H_blocks]
         self.H_e = self.SubsNum(self.sym.H_e)
-
-        if not self.sym.unitary:
-            self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
+        self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
 
     def RHS(self, rho):
         """
@@ -104,27 +102,21 @@ class NumericalComputationBase(object):
         """
         Computes time evolution
 
-        Accepts a set of initial states to compute evolution for in master
-        equation case
+        Accepts a set of initial states to compute evolution for
 
         """
-        if self.sym.unitary:
-            self.U = [self.TimeEvolutionMatrix(self.IterationTime(t))
-                for t in range(self.params.time_steps)]
+        rho_initial = [vec2dm(basis_state(state)) for state in states_list]
 
-        else:
-            rho_initial = [vec2dm(basis_state(state)) for state in states_list]
+        self.rho_list = [rho_initial]
+        for t in range(1, self.params.time_steps):
+            l = []
+            for state in states_list:
+                rho = self.rho_list[-1][state]
+                if state in initial_states:
+                    rho = self.METimeStep(rho)
+                l.append(rho)
 
-            self.rho_list = [rho_initial]
-            for t in range(1, self.params.time_steps):
-                l = []
-                for state in states_list:
-                    rho = self.rho_list[-1][state]
-                    if state in initial_states:
-                        rho = self.METimeStep(rho)
-                    l.append(rho)
-
-                self.rho_list.append(l)
+            self.rho_list.append(l)
 
 
     def Rho(self, initial_state, t):
@@ -134,13 +126,7 @@ class NumericalComputationBase(object):
         Evolution must have been computed beforehand
 
         """
-        if self.sym.unitary:
-            U = self.U[t]
-            vec = U.column(initial_state)
-            psi = vec.column()
-            return psi * psi.conjugate_transpose()
-        else:
-            return self.rho_list[t][initial_state]
+        return self.rho_list[t][initial_state]
 
     def DiagDist(self, initial_state, t):
         """
