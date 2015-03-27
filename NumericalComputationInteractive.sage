@@ -94,7 +94,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         """
         def inner(
-                initial_state = self.StateSlider(),
                 t = self.TimeSlider(),
                 basis_e = [True, False]):
             """
@@ -103,7 +102,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            self.ProbabilityBarChart(initial_state, t, basis_e)
+            self.ProbabilityBarChart(self.params.initial_state, t, basis_e)
 
         return inner
 
@@ -115,7 +114,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         """
         def inner(
-                initial_state = self.StateSlider(),
                 state = self.StateSlider(),
                 auto_update = False):
             """
@@ -125,9 +123,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
-                initial_state))
-            show(self.PlotState(state, initial_state))
+            show(self.PlotState(state, self.params.initial_state))
 
         return inner
 
@@ -139,7 +135,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         """
         def inner(
-                initial_state = self.StateSlider(),
                 t = self.TimeSlider(),
                 basis_e = [True, False]):
             """
@@ -148,6 +143,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            show(self.PlotRho(initial_state, t, basis_e))
+            show(self.PlotRho(self.params.initial_state, t, basis_e))
 
         return inner
