@@ -111,16 +111,16 @@ class NumericalComputationBase(object):
             self.rho_list.append(l)
 
 
-    def Rho(self, initial_state, t):
+    def Rho(self, t):
         """
         Return density matrix at time t
 
         Evolution must have been computed beforehand
 
         """
-        return self.rho_list[t][initial_state]
+        return self.rho_list[t][self.params.initial_state]
 
-    def DiagDist(self, initial_state, t):
+    def DiagDist(self, t):
         """
         Returns distance between density matrix and a set of diagonal matrices
 
@@ -129,19 +129,19 @@ class NumericalComputationBase(object):
 
         """
         s = RDF()
-        rho = self.Rho(initial_state, t)
+        rho = self.Rho(t)
         for i in states_list:
             for j in states_list:
                 if (i != j):
                     s += norm(rho[i, j])
         return sqrt(s)
 
-    def Entropy1(self, initial_state, t):
+    def Entropy1(self, t):
         """
         Returnes Von Neumann entropy of reduced density matrix
 
         """
-        rho = self.Rho(initial_state, t)
+        rho = self.Rho(t)
         rho1 = partial_trace1(rho)
         # drop imag part, it should be zero
         ev = map(abs, rho1.eigenvalues())

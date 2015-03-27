@@ -14,7 +14,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
 
-            rho = self.Rho(self.params.initial_state, t)
+            rho = self.Rho(t)
             y = abs(rho[state, state])
 
             point = (x, y)
@@ -69,7 +69,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns bar chart of state at time t
 
         """
-        rho = self.Rho(self.params.initial_state, t)
+        rho = self.Rho(t)
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
         d = map(abs, rho.diagonal())
@@ -118,7 +118,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            y = self.DiagDist(self.params.initial_state, t)
+            y = self.DiagDist(t)
             point = (x, y)
             l.append(point)
 
@@ -138,7 +138,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            rho = self.Rho(self.params.initial_state, t)
+            rho = self.Rho(t)
             rho1 = partial_trace1(rho)
             y = abs(rho1[state, state])
             point = (x, y)
@@ -182,7 +182,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            y = self.Entropy1(self.params.initial_state, t)
+            y = self.Entropy1(t)
             point = (x, y)
             l.append(point)
 
@@ -206,7 +206,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Return matrix plot of rho at time t
 
         """
-        rho = self.Rho(self.params.initial_state, t)
+        rho = self.Rho(t)
         title1 = r'\rho'
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
