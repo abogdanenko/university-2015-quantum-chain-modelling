@@ -96,6 +96,21 @@ def partial_trace_chain(rho_full):
              rho[i, j] = s
     return rho
 
+def partial_trace_sink(rho_full):
+    """
+    Returns reduced density matrix of sink subsystem
+
+    """
+    rho = matrix(CDF, 2)
+    for i in range(2):
+        for j in range(2):
+             s = 0
+             for k in range(16):
+                 s += rho_full[i * 16 + k, j * 16 + k]
+
+             rho[i, j] = s
+    return rho
+
 def xlnx(x):
     """
     Returnes x * ln(x) or 0 if x is near 0
