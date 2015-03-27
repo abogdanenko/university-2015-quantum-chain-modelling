@@ -46,13 +46,15 @@ class NumericalComputationBase(object):
         self.H_blocks = [self.SubsNum(B) for B in self.sym.H_blocks]
         self.H_e = self.SubsNum(self.sym.H_e)
         self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
+        I2 = identity_matrix(CDF, 2)
+        self.H_full = self.H.tensor_product(I2)
 
     def RHS(self, rho):
         """
         Defines right-hand side of master equation ode
 
         """
-        unitary_term = CDF(-I) * self.H.commutator(rho)
+        unitary_term = CDF(-I) * self.H_full.commutator(rho)
 
         L = self.L
         Lc = L.conjugate_transpose()
@@ -98,11 +100,15 @@ class NumericalComputationBase(object):
         """
         rho = vec2dm(basis_state(self.params.initial_state))
 
-        self.rho_list = [rho]
+        I2 = identity_matrix(CDF, 2)
+        rho = rho.tensor_product(I2)
+
+        self.rho_full_list = [rho]
         for t in range(1, self.params.time_steps):
             rho = self.METimeStep(rho)
-            self.rho_list.append(rho)
+            self.rho_full_list.append(rho)
 
+        self.rho_list = [partial_trace_chain(x) for x in self.rho_full_list]
 
     def Rho(self, t):
         """
