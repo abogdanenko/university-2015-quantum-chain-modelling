@@ -60,6 +60,5 @@ num.ShowReducedStates1()
 }}}
 
 {{{
-interact(num.InteractiveEntropy1())
-pass
+num.ShowEntropy1()
 }}}

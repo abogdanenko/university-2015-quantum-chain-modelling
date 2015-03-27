@@ -131,27 +131,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         return inner
 
-    def InteractiveEntropy1(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(initial_state = self.StateSlider()):
-            """
-            Shows line plot of entropy
-
-            User specifies initial state
-
-            """
-            html('<h2>Entropy of subsystem 1</h2>')
-            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
-                initial_state))
-            show(self.PlotEntropy1(initial_state))
-
-        return inner
-
     def InteractiveRho(self):
         """
         Returns inner function

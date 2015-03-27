@@ -199,6 +199,14 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
+    def ShowEntropy1(self):
+        """
+        Shows line plot of entropy
+
+        """
+        html('<h2>Entropy of subsystem 1</h2>')
+        show(self.PlotEntropy1(self.params.initial_state))
+
     def PlotRho(self, initial_state, t, basis_e = False):
         """
         Return matrix plot of rho at time t
