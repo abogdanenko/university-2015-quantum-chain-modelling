@@ -14,6 +14,11 @@ load('main.sage')
 sym = SymbolicComputation()
 }}}
 
+{{{
+sym.ShowBasisStatesTableHTML()
+sym.ShowVarsHTML()
+}}}
+
 <div style = "color:white;background-color:green">
 <h2>Numerical computation</h2>
 </div>
