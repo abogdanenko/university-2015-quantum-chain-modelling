@@ -131,28 +131,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         return inner
 
-    def InteractiveReducedStates1(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(initial_state = self.StateSlider()):
-            """
-            Shows multi-line plot and then multiple line plots of state evol.
-
-            User specifies initial state
-
-            """
-            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
-                initial_state))
-            l = self.PlotReducedStates1(initial_state)
-            show(sum(l))
-            show(graphics_array(l, 2, 2))
-
-        return inner
-
     def InteractiveEntropy1(self):
         """
         Returns inner function

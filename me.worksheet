@@ -56,8 +56,7 @@ num.ShowDiagDist()
 }}}
 
 {{{
-interact(num.InteractiveReducedStates1())
-pass
+num.ShowReducedStates1()
 }}}
 
 {{{

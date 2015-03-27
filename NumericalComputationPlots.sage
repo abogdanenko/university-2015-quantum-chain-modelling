@@ -171,6 +171,15 @@ class NumericalComputationPlots(NumericalComputationBase):
         return [self.PlotReducedState1(s, initial_state, colors[s])
             for s in range(4)]
 
+    def ShowReducedStates1(self):
+        """
+        Shows multi-line plot and then multiple line plots of state evol.
+
+        """
+        l = self.PlotReducedStates1(self.params.initial_state)
+        show(sum(l))
+        show(graphics_array(l, 2, 2))
+
     def PlotEntropy1(self, initial_state):
         """
         Returns line plot of entropy
