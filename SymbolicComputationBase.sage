@@ -53,7 +53,8 @@ class SymbolicComputationBase(object):
         self.H_e = self.ToExcBasis(self.H)
 
         gamma = SR.var('gamma', domain = 'positive')
-        self.L = gamma * I4.tensor_product(self.a).tensor_product(I2)
+        self.L = gamma * I4.tensor_product(I2).tensor_product(
+            self.sigma_minus).tensor_product(self.sigma_plus)
 
     def ShowVarsHTML(self):
         """
