@@ -131,27 +131,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         return inner
 
-    def InteractiveDiagDist(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(initial_state = self.StateSlider()):
-            """
-            Shows line plot of DiagDist(initial_state, t)
-
-            User specifies initial state
-
-            """
-            html('<h2>Distance to diagonal matrices</h2>')
-            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
-                initial_state))
-            show(self.PlotDiagDist(initial_state))
-
-        return inner
-
     def InteractiveReducedStates1(self):
         """
         Returns inner function

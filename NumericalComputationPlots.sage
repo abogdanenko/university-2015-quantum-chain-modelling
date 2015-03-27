@@ -57,6 +57,13 @@ class NumericalComputationPlots(NumericalComputationBase):
         show(sum(l))
         show(graphics_array(l, 8, 2), figsize = [10, 20])
 
+    def ShowDiagDist(self):
+        """
+        Shows line plot of DiagDist(t)
+
+        """
+        html('<h2>Distance to diagonal matrices</h2>')
+        show(self.PlotDiagDist(self.params.initial_state))
 
     def ProbabilityBarChart(
             self,

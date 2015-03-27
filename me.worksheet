@@ -52,8 +52,7 @@ pass
 }}}
 
 {{{
-interact(num.InteractiveDiagDist())
-pass
+num.ShowDiagDist()
 }}}
 
 {{{
