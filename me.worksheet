@@ -38,8 +38,7 @@ pass
 }}}
 
 {{{
-interact(num.InteractiveStates())
-pass
+num.ShowStates()
 }}}
 
 {{{

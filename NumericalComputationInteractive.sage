@@ -131,28 +131,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         return inner
 
-    def InteractiveStates(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(initial_state = self.StateSlider(), auto_update = False):
-            """
-            Shows multi-line plot and then multiple line plots of state evol.
-
-            User specifies initial state
-
-            """
-            html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(
-                initial_state))
-            l = self.PlotStates(states_list, initial_state)
-            show(sum(l))
-            show(graphics_array(l, 8, 2), figsize = [10, 20])
-
-        return inner
-
     def InteractiveDiagDist(self):
         """
         Returns inner function

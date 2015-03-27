@@ -48,6 +48,15 @@ class NumericalComputationPlots(NumericalComputationBase):
         return [self.PlotState(s, initial_state, c) for s, c \
             in zip(states, colors)]
 
+    def ShowStates(self):
+        """
+        Shows multi-line plot and then multiple line plots of state evol.
+
+        """
+        l = self.PlotStates(states_list, params.initial_state)
+        show(sum(l))
+        show(graphics_array(l, 8, 2), figsize = [10, 20])
+
 
     def ProbabilityBarChart(
             self,
