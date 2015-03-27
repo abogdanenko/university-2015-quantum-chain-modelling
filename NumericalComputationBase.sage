@@ -91,13 +91,12 @@ class NumericalComputationBase(object):
 
         return matrix(rho)
 
-    def ComputeTimeEvolution(self, initial_states = []):
+    def ComputeTimeEvolution(self):
         """
         Computes time evolution
 
-        Accepts a set of initial states to compute evolution for
-
         """
+        initial_states = [self.params.initial_state]
         rho_initial = [vec2dm(basis_state(state)) for state in states_list]
 
         self.rho_list = [rho_initial]

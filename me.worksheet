@@ -29,7 +29,7 @@ pass
 
 {{{
 %time
-num.ComputeTimeEvolution(states_list)
+num.ComputeTimeEvolution()
 }}}
 
 {{{
