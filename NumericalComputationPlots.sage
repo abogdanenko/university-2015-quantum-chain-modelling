@@ -53,7 +53,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows multi-line plot and then multiple line plots of state evol.
 
         """
-        l = self.PlotStates(states_list, params.initial_state)
+        l = self.PlotStates(states_list, self.params.initial_state)
         show(sum(l))
         show(graphics_array(l, 8, 2), figsize = [10, 20])
 
