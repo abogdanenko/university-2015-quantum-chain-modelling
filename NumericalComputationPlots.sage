@@ -5,19 +5,16 @@ class NumericalComputationPlots(NumericalComputationBase):
     Makes plots
 
     """
-    def PlotState(self, state, initial_state = None, color = 'red'):
+    def PlotState(self, state, color = 'red'):
         """
         Returns line plot of the state
 
         """
-        if (initial_state == None):
-            initial_state = state
-
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
 
-            rho = self.Rho(initial_state, t)
+            rho = self.Rho(self.params.initial_state, t)
             y = abs(rho[state, state])
 
             point = (x, y)
@@ -41,11 +38,9 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns a list of line plots of the states
 
         """
-        if (initial_state == None):
-            initial_state = states[0]
         colors = rainbow(len(states))
 
-        return [self.PlotState(s, initial_state, c) for s, c \
+        return [self.PlotState(s, c) for s, c \
             in zip(states, colors)]
 
     def ShowStates(self):
@@ -67,7 +62,6 @@ class NumericalComputationPlots(NumericalComputationBase):
 
     def ProbabilityBarChart(
             self,
-            initial_state,
             t,
             basis_e = False,
             filename = 'ProbabilityBarChart'):
@@ -75,7 +69,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns bar chart of state at time t
 
         """
-        rho = self.Rho(initial_state, t)
+        rho = self.Rho(self.params.initial_state, t)
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
         d = map(abs, rho.diagonal())
@@ -95,7 +89,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         title1 = 't = {:7.2f}'.format(float(num.IterationTime(t)))
         title2 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
-                 initial_state)
+                 self.params.initial_state)
         title = r'${},\ {}$'.format(title1, title2)
         ax.set_title(title)
 
@@ -207,12 +201,12 @@ class NumericalComputationPlots(NumericalComputationBase):
         html('<h2>Entropy of subsystem 1</h2>')
         show(self.PlotEntropy1(self.params.initial_state))
 
-    def PlotRho(self, initial_state, t, basis_e = False):
+    def PlotRho(self, t, basis_e = False):
         """
         Return matrix plot of rho at time t
 
         """
-        rho = self.Rho(initial_state, t)
+        rho = self.Rho(self.params.initial_state, t)
         title1 = r'\rho'
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
@@ -220,7 +214,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
         title3 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
-                 initial_state)
+                 self.params.initial_state)
         title = r'${},\ {},\ {}$'.format(title1, title2, title3)
 
         plot_object = matrix_plot(matrix(abs(array(rho))),

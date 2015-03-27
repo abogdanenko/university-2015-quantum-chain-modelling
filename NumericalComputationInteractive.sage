@@ -102,7 +102,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            self.ProbabilityBarChart(self.params.initial_state, t, basis_e)
+            self.ProbabilityBarChart(t, basis_e)
 
         return inner
 
@@ -123,7 +123,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            show(self.PlotState(state, self.params.initial_state))
+            show(self.PlotState(state))
 
         return inner
 
@@ -143,6 +143,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            show(self.PlotRho(self.params.initial_state, t, basis_e))
+            show(self.PlotRho(t, basis_e))
 
         return inner
