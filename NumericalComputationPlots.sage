@@ -33,7 +33,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
-    def PlotStates(self, states, initial_state = None):
+    def PlotStates(self, states):
         """
         Returns a list of line plots of the states
 
@@ -48,7 +48,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows multi-line plot and then multiple line plots of state evol.
 
         """
-        l = self.PlotStates(states_list, self.params.initial_state)
+        l = self.PlotStates(states_list)
         show(sum(l))
         show(graphics_array(l, 8, 2), figsize = [10, 20])
 
@@ -58,7 +58,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         html('<h2>Distance to diagonal matrices</h2>')
-        show(self.PlotDiagDist(self.params.initial_state))
+        show(self.PlotDiagDist())
 
     def ProbabilityBarChart(
             self,
@@ -110,15 +110,15 @@ class NumericalComputationPlots(NumericalComputationBase):
         fig.savefig(filename)
         plt.close(fig)
 
-    def PlotDiagDist(self, initial_state):
+    def PlotDiagDist(self):
         """
-        Returns line plot of DiagDist(initial_state, t)
+        Returns line plot of DiagDist(t)
 
         """
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            y = self.DiagDist(initial_state, t)
+            y = self.DiagDist(self.params.initial_state, t)
             point = (x, y)
             l.append(point)
 
@@ -130,7 +130,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
-    def PlotReducedState1(self, state, initial_state, color = 'red'):
+    def PlotReducedState1(self, state, color = 'red'):
         """
         Returns line plot of reduced state
 
@@ -138,7 +138,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            rho = self.Rho(initial_state, t)
+            rho = self.Rho(self.params.initial_state, t)
             rho1 = partial_trace1(rho)
             y = abs(rho1[state, state])
             point = (x, y)
@@ -156,13 +156,13 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
-    def PlotReducedStates1(self, initial_state):
+    def PlotReducedStates1(self):
         """
         Returns a list of line plots of reduced states
 
         """
         colors = rainbow(4)
-        return [self.PlotReducedState1(s, initial_state, colors[s])
+        return [self.PlotReducedState1(s, colors[s])
             for s in range(4)]
 
     def ShowReducedStates1(self):
@@ -170,11 +170,11 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows multi-line plot and then multiple line plots of state evol.
 
         """
-        l = self.PlotReducedStates1(self.params.initial_state)
+        l = self.PlotReducedStates1()
         show(sum(l))
         show(graphics_array(l, 2, 2))
 
-    def PlotEntropy1(self, initial_state):
+    def PlotEntropy1(self):
         """
         Returns line plot of entropy
 
@@ -182,7 +182,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-            y = self.Entropy1(initial_state, t)
+            y = self.Entropy1(self.params.initial_state, t)
             point = (x, y)
             l.append(point)
 
@@ -199,7 +199,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         html('<h2>Entropy of subsystem 1</h2>')
-        show(self.PlotEntropy1(self.params.initial_state))
+        show(self.PlotEntropy1())
 
     def PlotRho(self, t, basis_e = False):
         """
