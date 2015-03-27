@@ -225,3 +225,31 @@ class NumericalComputationPlots(NumericalComputationBase):
             colorbar = True,
             title = title)
         return plot_object
+
+    def PlotSink(self, i, j):
+        """
+        Returns line plot of the state
+
+        """
+        l = []
+        for t in range(self.params.time_steps):
+            x = self.IterationTime(t)
+
+            rho = partial_trace_sink(self.rho_full_list[t])
+
+            y = abs(rho[i, j])
+
+            point = (x, y)
+            l.append(point)
+
+        plot_object = line(l,
+            ymin = 0,
+            ymax = 1,
+            color = 'red',
+            tick_formatter = 'latex',
+            axes_labels = ['$t$', '$P$'],
+            legend_label = r'$\rho_{{{0},{0}}}(t)$'.format(1))
+
+        plot_object.set_legend_options(back_color = 'white')
+
+        return plot_object
