@@ -68,7 +68,7 @@ def html_vars(l):
 
 def partial_trace1(rho):
     """
-    Returnes reduced density matrix of subsystem 1
+    Returns reduced density matrix of subsystem 1
 
     """
     rho1 = matrix(CDF, 4)
