@@ -13,17 +13,17 @@ class NumericalComputationAnimation(NumericalComputationPlots):
         animation = animate(l)
         return animation.png()
 
-    def SaveRhoAnimation(self, initial_state, basis_e = False):
+    def SaveRhoAnimation(self, basis_e = False):
         """
         Saves density matrix plot png image for each moment of time
 
         """
-        l = [self.PlotRho(initial_state, t, basis_e)
+        l = [self.PlotRho(t, basis_e)
             for t in range(self.params.time_steps)]
         animation = animate(l)
         return animation.png()
 
-    def SaveProbabilityBarChartAnimation(self, initial_state, basis_e = False):
+    def SaveProbabilityBarChartAnimation(self, basis_e = False):
         """
         Saves bar chart png image for each moment of time
 
@@ -32,6 +32,6 @@ class NumericalComputationAnimation(NumericalComputationPlots):
 
         for t in range(self.params.time_steps):
             filename = os.path.join(dirname, '{:08d}.png'.format(t))
-            self.ProbabilityBarChart(initial_state, t, basis_e, filename)
+            self.ProbabilityBarChart(t, basis_e, filename)
 
         return dirname
