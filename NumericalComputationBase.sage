@@ -96,19 +96,12 @@ class NumericalComputationBase(object):
         Computes time evolution
 
         """
-        initial_states = [self.params.initial_state]
-        rho_initial = [vec2dm(basis_state(state)) for state in states_list]
+        rho = vec2dm(basis_state(self.params.initial_state))
 
-        self.rho_list = [rho_initial]
+        self.rho_list = [rho]
         for t in range(1, self.params.time_steps):
-            l = []
-            for state in states_list:
-                rho = self.rho_list[-1][state]
-                if state in initial_states:
-                    rho = self.METimeStep(rho)
-                l.append(rho)
-
-            self.rho_list.append(l)
+            rho = self.METimeStep(rho)
+            self.rho_list.append(rho)
 
 
     def Rho(self, t):
@@ -118,7 +111,7 @@ class NumericalComputationBase(object):
         Evolution must have been computed beforehand
 
         """
-        return self.rho_list[t][self.params.initial_state]
+        return self.rho_list[t]
 
     def DiagDist(self, t):
         """
