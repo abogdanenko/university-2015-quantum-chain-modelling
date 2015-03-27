@@ -48,28 +48,6 @@ class NumericalComputationPlots(NumericalComputationBase):
         return [self.PlotState(s, initial_state, c) for s, c \
             in zip(states, colors)]
 
-    def PlotUnitaryEvolutionMatrix(self, t, basis_e = False):
-        """
-        Return matrix plot of U at time t
-
-        """
-        m = self.U[t].apply_map(norm)
-        title1 = 'U'
-        if basis_e:
-            m = self.sym.ToExcBasis(m)
-            title1 = r'U^{\rm ex}'
-
-        title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
-        title = r'${},\ {}$'.format(title1, title2)
-
-        plot_object = matrix_plot(m,
-            cmap = 'gist_heat',
-            vmin = 0,
-            vmax = 1,
-            tick_formatter = 'latex',
-            colorbar = True,
-            title = title)
-        return plot_object
 
     def ProbabilityBarChart(
             self,

@@ -11,13 +11,6 @@ class NumericalComputationBase(object):
         self.params = NumericalParams()
         self.InitOperators()
 
-    def TimeEvolutionMatrix(self, t):
-        """
-        Returns time evolution matrix at time t
-
-        """
-        return exp(CDF(-I * t) * self.H)
-
     def IterationTime(self, t):
         """
         Returns moment of time corresponding to iteration number t
