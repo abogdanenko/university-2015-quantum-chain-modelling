@@ -11,6 +11,7 @@ class NumericalParams(object):
         self.time_steps = 500
         self.time_end = RDF(40)
         self.gamma = RDF(0.5)
+        self.initial_state = 14
 
     def ShowHTML(self):
         """
@@ -30,3 +31,4 @@ class NumericalParams(object):
         l.append((r't_{\rm end}', self.time_end))
 
         html_vars(l)
+        html(r'$\rho(0) = |{0}\rangle \langle {0}|$'.format(self.initial_state))

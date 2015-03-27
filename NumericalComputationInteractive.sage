@@ -42,6 +42,10 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             label = r'$t_{\rm end}$',
             type = RDF)
 
+        initial_state_slider = slider(
+            states_list,
+            default = defaults.initial_state)
+
         gamma_box = input_box(
             defaults.gamma,
             label = r'$\gamma = $',
@@ -55,6 +59,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
                 omega_c = omega_c_box,
                 time_steps = time_steps_box,
                 time_end = time_end_box,
+                initial_state = initial_state_slider,
                 auto_update = False):
             """
             Sets parameters interactively, display new parameters in html
@@ -69,6 +74,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.omega_c = omega_c
             self.params.time_end = time_end
             self.params.time_steps = time_steps
+            self.params.initial_state = initial_state
             self.InitOperators()
             self.params.ShowHTML()
 
