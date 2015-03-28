@@ -10,6 +10,9 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
+        html('<h2>Set parameters, number of points, time interval '
+            'and initial condition</h2>')
+
         defaults = NumericalParams()
 
         alpha_box = input_box(
@@ -93,6 +96,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
+        html('<h2>Chain subsystem density matrix diagonal</h2>')
         def inner(
                 t = self.TimeSlider(),
                 basis_e = [True, False]):
@@ -113,6 +117,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
+        html('<h2>Chain subsystem density matrix diagonal elem</h2>')
         def inner(
                 state = self.StateSlider(),
                 auto_update = False):
@@ -134,6 +139,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
+        html('<h2>Chain subsystem density matrix</h2>')
         def inner(
                 t = self.TimeSlider(),
                 basis_e = [True, False]):
