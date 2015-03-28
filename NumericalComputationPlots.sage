@@ -242,13 +242,15 @@ class NumericalComputationPlots(NumericalComputationBase):
             point = (x, y)
             l.append(point)
 
+        index = r'{},{}'.format(i, j)
+        legend_label = r'$\rho_{' + index + r'}^{\rm sink}(t)$'
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
             color = 'red',
             tick_formatter = 'latex',
             axes_labels = ['$t$', '$P$'],
-            legend_label = r'$\rho_{{{0},{0}}}(t)$'.format(1))
+            legend_label = legend_label)
 
         plot_object.set_legend_options(back_color = 'white')
 
