@@ -48,6 +48,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows multi-line plot and then multiple line plots of state evol.
 
         """
+        html('<h2>Chain subsystem density matrix diagonal elems</h2>')
         l = self.PlotStates(states_list)
         show(sum(l))
         show(graphics_array(l, 8, 2), figsize = [10, 20])
@@ -161,6 +162,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns a list of line plots of reduced states
 
         """
+        html('<h2>First cavity subsystem density matrix elems</h2>')
         colors = rainbow(4)
         return [self.PlotReducedState1(s, colors[s])
             for s in range(4)]
@@ -198,7 +200,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows line plot of entropy
 
         """
-        html('<h2>Entropy of subsystem 1</h2>')
+        html('<h2>Entropy of first cavity subsystem</h2>')
         show(self.PlotEntropy1())
 
     def PlotRho(self, t, basis_e = False):
@@ -261,5 +263,5 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows line plot of sink subsystem density matrix elem rho_sink[1,1]
 
         """
-        html('<h2>Sink "charge" (sink subsystem reduced density matrix elem)</h2>')
+        html('<h2>Sink subsystem density matrix elem</h2>')
         show(self.PlotSink(1, 1))
