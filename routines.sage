@@ -106,7 +106,7 @@ def partial_trace_sink(rho_full):
         for j in range(2):
              s = 0
              for k in range(16):
-                 s += rho_full[i * 16 + k, j * 16 + k]
+                 s += rho_full[i + 2 * k, j + 2 * k]
 
              rho[i, j] = s
     return rho
