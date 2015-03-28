@@ -98,10 +98,8 @@ class NumericalComputationBase(object):
         Computes time evolution
 
         """
-        rho = vec2dm(basis_state(self.params.initial_state))
-
-        I2 = identity_matrix(CDF, 2)
-        rho = rho.tensor_product(I2)
+        psi = full_basis_state(self.params.initial_state)
+        rho = vec2dm(psi)
 
         self.rho_full_list = [rho]
         for t in range(1, self.params.time_steps):
