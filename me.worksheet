@@ -47,6 +47,10 @@ num.ShowStates()
 }}}
 
 {{{
+num.ShowSink()
+}}}
+
+{{{
 interact(num.InteractiveState())
 pass
 }}}

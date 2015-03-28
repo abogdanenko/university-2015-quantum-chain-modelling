@@ -255,3 +255,11 @@ class NumericalComputationPlots(NumericalComputationBase):
         plot_object.set_legend_options(back_color = 'white')
 
         return plot_object
+
+    def ShowSink(self):
+        """
+        Shows line plot of sink subsystem density matrix elem rho_sink[1,1]
+
+        """
+        html('<h2>Sink "charge" (sink subsystem reduced density matrix elem)</h2>')
+        show(self.PlotSink(1, 1))
