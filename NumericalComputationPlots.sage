@@ -230,7 +230,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
     def PlotSink(self, i, j):
         """
-        Returns line plot of the state
+        Returns line plot of sink subsystem matrix elem
 
         """
         l = []
