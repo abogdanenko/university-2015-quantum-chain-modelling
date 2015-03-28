@@ -28,7 +28,7 @@ def full_basis_state(state):
     """
     states_count = 2 ** 5
     psi = vector(CDF, states_count)
-    psi[state] = 1
+    psi[state * 2] = 1
     return psi
 
 def coordinate_change_matrix():
