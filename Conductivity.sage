@@ -31,3 +31,29 @@ class Conductivity(object):
             self.num.ComputeTimeEvolution()
             l = self.GetRhoSink11()
             self.rho_sink_11_list.append(l)
+
+    def PlotSink(self, beta_index, color = 'red'):
+        """
+        Returns line plot of sink subsystem matrix elem
+
+        """
+        l = []
+        for t in range(self.num.params.time_steps):
+            x = self.num.IterationTime(t)
+            y = self.rho_sink_11_list[beta_index][t]
+            point = (x, y)
+            l.append(point)
+
+        beta = '{}'.format(self.beta_list[beta_index])
+        legend_label = r'$\rho_{1,1}^{\rm sink}(t), \beta = ' + beta + '$'
+        plot_object = line(l,
+            ymin = 0,
+            ymax = 1,
+            color = color,
+            tick_formatter = 'latex',
+            axes_labels = ['$t$', '$P$'],
+            legend_label = legend_label)
+
+        plot_object.set_legend_options(back_color = 'white')
+
+        return plot_object
