@@ -1,0 +1,35 @@
+<div style = "color:white;background-color:green">
+<h1>JCH model of two cavities</h1>
+</div>
+
+{{{
+load('main.sage')
+}}}
+
+<div style = "color:white;background-color:green">
+<h2>Chain conductivity analysis</h2>
+</div>
+
+{{{
+sym = SymbolicComputation()
+num = NumericalComputation(sym)
+con = Conductivity(num)
+}}}
+
+{{{
+%time
+con.ComputeTimeEvolutionBeta()
+}}}
+
+{{{
+interact(con.InteractiveSinkBeta())
+pass
+}}}
+
+{{{
+con.ShowSinkBeta()
+}}}
+
+{{{
+con.ShowConductivityBeta()
+}}}
