@@ -1,3 +1,5 @@
+from numpy import average
+
 class Conductivity(object):
     """
     Computes chain conductivity, makes sink plots for diff. values of params
@@ -127,3 +129,38 @@ class Conductivity(object):
             show(self.PlotSink(index))
 
         return inner
+
+    def PlotConductivity(self):
+        """
+        Returns line plot of chain conductivity
+
+        """
+        l = []
+        for param, row in zip(self.param_list, self.rho_sink_11_list):
+            c = RDF(average(array(row)))
+            point = (param, c)
+            l.append(point)
+
+        legend_label = r'$\langle\rho_{1,1}^{\rm sink}\rangle$'
+        labelx = r'$\{}$'.format(self.param)
+        labely = '$C$'
+        plot_object = line(l,
+            ymin = 0,
+            ymax = 1,
+            xmin = 0,
+            color = 'red',
+            tick_formatter = 'latex',
+            axes_labels = [labelx, labely],
+            legend_label = legend_label)
+
+        plot_object.set_legend_options(back_color = 'white')
+
+        return plot_object
+
+    def ShowConductivity(self):
+        """
+        Shows line plot of chain conductivity
+
+        """
+        html('<h2>Chain conductivity</h2>')
+        show(self.PlotConductivity())
