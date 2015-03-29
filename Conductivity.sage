@@ -72,3 +72,24 @@ class Conductivity(object):
             plot += self.PlotSinkBeta(i, colors[i])
 
         return plot
+
+    def InteractiveSinkBeta(self):
+        """
+        Returns inner function
+
+        Prepares default values for inner function
+
+        """
+        html('<h2>Sink subsystem density matrix elem</h2>')
+        def inner(beta = self.beta_list):
+            """
+            Shows line plot of sink subsystem matrix elem
+            User specifies beta
+
+            Should be passed to interact()
+
+            """
+            index = self.beta_list.index(beta)
+            show(self.PlotSinkBeta(index))
+
+        return inner
