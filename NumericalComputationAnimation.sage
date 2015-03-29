@@ -8,10 +8,14 @@ class NumericalComputationAnimation(NumericalComputationPlots):
         Saves density matrix plot png image for each moment of time
 
         """
-        l = [self.PlotRho(t, basis_e)
-            for t in range(self.params.time_steps)]
-        animation = animate(l)
-        return animation.png()
+        dirname = tmp_dir()
+
+        for t in range(self.params.time_steps):
+            filename = os.path.join(dirname, '{:08d}.png'.format(t))
+            plot = self.PlotRho(t, basis_e)
+            plot.save_image(filename)
+
+        return dirname
 
     def SaveProbabilityBarChartAnimation(self, basis_e = False):
         """
