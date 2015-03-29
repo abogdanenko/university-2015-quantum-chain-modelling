@@ -5,7 +5,9 @@ class Conductivity(object):
     """
     def __init__(self, num):
         self.num = num
-        self.beta_list = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]
+        # pretty output formatting
+        beta_list = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]
+        self.beta_list = [RDF(x) for x in beta_list]
 
     def GetRhoSink11(self):
         """
@@ -45,7 +47,7 @@ class Conductivity(object):
             l.append(point)
 
         beta = '{}'.format(self.beta_list[beta_index])
-        legend_label = r'$\rho_{1,1}^{\rm sink}(t), \beta = ' + beta + '$'
+        legend_label = r'$\rho_{1,1}^{\rm sink}(t),\ \beta = ' + beta + '$'
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
