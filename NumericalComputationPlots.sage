@@ -223,7 +223,6 @@ class NumericalComputationPlots(NumericalComputationBase):
             cmap = 'spectral',
             vmin = 0,
             vmax = 1,
-            tick_formatter = 'latex',
             colorbar = True,
             title = title)
         return plot_object
