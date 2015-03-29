@@ -228,6 +228,30 @@ class NumericalComputationPlots(NumericalComputationBase):
             title = title)
         return plot_object
 
+    def PlotRhoFull(self, t, basis_e = False):
+        """
+        Return matrix plot of rho_full at time t
+
+        """
+        rho = self.rho_full_list[t]
+        title1 = r'\rho^{\rm full}'
+        if basis_e:
+            rho = self.sym.ToFullExcBasis(rho)
+            title1 = r'\rho^{\rm full,ex}'
+
+        title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
+        title3 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
+                 self.params.initial_state)
+        title = r'${},\ {},\ {}$'.format(title1, title2, title3)
+
+        plot_object = matrix_plot(matrix(abs(array(rho))),
+            cmap = 'spectral',
+            vmin = 0,
+            vmax = 1,
+            colorbar = True,
+            title = title)
+        return plot_object
+
     def PlotSink(self, i, j):
         """
         Returns line plot of sink subsystem matrix elem

@@ -10,6 +10,13 @@ class SymbolicComputationBase(object):
         """
         return self.T.transpose() * A * self.T
 
+    def ToFullExcBasis(self, A):
+        """
+        Returnes matrix A in excitation basis
+
+        """
+        return self.T_full.transpose() * A * self.T_full
+
     def __init__(self):
         omega_a = SR.var('omega_a', domain = 'positive')
         omega_c = SR.var('omega_c', domain = 'positive')
@@ -49,6 +56,7 @@ class SymbolicComputationBase(object):
             self.H_blocks.append(self.H[I, J])
 
         self.T = coordinate_change_matrix()
+        self.T_full = self.T.tensor_product(identity_matrix(IntegerRing(), 2))
 
         self.H_e = self.ToExcBasis(self.H)
 
