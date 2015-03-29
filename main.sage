@@ -6,6 +6,7 @@ load('NumericalComputationPlots.sage')
 load('NumericalComputationInteractive.sage')
 load('NumericalComputationAnimation.sage')
 load('NumericalComputation.sage')
+load('Conductivity.sage')
 
 qubits_count = 4
 states_count = 2^qubits_count
