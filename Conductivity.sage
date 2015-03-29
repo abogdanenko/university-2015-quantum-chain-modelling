@@ -9,6 +9,31 @@ class Conductivity(object):
         param_list = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]
         self.param_list = [RDF(x) for x in param_list]
 
+    def InteractiveParamPicker(self):
+        """
+        Returns inner function
+
+        Prepares default values for inner function
+
+        """
+        html('<h2>Please pick parameter below</h2>')
+        param_picker = ('Parameter: ', [r'$\beta$', r'$\gamma$'])
+
+        def inner(param = param_picker):
+            """
+            Set param to the one chosen by user
+
+            Should be passed to interact()
+
+            """
+            html('You have chosen: ' + param)
+            if (param == r'$\beta$'):
+                self.param = 'beta'
+            else:
+                self.param = 'gamma'
+
+        return inner
+
     def GetRhoSink11(self):
         """
         Return list of rho_sink[1,1] for each moment of time
