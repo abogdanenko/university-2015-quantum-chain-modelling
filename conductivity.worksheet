@@ -17,6 +17,11 @@ con = Conductivity(num)
 }}}
 
 {{{
+interact(con.num.InteractiveParamsSet())
+pass
+}}}
+
+{{{
 %time
 con.ComputeTimeEvolutionBeta()
 }}}
