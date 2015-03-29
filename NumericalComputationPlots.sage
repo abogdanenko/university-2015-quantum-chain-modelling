@@ -260,7 +260,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
 
-            rho = partial_trace_sink(self.rho_full_list[t])
+            rho = self.rho_sink_list[t]
 
             y = abs(rho[i, j])
 

@@ -107,6 +107,7 @@ class NumericalComputationBase(object):
             self.rho_full_list.append(rho)
 
         self.rho_list = [partial_trace_chain(x) for x in self.rho_full_list]
+        self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_full_list]
 
     def Rho(self, t):
         """
