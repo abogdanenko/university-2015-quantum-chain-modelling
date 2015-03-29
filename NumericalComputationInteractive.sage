@@ -152,3 +152,24 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             show(self.PlotRho(t, basis_e))
 
         return inner
+
+    def InteractiveRhoFull(self):
+        """
+        Returns inner function
+
+        Prepares default values for inner function
+
+        """
+        html('<h2>Full system density matrix</h2>')
+        def inner(
+                t = self.TimeSlider(),
+                basis_e = [True, False]):
+            """
+            Displays density matrix at time t
+
+            Should be passed to interact()
+
+            """
+            show(self.PlotRhoFull(t, basis_e))
+
+        return inner
