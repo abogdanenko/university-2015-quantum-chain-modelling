@@ -57,3 +57,18 @@ class Conductivity(object):
         plot_object.set_legend_options(back_color = 'white')
 
         return plot_object
+
+    def ShowSinkBeta(self):
+        """
+        Shows multi-line plot of rho_sink[1,1] with different beta
+
+        """
+        html('<h2>Sink subsystem density matrix elem</h2>')
+        n = len(self.beta_list)
+        colors = rainbow(n)
+
+        plot = sage.plot.graphics.Graphics()
+        for i in range(n):
+            plot += self.PlotSink(i, colors[i])
+
+        return plot
