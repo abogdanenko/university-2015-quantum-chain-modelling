@@ -22,6 +22,11 @@ pass
 }}}
 
 {{{
+interact(con.InteractiveParamPicker())
+pass
+}}}
+
+{{{
 %time
 con.ComputeTimeEvolution()
 }}}

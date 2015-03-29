@@ -5,6 +5,7 @@ class Conductivity(object):
     """
     def __init__(self, num):
         self.num = num
+        self.param = 'beta'
         # pretty output formatting
         param_list = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]
         self.param_list = [RDF(x) for x in param_list]
@@ -53,7 +54,10 @@ class Conductivity(object):
         """
         self.rho_sink_11_list = []
         for param in self.param_list:
-            self.num.params.beta = param
+            if (self.param == 'beta'):
+                self.num.params.beta = param
+            else:
+                self.num.params.gamma = param
             self.num.InitOperators()
             self.num.ComputeTimeEvolution()
             l = self.GetRhoSink11()
@@ -72,7 +76,9 @@ class Conductivity(object):
             l.append(point)
 
         param = '{}'.format(self.param_list[param_index])
-        legend_label = r'$\rho_{1,1}^{\rm sink}(t),\ \beta = ' + param + '$'
+        label1 = r'\rho_{1,1}^{\rm sink}(t)'
+        label2 = r'\{} = {}'.format(self.param, param)
+        legend_label = r'${},\ {}$'.format(label1, label2)
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
@@ -108,7 +114,8 @@ class Conductivity(object):
 
         """
         html('<h2>Sink subsystem density matrix elem</h2>')
-        def inner(param = self.param_list):
+        param_value_picker = ('{}: '.format(self.param), self.param_list)
+        def inner(param = param_value_picker):
             """
             Shows line plot of sink subsystem matrix elem
             User specifies param
