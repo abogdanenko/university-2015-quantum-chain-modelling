@@ -6,8 +6,8 @@ class Conductivity(object):
     def __init__(self, num):
         self.num = num
         # pretty output formatting
-        beta_list = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]
-        self.beta_list = [RDF(x) for x in beta_list]
+        param_list = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]
+        self.param_list = [RDF(x) for x in param_list]
 
     def GetRhoSink11(self):
         """
@@ -23,18 +23,18 @@ class Conductivity(object):
 
     def ComputeTimeEvolution(self):
         """
-        Computes time evolution for each beta
+        Computes time evolution for each parameter value
 
         """
         self.rho_sink_11_list = []
-        for beta in self.beta_list:
-            self.num.params.beta = beta
+        for param in self.param_list:
+            self.num.params.beta = param
             self.num.InitOperators()
             self.num.ComputeTimeEvolution()
             l = self.GetRhoSink11()
             self.rho_sink_11_list.append(l)
 
-    def PlotSink(self, beta_index, color = 'red'):
+    def PlotSink(self, param_index, color = 'red'):
         """
         Returns line plot of sink subsystem matrix elem
 
@@ -42,12 +42,12 @@ class Conductivity(object):
         l = []
         for t in range(self.num.params.time_steps):
             x = self.num.IterationTime(t)
-            y = self.rho_sink_11_list[beta_index][t]
+            y = self.rho_sink_11_list[param_index][t]
             point = (x, y)
             l.append(point)
 
-        beta = '{}'.format(self.beta_list[beta_index])
-        legend_label = r'$\rho_{1,1}^{\rm sink}(t),\ \beta = ' + beta + '$'
+        param = '{}'.format(self.param_list[param_index])
+        legend_label = r'$\rho_{1,1}^{\rm sink}(t),\ \beta = ' + param + '$'
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
@@ -62,11 +62,11 @@ class Conductivity(object):
 
     def ShowSink(self):
         """
-        Shows multi-line plot of rho_sink[1,1] with different beta
+        Shows multi-line plot of rho_sink[1,1] with different param values
 
         """
         html('<h2>Sink subsystem density matrix elem</h2>')
-        n = len(self.beta_list)
+        n = len(self.param_list)
         colors = rainbow(n)
 
         plot = sage.plot.graphics.Graphics()
@@ -83,15 +83,15 @@ class Conductivity(object):
 
         """
         html('<h2>Sink subsystem density matrix elem</h2>')
-        def inner(beta = self.beta_list):
+        def inner(param = self.param_list):
             """
             Shows line plot of sink subsystem matrix elem
-            User specifies beta
+            User specifies param
 
             Should be passed to interact()
 
             """
-            index = self.beta_list.index(beta)
+            index = self.param_list.index(param)
             show(self.PlotSink(index))
 
         return inner
