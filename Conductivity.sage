@@ -32,7 +32,7 @@ class Conductivity(object):
             l = self.GetRhoSink11()
             self.rho_sink_11_list.append(l)
 
-    def PlotSink(self, beta_index, color = 'red'):
+    def PlotSinkBeta(self, beta_index, color = 'red'):
         """
         Returns line plot of sink subsystem matrix elem
 
@@ -69,6 +69,6 @@ class Conductivity(object):
 
         plot = sage.plot.graphics.Graphics()
         for i in range(n):
-            plot += self.PlotSink(i, colors[i])
+            plot += self.PlotSinkBeta(i, colors[i])
 
         return plot
