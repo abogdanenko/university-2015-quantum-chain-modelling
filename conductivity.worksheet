@@ -23,18 +23,18 @@ pass
 
 {{{
 %time
-con.ComputeTimeEvolutionBeta()
+con.ComputeTimeEvolution()
 }}}
 
 {{{
-interact(con.InteractiveSinkBeta())
+interact(con.InteractiveSink())
 pass
 }}}
 
 {{{
-con.ShowSinkBeta()
+con.ShowSink()
 }}}
 
 {{{
-con.ShowConductivityBeta()
+con.ShowConductivity()
 }}}

@@ -21,7 +21,7 @@ class Conductivity(object):
             l.append(y)
         return l
 
-    def ComputeTimeEvolutionBeta(self):
+    def ComputeTimeEvolution(self):
         """
         Computes time evolution for each beta
 
@@ -34,7 +34,7 @@ class Conductivity(object):
             l = self.GetRhoSink11()
             self.rho_sink_11_list.append(l)
 
-    def PlotSinkBeta(self, beta_index, color = 'red'):
+    def PlotSink(self, beta_index, color = 'red'):
         """
         Returns line plot of sink subsystem matrix elem
 
@@ -60,7 +60,7 @@ class Conductivity(object):
 
         return plot_object
 
-    def ShowSinkBeta(self):
+    def ShowSink(self):
         """
         Shows multi-line plot of rho_sink[1,1] with different beta
 
@@ -71,11 +71,11 @@ class Conductivity(object):
 
         plot = sage.plot.graphics.Graphics()
         for i in range(n):
-            plot += self.PlotSinkBeta(i, colors[i])
+            plot += self.PlotSink(i, colors[i])
 
         return plot
 
-    def InteractiveSinkBeta(self):
+    def InteractiveSink(self):
         """
         Returns inner function
 
@@ -92,6 +92,6 @@ class Conductivity(object):
 
             """
             index = self.beta_list.index(beta)
-            show(self.PlotSinkBeta(index))
+            show(self.PlotSink(index))
 
         return inner
