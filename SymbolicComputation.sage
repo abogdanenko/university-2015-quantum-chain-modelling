@@ -102,8 +102,7 @@ class SymbolicComputation(object):
         Works inside notebook interface
 
         """
-        header = ['state', 'ph1', 'at1', 'ph2', 'at2', r'$N_{\rm ex}$']
-        header_e = header + [r'$\langle H \rangle$']
+        header = ['state', 'ph1', 'at1', 'ph2', 'at2', 'sink', r'$N_{\rm ex}$']
 
         html('<h2>Basis states</h2>')
 
@@ -112,10 +111,9 @@ class SymbolicComputation(object):
             row = [i]
             row.extend(bits(i, qubits_count))
             row.append(exc_number(i))
-            row.append(self.H[i, i])
             rows.append(row)
 
-        html.table(rows, header = header_e)
+        html.table(rows, header = header)
 
         rows = []
         for E in exc_list:
