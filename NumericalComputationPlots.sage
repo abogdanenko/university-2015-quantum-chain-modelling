@@ -131,51 +131,6 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
-    def PlotReducedState1(self, state, color = 'red'):
-        """
-        Returns line plot of reduced state
-
-        """
-        l = []
-        for t in range(self.params.time_steps):
-            x = self.IterationTime(t)
-            rho = self.Rho(t)
-            rho1 = partial_trace1(rho)
-            y = abs(rho1[state, state])
-            point = (x, y)
-            l.append(point)
-
-        plot_object = line(l,
-            ymin = 0,
-            ymax = 1,
-            color = color,
-            tick_formatter = 'latex',
-            axes_labels = ['$t$', '$P$'],
-            legend_label = r'$\rho^1_{{{0},{0}}}(t)$'.format(state))
-
-        plot_object.set_legend_options(back_color = 'white')
-
-        return plot_object
-
-    def PlotReducedStates1(self):
-        """
-        Returns a list of line plots of reduced states
-
-        """
-        html('<h2>First cavity subsystem density matrix elems</h2>')
-        colors = rainbow(4)
-        return [self.PlotReducedState1(s, colors[s])
-            for s in range(4)]
-
-    def ShowReducedStates1(self):
-        """
-        Shows multi-line plot and then multiple line plots of state evol.
-
-        """
-        l = self.PlotReducedStates1()
-        show(sum(l))
-        show(graphics_array(l, 2, 2))
-
     def PlotRho(self, t, basis_e = False):
         """
         Return matrix plot of rho at time t
