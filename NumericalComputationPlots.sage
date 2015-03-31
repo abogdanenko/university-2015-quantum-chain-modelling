@@ -45,13 +45,12 @@ class NumericalComputationPlots(NumericalComputationBase):
 
     def ShowStates(self):
         """
-        Shows multi-line plot and then multiple line plots of state evol.
+        Shows multi-line plot of state evolution
 
         """
         html('<h2>Chain subsystem density matrix diagonal elems</h2>')
         l = self.PlotStates(states_list)
         show(sum(l))
-        show(graphics_array(l, 8, 2), figsize = [10, 20])
 
     def ProbabilityBarChart(
             self,
