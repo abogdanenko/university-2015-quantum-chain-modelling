@@ -67,21 +67,6 @@ def html_vars(l):
     for x in l:
         html('${} = {}$'.format(x[0], latex(x[1])))
 
-def partial_trace1(rho):
-    """
-    Returns reduced density matrix of subsystem 1
-
-    """
-    rho1 = matrix(CDF, 4)
-    for i1i2 in range(4):
-        for j1j2 in range(4):
-             s = 0
-             for i3i4 in range(4):
-                 s += rho[i1i2 * 4 + i3i4, j1j2 * 4 + i3i4]
-
-             rho1[i1i2, j1j2] = s
-    return rho1
-
 def partial_trace_chain(rho_full):
     """
     Returns reduced density matrix of chain subsystem
