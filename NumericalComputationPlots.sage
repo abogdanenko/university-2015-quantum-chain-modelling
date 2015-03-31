@@ -53,14 +53,6 @@ class NumericalComputationPlots(NumericalComputationBase):
         show(sum(l))
         show(graphics_array(l, 8, 2), figsize = [10, 20])
 
-    def ShowDiagDist(self):
-        """
-        Shows line plot of DiagDist(t)
-
-        """
-        html('<h2>Distance to diagonal matrices</h2>')
-        show(self.PlotDiagDist())
-
     def ProbabilityBarChart(
             self,
             t,
@@ -110,26 +102,6 @@ class NumericalComputationPlots(NumericalComputationBase):
         ax.legend(points, labels, loc = 'upper center')
         fig.savefig(filename)
         plt.close(fig)
-
-    def PlotDiagDist(self):
-        """
-        Returns line plot of DiagDist(t)
-
-        """
-        l = []
-        for t in range(self.params.time_steps):
-            x = self.IterationTime(t)
-            y = self.DiagDist(t)
-            point = (x, y)
-            l.append(point)
-
-        plot_object = line(l,
-            ymin = 0,
-            ymax = 1,
-            tick_formatter = 'latex',
-            axes_labels = ['$t$', r'$d(\rho, D)$'])
-
-        return plot_object
 
     def PlotRho(self, t, basis_e = False):
         """

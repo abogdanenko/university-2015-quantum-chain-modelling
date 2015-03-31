@@ -64,7 +64,3 @@ pass
 interact(num.InteractiveProbabilityBarChart())
 pass
 }}}
-
-{{{
-num.ShowDiagDist()
-}}}

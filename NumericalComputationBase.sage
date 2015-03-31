@@ -117,19 +117,3 @@ class NumericalComputationBase(object):
 
         """
         return self.rho_list[t]
-
-    def DiagDist(self, t):
-        """
-        Returns distance between density matrix and a set of diagonal matrices
-
-        State is a state at time step t. Distance between matrices is frobenius
-        norm of matrix difference.
-
-        """
-        s = RDF()
-        rho = self.Rho(t)
-        for i in states_list:
-            for j in states_list:
-                if (i != j):
-                    s += norm(rho[i, j])
-        return sqrt(s)
