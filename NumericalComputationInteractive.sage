@@ -132,27 +132,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         return inner
 
-    def InteractiveRho(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        html('<h2>Chain subsystem density matrix</h2>')
-        def inner(
-                t = self.TimeSlider(),
-                basis_e = [True, False]):
-            """
-            Displays density matrix at time t
-
-            Should be passed to interact()
-
-            """
-            show(self.PlotRho(t, basis_e))
-
-        return inner
-
     def InteractiveRhoFull(self):
         """
         Returns inner function

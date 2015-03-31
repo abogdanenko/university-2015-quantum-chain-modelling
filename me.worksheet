@@ -43,11 +43,6 @@ pass
 }}}
 
 {{{
-interact(num.InteractiveRho())
-pass
-}}}
-
-{{{
 num.ShowStates()
 }}}
 

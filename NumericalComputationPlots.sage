@@ -102,30 +102,6 @@ class NumericalComputationPlots(NumericalComputationBase):
         fig.savefig(filename)
         plt.close(fig)
 
-    def PlotRho(self, t, basis_e = False):
-        """
-        Return matrix plot of rho at time t
-
-        """
-        rho = self.Rho(t)
-        title1 = r'\rho'
-        if basis_e:
-            rho = self.sym.ToExcBasis(rho)
-            title1 = r'\rho^{\rm ex}'
-
-        title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
-        title3 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
-                 self.params.initial_state)
-        title = r'${},\ {},\ {}$'.format(title1, title2, title3)
-
-        plot_object = matrix_plot(matrix(abs(array(rho))),
-            cmap = 'spectral',
-            vmin = 0,
-            vmax = 1,
-            colorbar = True,
-            title = title)
-        return plot_object
-
     def PlotRhoFull(self, t, basis_e = False):
         """
         Return matrix plot of rho_full at time t
