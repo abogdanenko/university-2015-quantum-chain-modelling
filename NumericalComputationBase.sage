@@ -133,14 +133,3 @@ class NumericalComputationBase(object):
                 if (i != j):
                     s += norm(rho[i, j])
         return sqrt(s)
-
-    def Entropy1(self, t):
-        """
-        Returnes Von Neumann entropy of reduced density matrix
-
-        """
-        rho = self.Rho(t)
-        rho1 = partial_trace1(rho)
-        # drop imag part, it should be zero
-        ev = map(abs, rho1.eigenvalues())
-        return -1 * sum([xlnx(p) for p in ev])

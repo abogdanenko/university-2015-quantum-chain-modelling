@@ -176,33 +176,6 @@ class NumericalComputationPlots(NumericalComputationBase):
         show(sum(l))
         show(graphics_array(l, 2, 2))
 
-    def PlotEntropy1(self):
-        """
-        Returns line plot of entropy
-
-        """
-        l = []
-        for t in range(self.params.time_steps):
-            x = self.IterationTime(t)
-            y = self.Entropy1(t)
-            point = (x, y)
-            l.append(point)
-
-        plot_object = line(l,
-            ymin = 0,
-            tick_formatter = 'latex',
-            axes_labels = ['$t$', r'$S(\rho^1)$'])
-
-        return plot_object
-
-    def ShowEntropy1(self):
-        """
-        Shows line plot of entropy
-
-        """
-        html('<h2>Entropy of first cavity subsystem</h2>')
-        show(self.PlotEntropy1())
-
     def PlotRho(self, t, basis_e = False):
         """
         Return matrix plot of rho at time t

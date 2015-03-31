@@ -111,14 +111,3 @@ def partial_trace_sink(rho_full):
 
              rho[i, j] = s
     return rho
-
-def xlnx(x):
-    """
-    Returnes x * ln(x) or 0 if x is near 0
-
-    """
-    epsilon = 1e-14
-    if (abs(x) < epsilon):
-        return 0
-    else:
-        return x * ln(x)

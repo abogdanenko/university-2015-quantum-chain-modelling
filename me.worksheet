@@ -72,7 +72,3 @@ num.ShowDiagDist()
 {{{
 num.ShowReducedStates1()
 }}}
-
-{{{
-num.ShowEntropy1()
-}}}
