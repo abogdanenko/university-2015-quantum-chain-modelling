@@ -10,13 +10,6 @@ class SymbolicComputation(object):
         """
         return self.T.transpose() * A * self.T
 
-    def ToFullExcBasis(self, A):
-        """
-        Returnes matrix A in excitation basis
-
-        """
-        return self.T_full.transpose() * A * self.T_full
-
     def __init__(self):
         omega_a = SR.var('omega_a', domain = 'positive')
         omega_c = SR.var('omega_c', domain = 'positive')
