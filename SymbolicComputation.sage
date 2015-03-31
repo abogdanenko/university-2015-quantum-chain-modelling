@@ -39,9 +39,11 @@ class SymbolicComputation(object):
 
         I4 = identity_matrix(SR, 4)
 
-        self.H = self.H_sum.tensor_product(I4) \
+        self.H_chain = self.H_sum.tensor_product(I4) \
             + I4.tensor_product(self.H_sum) \
             + self.H_tun
+
+        self.H = self.H_chain.tensor_product(I2)
 
         self.H_blocks = []
         for E in exc_list:
@@ -49,7 +51,6 @@ class SymbolicComputation(object):
             self.H_blocks.append(self.H[I, J])
 
         self.T = coordinate_change_matrix()
-        self.T_full = self.T.tensor_product(identity_matrix(IntegerRing(), 2))
 
         self.H_e = self.ToExcBasis(self.H)
 
@@ -81,6 +82,7 @@ class SymbolicComputation(object):
         l.append((r'H_{\rm field,at}', self.H_field_at))
         l.append((r'H_{\rm sum}', self.H_sum))
         l.append((r'H_{\rm tun}', self.H_tun))
+        l.append((r'H_{\rm chain}', self.H_chain))
         l.append((r'H', self.H))
 
         l.append((r'T', self.T))
