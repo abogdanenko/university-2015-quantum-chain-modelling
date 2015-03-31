@@ -132,7 +132,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         return inner
 
-    def InteractiveRhoFull(self):
+    def InteractiveRho(self):
         """
         Returns inner function
 

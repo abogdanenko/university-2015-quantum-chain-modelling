@@ -38,7 +38,7 @@ num.ComputeTimeEvolution()
 }}}
 
 {{{
-interact(num.InteractiveRhoFull())
+interact(num.InteractiveRho())
 pass
 }}}
 

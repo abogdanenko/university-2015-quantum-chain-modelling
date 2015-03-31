@@ -102,7 +102,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         fig.savefig(filename)
         plt.close(fig)
 
-    def PlotRhoFull(self, t, basis_e = False):
+    def PlotRho(self, t, basis_e = False):
         """
         Return matrix plot of rho_full at time t
 
