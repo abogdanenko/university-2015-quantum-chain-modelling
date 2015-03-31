@@ -1,4 +1,4 @@
-class SymbolicComputationBase(object):
+class SymbolicComputation(object):
     """
     Computes hamiltonian symbolically
 
@@ -132,4 +132,3 @@ class SymbolicComputationBase(object):
                 row.append(exc_number(i))
                 rows.append(row)
             html.table(rows, header = header)
-
