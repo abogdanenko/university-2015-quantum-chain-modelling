@@ -90,8 +90,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         ax.set_xlabel('$j$')
         ax.set_ylabel(ylabel)
 
-        ax.set_xticks(states_list)
-        ax.set_xticklabels(states_list)
+        ax.set_xticks(states_list[::2])
 
         b = ax.bar(states_list, d, color = colors, align = 'center')
 
