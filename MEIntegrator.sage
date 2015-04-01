@@ -11,6 +11,27 @@ class MEIntegrator(object):
         self.H = H
         self.L = L
         self.dt = dt
+        self.InitODE()
+
+    def InitODE(self):
+        def f(t, y):
+            """
+            Defines right-hand side of master equation ode
+
+            Can be used with scipy.integrate.ode ode solver
+
+            """
+            rho = matrix(y.reshape(self.matshape))
+            rhs = self.RHS(rho)
+            return array(rhs).ravel()
+
+        rho = array(rho)
+        self.matshape = rho.shape
+        rho = rho.ravel()
+
+        self.integrator = ode(f)
+        self.integrator.set_integrator('zvode')
+        self.integrator.set_initial_value(rho)
 
     def RHS(self, rho):
         """
@@ -25,33 +46,18 @@ class MEIntegrator(object):
 
         return unitary_term + lindblad_term
 
-    def METimeStep(self, rho):
+    def Step(self):
         """
         Computes time evolution of rho over time dt
 
         """
-        rho = array(rho)
-        matshape = rho.shape
-        rho = rho.ravel()
+        self.integrator.integrate(self.dt)
 
-        def f(t, y):
-            """
-            Defines right-hand side of master equation ode
+    def Rho():
+        """
+        Return current rho
 
-            Can be used with scipy.integrate.ode ode solver
-
-            """
-            rho = matrix(y.reshape(matshape))
-            rhs = self.RHS(rho)
-            return array(rhs).ravel()
-
-        dt = RDF(self.params.time_end / self.params.time_steps)
-
-        r = ode(f)
-        r.set_integrator('zvode')
-        r.set_initial_value(rho)
-        r.integrate(dt)
-
-        rho = r.y.reshape(matshape)
-
-        return matrix(rho)
+        """
+        y = self.integrator.y
+        rho = matrix(y.reshape(self.matshape))
+        return rho
