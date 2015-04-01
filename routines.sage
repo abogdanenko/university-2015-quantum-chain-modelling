@@ -21,6 +21,18 @@ def vec2dm(psi):
     c = psi.column()
     return c * c.conjugate_transpose()
 
+def get_blocks(A):
+    """
+    Returns list of blocks of A in exc basis
+
+    """
+    blocks = []
+    for E in exc_list:
+        I = J = e_states(E)
+        blocks.append(A[I, J])
+
+    return blocks
+
 def basis_state(state):
     """
     Returns basis state number ``state``
