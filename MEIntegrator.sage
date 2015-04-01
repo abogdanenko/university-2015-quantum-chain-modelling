@@ -6,8 +6,11 @@ class MEIntegrator(object):
     Integrates master equation
 
     """
-    def __init__(self):
-        pass
+    def __init__(self, rho, H, L, dt):
+        self.rho = rho
+        self.H = H
+        self.L = L
+        self.dt = dt
 
     def RHS(self, rho):
         """
