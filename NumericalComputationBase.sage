@@ -53,9 +53,13 @@ class NumericalComputationBase(object):
         psi = basis_state(self.params.initial_state)
         rho = vec2dm(psi)
 
+        dt = RDF(self.params.time_end / self.params.time_steps)
+        integrator = MEIntegrator(rho = rho, H = self.H, L = self.L, dt = dt)
+
         self.rho_list = [rho]
         for t in range(1, self.params.time_steps):
-            rho = self.METimeStep(rho)
+            integrator.Step()
+            rho = integrator.Rho()
             self.rho_list.append(rho)
 
         self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_list]
