@@ -84,7 +84,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         return inner
 
     def StateSlider(self):
-        return slider(states_list, default = 1)
+        return slider(states_list, default = 8)
 
     def TimeSlider(self):
         return slider(range(self.params.time_steps))
