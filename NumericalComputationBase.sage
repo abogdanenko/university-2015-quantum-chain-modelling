@@ -27,7 +27,8 @@ class NumericalComputationBase(object):
             alpha = self.params.alpha,
             beta = self.params.beta,
             omega_a = self.params.omega_a,
-            omega_c = self.params.omega_c)
+            omega_c = self.params.omega_c,
+            gamma = self.params.gamma)
         return result
 
     def SubsNum(self, expr):
@@ -39,14 +40,13 @@ class NumericalComputationBase(object):
 
     def InitOperators(self):
         """
-        Computes H, H_blocks, H_e, L by simple substitution
+        Computes H, H_blocks, L, L_blocks by simple substitution
 
         """
         self.H = self.SubsNum(self.sym.H)
         self.H_blocks = [self.SubsNum(B) for B in self.sym.H_blocks]
-        self.H_e = self.SubsNum(self.sym.H_e)
-        self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
-        I2 = identity_matrix(CDF, 2)
+        self.L = self.SubsNum(self.sym.L)
+        self.L_blocks = [self.SubsNum(B) for B in self.sym.L_blocks]
 
     def RHS(self, rho):
         """
