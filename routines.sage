@@ -21,14 +21,13 @@ def vec2dm(psi):
     c = psi.column()
     return c * c.conjugate_transpose()
 
-def full_basis_state(state):
+def basis_state(state):
     """
     Returns basis state number ``state``
 
     """
-    states_count = 2 ** 5
     psi = vector(CDF, states_count)
-    psi[state * 2] = 1
+    psi[state] = 1
     return psi
 
 def coordinate_change_matrix():
