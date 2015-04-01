@@ -139,7 +139,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
-        html('<h2>Full system density matrix</h2>')
+        html('<h2>Density matrix</h2>')
         def inner(
                 t = self.TimeSlider(),
                 basis_e = [True, False]):
@@ -149,6 +149,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            show(self.PlotRhoFull(t, basis_e))
+            show(self.PlotRho(t, basis_e))
 
         return inner

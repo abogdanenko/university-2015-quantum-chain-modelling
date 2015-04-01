@@ -97,16 +97,15 @@ class NumericalComputationBase(object):
         Computes time evolution
 
         """
-        psi = full_basis_state(self.params.initial_state)
+        psi = basis_state(self.params.initial_state)
         rho = vec2dm(psi)
 
-        self.rho_full_list = [rho]
+        self.rho_list = [rho]
         for t in range(1, self.params.time_steps):
             rho = self.METimeStep(rho)
-            self.rho_full_list.append(rho)
+            self.rho_list.append(rho)
 
-        self.rho_list = [partial_trace_chain(x) for x in self.rho_full_list]
-        self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_full_list]
+        self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_list]
 
     def Rho(self, t):
         """

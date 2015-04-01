@@ -104,14 +104,14 @@ class NumericalComputationPlots(NumericalComputationBase):
 
     def PlotRho(self, t, basis_e = False):
         """
-        Return matrix plot of rho_full at time t
+        Return matrix plot of rho at time t
 
         """
-        rho = self.rho_full_list[t]
-        title1 = r'\rho^{\rm full}'
+        rho = self.Rho(t)
+        title1 = r'\rho'
         if basis_e:
-            rho = self.sym.ToFullExcBasis(rho)
-            title1 = r'\rho^{\rm full,ex}'
+            rho = self.sym.ToExcBasis(rho)
+            title1 = r'\rho^{\rm ex}'
 
         title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
         title3 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(
