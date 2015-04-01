@@ -47,14 +47,13 @@ class NumericalComputationBase(object):
         self.H_e = self.SubsNum(self.sym.H_e)
         self.L = self.sym.L.subs(gamma = self.params.gamma).change_ring(CDF)
         I2 = identity_matrix(CDF, 2)
-        self.H_full = self.H.tensor_product(I2)
 
     def RHS(self, rho):
         """
         Defines right-hand side of master equation ode
 
         """
-        unitary_term = CDF(-I) * self.H_full.commutator(rho)
+        unitary_term = CDF(-I) * self.H.commutator(rho)
 
         L = self.L
         Lc = L.conjugate_transpose()
