@@ -1,6 +1,7 @@
 load('routines.sage')
 load('SymbolicComputation.sage')
 load('NumericalParams.sage')
+load('MEIntegrator.sage')
 load('NumericalComputationBase.sage')
 load('NumericalComputationPlots.sage')
 load('NumericalComputationInteractive.sage')
