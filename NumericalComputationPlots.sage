@@ -29,7 +29,7 @@ class NumericalComputationPlots(NumericalComputationBase):
             axes_labels = ['$t$', '$P$'],
             legend_label = r'$\rho_{{{0},{0}}}(t)$'.format(state))
 
-        plot_object.set_legend_options(back_color = 'white')
+        plot_object.set_legend_options(back_color = 'white', ncol = 2)
 
         return plot_object
 
