@@ -48,7 +48,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Shows multi-line plot of state evolution
 
         """
-        html('<h2>Chain subsystem density matrix diagonal elems</h2>')
+        html('<h2>Density matrix diagonal elems</h2>')
         l = self.PlotStates(states_list)
         show(sum(l))
 

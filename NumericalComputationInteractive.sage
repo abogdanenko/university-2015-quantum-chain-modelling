@@ -96,7 +96,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
-        html('<h2>Chain subsystem density matrix diagonal</h2>')
+        html('<h2>Density matrix diagonal</h2>')
         def inner(
                 t = self.TimeSlider(),
                 basis_e = [True, False]):
@@ -117,7 +117,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Prepares default values for inner function
 
         """
-        html('<h2>Chain subsystem density matrix diagonal elem</h2>')
+        html('<h2>Density matrix diagonal elem</h2>')
         def inner(
                 state = self.StateSlider(),
                 auto_update = False):
