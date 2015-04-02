@@ -80,6 +80,15 @@ def bits(n, min_width = 1):
     padded_list = [0] * (min_width - len(l)) + l
     return padded_list
 
+def html_var(variable, value):
+    """
+    Prints variable equals value with formatting
+
+    Works with notebook interface
+
+    """
+    html('${} = {}$'.format(variable, latex(value)))
+
 def html_vars(l):
     """
     Prints variables and values from a list of pairs
@@ -88,7 +97,7 @@ def html_vars(l):
 
     """
     for x in l:
-        html('${} = {}$'.format(x[0], latex(x[1])))
+        html_var(*x)
 
 def partial_trace_chain(rho_full):
     """
