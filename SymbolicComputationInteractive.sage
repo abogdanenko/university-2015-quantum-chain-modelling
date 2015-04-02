@@ -132,9 +132,15 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
         d = dict(l)
 
         latex_vars = ['${}$'.format(x[0]) for x in l]
-        param_picker = selector(latex_vars, buttons = True)
 
-        def inner(variable = param_picker):
+        variable_selector = selector(
+            label = 'Show variable: ',
+            values = latex_vars,
+            buttons = True,
+            ncols = 4,
+            nrows = 5)
+
+        def inner(variable = variable_selector):
             """
             Prints matrix chosen by the user
 
