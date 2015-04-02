@@ -108,20 +108,8 @@ class SymbolicComputationBase(object):
         l.append((r'T', self.T))
         l.append((r'H^{\rm ex}', self.H_e))
 
-        for E in exc_list:
-            name = r'H_{}'.format(E)
-            var = get_block(self.H, E)
-            pair = (name, var)
-            l.append(pair)
-
         l.append((r'L', self.L))
 
         l.append((r'L^{\rm ex}', self.L_e))
-
-        for E in exc_list:
-            name = r'L_{}'.format(E)
-            var = get_block(self.L, E)
-            pair = (name, var)
-            l.append(pair)
 
         html_vars(l)
