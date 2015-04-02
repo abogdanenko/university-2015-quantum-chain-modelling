@@ -79,7 +79,7 @@ class MEIntegrator(object):
         """
         self.integrator.integrate(self.dt)
 
-    def Rho():
+    def Rho(self):
         """
         Return current rho
 
