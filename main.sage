@@ -1,5 +1,6 @@
 load('routines.sage')
-load('SymbolicComputation.sage')
+load('SymbolicComputationBase.sage')
+load('SymbolicComputationInteractive.sage')
 load('NumericalParams.sage')
 load('MEIntegrator.sage')
 load('NumericalComputationBase.sage')
@@ -22,3 +23,6 @@ right_indices = [left_indices[E] + block_sizes[E]
 # first state with excitation number E
 first_indices = [2 ** E - 1 for E in exc_list]
 exc_number_rainbow = rainbow(qubits_count + 1)
+
+# alias
+SymbolicComputation = SymbolicComputationInteractive
