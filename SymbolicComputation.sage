@@ -44,10 +44,7 @@ class SymbolicComputation(object):
             + self.H_tun
 
         self.H = self.H_chain.tensor_product(I2)
-
         self.T = coordinate_change_matrix()
-
-        self.H_blocks = get_blocks(self.H)
         self.H_e = self.ToExcBasis(self.H)
 
         gamma = SR.var('gamma', domain = 'positive')
@@ -55,7 +52,6 @@ class SymbolicComputation(object):
             self.sigma_minus).tensor_product(self.sigma_plus)
 
         self.L_e = self.ToExcBasis(self.L)
-        self.L_blocks = get_blocks(self.L)
 
     def ShowVarsHTML(self):
         """
@@ -88,14 +84,20 @@ class SymbolicComputation(object):
         l.append((r'H^{\rm ex}', self.H_e))
 
         for E in exc_list:
-            l.append((r'H_{}'.format(E), self.H_blocks[E]))
+            name = r'H_{}'.format(E)
+            var = get_block(self.H, E)
+            pair = (name, var)
+            l.append(pair)
 
         l.append((r'L', self.L))
 
         l.append((r'L^{\rm ex}', self.L_e))
 
         for E in exc_list:
-            l.append((r'L_{}'.format(E), self.L_blocks[E]))
+            name = r'L_{}'.format(E)
+            var = get_block(self.L, E)
+            pair = (name, var)
+            l.append(pair)
 
         html_vars(l)
 

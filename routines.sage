@@ -21,17 +21,13 @@ def vec2dm(psi):
     c = psi.column()
     return c * c.conjugate_transpose()
 
-def get_blocks(A):
+def get_block(A, E):
     """
-    Returns list of blocks of A in exc basis
+    Returns E-th block of A in exc basis
 
     """
-    blocks = []
-    for E in exc_list:
-        I = J = e_states(E)
-        blocks.append(A[I, J])
-
-    return blocks
+    I = J = e_states(E)
+    return A[I, J]
 
 def basis_state(state):
     """

@@ -37,13 +37,11 @@ class NumericalComputationBase(object):
 
     def InitOperators(self):
         """
-        Computes H, H_blocks, L, L_blocks by simple substitution
+        Computes H, L by simple substitution
 
         """
         self.H = self.SubsNum(self.sym.H)
-        self.H_blocks = [self.SubsNum(B) for B in self.sym.H_blocks]
         self.L = self.SubsNum(self.sym.L)
-        self.L_blocks = [self.SubsNum(B) for B in self.sym.L_blocks]
 
     def ComputeTimeEvolution(self):
         """
