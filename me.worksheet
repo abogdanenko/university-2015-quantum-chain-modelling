@@ -20,6 +20,11 @@ sym.ShowVarsHTML()
 }}}
 
 {{{
+interact(sym.InteractiveSubspace())
+pass
+}}}
+
+{{{
 interact(sym.InteractiveState())
 pass
 }}}
