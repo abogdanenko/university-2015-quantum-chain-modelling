@@ -29,6 +29,18 @@ def get_block(A, E):
     I = J = e_states(E)
     return A[I, J]
 
+def get_full(B, E):
+    """
+    Returns full matrix A given E-th block of A in exc basis
+
+    Sets all elements of A to zero except elements in block B
+
+    """
+    A = matrix(B.base_ring(), states_count)
+    I = J = e_states(E)
+    A[I, J] = B
+    return A
+
 def basis_state(state):
     """
     Returns basis state number ``state``
