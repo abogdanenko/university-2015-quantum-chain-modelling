@@ -13,6 +13,24 @@ def e_states(E):
     """
     return [i for i in states_list if exc_number(i) == E]
 
+def exc_index(i):
+    """
+    Returns index of state i within its subspace
+
+    """
+    E = exc_number(i)
+    subspace = e_states(E)
+    return subspace.index(i)
+
+def exc_size(i):
+    """
+    Returns size of subspace to which i belongs
+
+    """
+    E = exc_number(i)
+    subspace = e_states(E)
+    return len(subspace)
+
 def vec2dm(psi):
     """
     Returns density matrix corresponding to state vector psi
