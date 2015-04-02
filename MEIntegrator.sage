@@ -13,6 +13,15 @@ class MEIntegrator(object):
         self.dt = dt
         self.InitODE()
 
+    def Flat(self, A):
+        """
+        Returns one-dimensional numpy array representation of matrix A
+
+        """
+        arr = array(A)
+        vec = arr.ravel()
+        return vec
+
     def InitODE(self):
         def f(t, y):
             """
