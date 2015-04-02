@@ -11,6 +11,7 @@ class MEIntegrator(object):
         self.H = H
         self.L = L
         self.dt = dt
+        self.matshape = array(rho).shape
         self.InitODE()
 
     def Flat(self, A):
@@ -21,6 +22,15 @@ class MEIntegrator(object):
         arr = array(A)
         vec = arr.ravel()
         return vec
+
+    def Reshape(self, vec):
+        """
+        Converts one-dimensional numpy array to square matrix
+
+        """
+        arr = vec.reshape(self.matshape)
+        mat = matrix(arr)
+        return mat
 
     def InitODE(self):
         def f(t, y):
