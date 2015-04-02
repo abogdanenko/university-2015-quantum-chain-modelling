@@ -50,15 +50,17 @@ class NumericalComputationBase(object):
         """
         psi = basis_state(self.params.initial_state)
         rho = vec2dm(psi)
+        E = exc_number(self.params.initial_state)
 
         integrator = MEIntegrator(
-            rho = rho,
-            H = self.H,
-            L = self.L,
+            rho = get_block(rho, E),
+            H = get_block(self.H, E),
+            L = get_block(self.L, E),
             dt = self.params.Dt())
 
-        self.rho_list = integrator.Integrate(self.params.time_steps)
+        self.rho_subspace_list = integrator.Integrate(self.params.time_steps)
 
+        self.rho_list = [get_full(x, E) for x in self.rho_subspace_list]
         self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_list]
 
     def Rho(self, t):
