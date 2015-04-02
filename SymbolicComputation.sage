@@ -164,8 +164,8 @@ class SymbolicComputation(object):
         Prepares default values for inner function
 
         """
-        html('<h2>Basis states</h2>')
-        def inner(state = slider(states_list)):
+        def inner(choice = slider(states_list),
+                basis_e = [False, True]):
             """
             Prints hilbert space basis vectors and excitation numbers
             User specifies initial state and basis
@@ -173,10 +173,21 @@ class SymbolicComputation(object):
             Should be passed to interact()
 
             """
-            header = ['state', 'ph1', 'at1', 'ph2', 'at2', 'sink', r'$N_{\rm ex}$']
-            row = [state]
-            row.extend(bits(state, qubits_count))
-            row.append(exc_number(state))
+            if basis_e:
+                state = self.T_rows[choice]
+                state_e = choice
+            else:
+                state = choice
+                state_e = self.T_columns[choice]
+
+            html('<h2>Basis vector numbers</h2>')
+            header = ['state', 'state_e', r'$N_{\rm ex}$']
+            row = [state, state_e, exc_number(state)]
+            html.table([row], header = header)
+
+            html('<h2>Bits</h2>')
+            header = ['ph1', 'at1', 'ph2', 'at2', 'sink']
+            row = bits(state, qubits_count)
             html.table([row], header = header)
 
         return inner
