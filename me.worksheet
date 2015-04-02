@@ -15,7 +15,8 @@ sym = SymbolicComputation()
 }}}
 
 {{{
-sym.ShowVarsHTML()
+interact(sym.InteractiveVars())
+pass
 }}}
 
 {{{

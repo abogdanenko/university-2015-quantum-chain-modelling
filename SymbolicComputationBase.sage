@@ -77,39 +77,3 @@ class SymbolicComputationBase(object):
             i = self.T_rows[j]
             self.T_columns[i] = j
             self.T[i, j] = 1
-
-    def ShowVarsHTML(self):
-        """
-        Prints matrices of quantum-mech. operators used in computations
-
-        Works inside notebook interface
-
-        """
-        l = []
-
-        l.append((r'|g\rangle', self.psi_g))
-        l.append((r'|e\rangle', self.psi_e))
-        l.append((r'|0\rangle', self.psi_ph0))
-        l.append((r'|1\rangle', self.psi_ph1))
-
-        l.append((r'a', self.a))
-        l.append((r'a^{+}', self.a_plus))
-        l.append((r'\sigma^{-}', self.sigma_minus))
-        l.append((r'\sigma^{+}', self.sigma_plus))
-
-        l.append((r'H_{\rm field}', self.H_field))
-        l.append((r'H_{\rm at}', self.H_at))
-        l.append((r'H_{\rm field,at}', self.H_field_at))
-        l.append((r'H_{\rm sum}', self.H_sum))
-        l.append((r'H_{\rm tun}', self.H_tun))
-        l.append((r'H_{\rm chain}', self.H_chain))
-        l.append((r'H', self.H))
-
-        l.append((r'T', self.T))
-        l.append((r'H^{\rm ex}', self.H_e))
-
-        l.append((r'L', self.L))
-
-        l.append((r'L^{\rm ex}', self.L_e))
-
-        html_vars(l)
