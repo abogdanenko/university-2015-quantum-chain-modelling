@@ -19,6 +19,11 @@ sym.ShowVarsHTML()
 }}}
 
 {{{
+interact(sym.InteractiveSubspaceOperators())
+pass
+}}}
+
+{{{
 interact(sym.InteractiveSubspace())
 pass
 }}}

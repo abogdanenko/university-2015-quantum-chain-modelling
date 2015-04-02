@@ -66,3 +66,31 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             html.table(rows, header = header)
 
         return inner
+
+    def InteractiveSubspaceOperators(self):
+        """
+        Returns inner function
+
+        Prepares default values for inner function
+
+        """
+        def inner(subspace = slider(exc_list, default = 1)):
+            """
+            Prints H, L for given subspace
+
+            User specifies subspace
+
+            Should be passed to interact()
+
+            """
+            name = r'H_{}'.format(subspace)
+            var = get_block(self.H, subspace)
+            l = [(name, var)]
+
+            name = r'L_{}'.format(subspace)
+            var = get_block(self.L, subspace)
+            l.append((name, var))
+
+            html_vars(l)
+
+        return inner
