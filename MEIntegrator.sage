@@ -43,9 +43,9 @@ class MEIntegrator(object):
             return self.RHS_array(y)
 
         y = self.Flat(self.rho)
-        self.integrator = ode(f)
-        self.integrator.set_integrator('zvode')
-        self.integrator.set_initial_value(y)
+        self.ode = ode(f)
+        self.ode.set_integrator('zvode')
+        self.ode.set_initial_value(y)
 
     def RHS(self, rho):
         """
@@ -77,15 +77,15 @@ class MEIntegrator(object):
         Computes time evolution of rho over time dt
 
         """
-        t0 = self.integrator.t
+        t0 = self.ode.t
         t1 = t0 + self.dt
-        self.integrator.integrate(t1)
+        self.ode.integrate(t1)
 
     def Rho(self):
         """
         Return current rho
 
         """
-        y = self.integrator.y
+        y = self.ode.y
         rho = self.Reshape(y)
         return rho
