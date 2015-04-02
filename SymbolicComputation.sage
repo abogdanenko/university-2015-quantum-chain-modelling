@@ -156,3 +156,27 @@ class SymbolicComputation(object):
                 row.append(exc_number(i))
                 rows.append(row)
             html.table(rows, header = header)
+
+    def InteractiveState(self):
+        """
+        Returns inner function
+
+        Prepares default values for inner function
+
+        """
+        html('<h2>Basis states</h2>')
+        def inner(state = slider(states_list)):
+            """
+            Prints hilbert space basis vectors and excitation numbers
+            User specifies initial state and basis
+
+            Should be passed to interact()
+
+            """
+            header = ['state', 'ph1', 'at1', 'ph2', 'at2', 'sink', r'$N_{\rm ex}$']
+            row = [state]
+            row.extend(bits(state, qubits_count))
+            row.append(exc_number(state))
+            html.table([row], header = header)
+
+        return inner

@@ -19,6 +19,11 @@ sym.ShowBasisStatesTableHTML()
 sym.ShowVarsHTML()
 }}}
 
+{{{
+interact(sym.InteractiveState())
+pass
+}}}
+
 <div style = "color:white;background-color:green">
 <h2>Numerical computation</h2>
 </div>
