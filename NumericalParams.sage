@@ -13,6 +13,9 @@ class NumericalParams(object):
         self.gamma = RDF(0.5)
         self.initial_state = 8
 
+    def Dt(self):
+        return RDF(self.time_end / self.time_steps)
+
     def ShowHTML(self):
         """
         Print values of parameters
