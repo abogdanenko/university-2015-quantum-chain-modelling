@@ -40,9 +40,7 @@ class MEIntegrator(object):
             Can be used with scipy.integrate.ode ode solver
 
             """
-            rho = matrix(y.reshape(self.matshape))
-            rhs = self.RHS(rho)
-            return array(rhs).ravel()
+            return self.RHS_array(y)
 
         rho = array(rho)
         self.matshape = rho.shape
@@ -64,6 +62,18 @@ class MEIntegrator(object):
         lindblad_term = L * rho * Lc - 0.5 * rho.anticommutator(Lc * L)
 
         return unitary_term + lindblad_term
+
+    def RHS_array(self, rho_flat):
+        """
+        Defines right-hand side of master equation ode
+
+        Accepts density matrix in flat format
+
+        """
+        rho = self.Reshape(rho_flat)
+        rhs = self.RHS(rho)
+        rhs_flat = self.Flat(rhs)
+        return rhs_flat
 
     def Step(self):
         """
