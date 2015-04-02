@@ -42,13 +42,10 @@ class MEIntegrator(object):
             """
             return self.RHS_array(y)
 
-        rho = array(rho)
-        self.matshape = rho.shape
-        rho = rho.ravel()
-
+        y = self.Flat(self.rho)
         self.integrator = ode(f)
         self.integrator.set_integrator('zvode')
-        self.integrator.set_initial_value(rho)
+        self.integrator.set_initial_value(y)
 
     def RHS(self, rho):
         """
@@ -88,5 +85,5 @@ class MEIntegrator(object):
 
         """
         y = self.integrator.y
-        rho = matrix(y.reshape(self.matshape))
+        rho = self.Reshape(y)
         return rho
