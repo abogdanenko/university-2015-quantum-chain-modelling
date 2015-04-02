@@ -50,20 +50,6 @@ def basis_state(state):
     psi[state] = 1
     return psi
 
-def coordinate_change_matrix():
-    """
-    Returns coordinate change matrix to excitation basis
-
-    """
-    T = matrix(states_count)
-    rows = []
-    for E in exc_list:
-        rows.extend(e_states(E))
-    for j in states_list:
-        i = rows[j]
-        T[i, j] = 1
-    return T
-
 def bits(n, min_width = 1):
     """
     Returns binary representation of n as a list of ones and zeroes

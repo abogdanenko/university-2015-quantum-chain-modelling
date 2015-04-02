@@ -44,7 +44,7 @@ class SymbolicComputation(object):
             + self.H_tun
 
         self.H = self.H_chain.tensor_product(I2)
-        self.T = coordinate_change_matrix()
+        self.InitTransform()
         self.H_e = self.ToExcBasis(self.H)
 
         gamma = SR.var('gamma', domain = 'positive')
@@ -52,6 +52,31 @@ class SymbolicComputation(object):
             self.sigma_minus).tensor_product(self.sigma_plus)
 
         self.L_e = self.ToExcBasis(self.L)
+
+    def InitTransform(self):
+        """
+        Initializes T, T_rows, T_columns
+
+        T - coordinate change matrix to excitation basis
+
+        Invariants:
+        T[i, T_columns[i]] = 1
+        T[T_rows[j], j] = 1
+        T_rows[T_columns[i]] = i
+        T_columns[T_rows[j]] = j
+
+        """
+        self.T_rows = []
+        for E in exc_list:
+            self.T_rows.extend(e_states(E))
+
+        self.T_columns = [0] * states_count
+        self.T = matrix(states_count)
+
+        for j in states_list:
+            i = self.T_rows[j]
+            self.T_columns[i] = j
+            self.T[i, j] = 1
 
     def ShowVarsHTML(self):
         """
