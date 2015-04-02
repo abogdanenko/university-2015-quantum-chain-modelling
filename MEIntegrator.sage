@@ -77,7 +77,9 @@ class MEIntegrator(object):
         Computes time evolution of rho over time dt
 
         """
-        self.integrator.integrate(self.dt)
+        t0 = self.integrator.t
+        t1 = t0 + self.dt
+        self.integrator.integrate(t1)
 
     def Rho(self):
         """
