@@ -125,35 +125,3 @@ class SymbolicComputationBase(object):
             l.append(pair)
 
         html_vars(l)
-
-    def ShowBasisStatesTableHTML(self):
-        """
-        Prints hilbert space basis vectors, excitation numbers and energies
-
-        Works inside notebook interface
-
-        """
-        header = ['state', 'ph1', 'at1', 'ph2', 'at2', 'sink', r'$N_{\rm ex}$']
-
-        html('<h2>Basis states</h2>')
-
-        rows = []
-        for i in states_list:
-            row = [i]
-            row.extend(bits(i, qubits_count))
-            row.append(exc_number(i))
-            rows.append(row)
-
-        html.table(rows, header = header)
-
-        rows = []
-        for E in exc_list:
-            html(r'<h2>Subspace ($N_{{\rm ex}} = {}$)</h2>'.format(E))
-            rows = []
-            for i in e_states(E):
-                row = [i]
-                row.extend(bits(i, qubits_count))
-                row.append(exc_number(i))
-                rows.append(row)
-            html.table(rows, header = header)
-

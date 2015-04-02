@@ -15,7 +15,6 @@ sym = SymbolicComputation()
 }}}
 
 {{{
-sym.ShowBasisStatesTableHTML()
 sym.ShowVarsHTML()
 }}}
 
