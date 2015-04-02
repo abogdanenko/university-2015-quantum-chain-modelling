@@ -57,11 +57,7 @@ class NumericalComputationBase(object):
             L = self.L,
             dt = self.params.Dt())
 
-        self.rho_list = [rho]
-        for t in range(1, self.params.time_steps):
-            integrator.Step()
-            rho = integrator.Rho()
-            self.rho_list.append(rho)
+        self.rho_list = integrator.Integrate(self.params.time_steps)
 
         self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_list]
 

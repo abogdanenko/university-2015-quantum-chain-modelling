@@ -80,12 +80,18 @@ class MEIntegrator(object):
         t0 = self.ode.t
         t1 = t0 + self.dt
         self.ode.integrate(t1)
+        self.rho = self.Reshape(self.ode.y)
 
-    def Rho(self):
+    def Integrate(self, steps):
         """
-        Return current rho
+        Do 'steps' integration steps
+
+        Return list of values on each step
 
         """
-        y = self.ode.y
-        rho = self.Reshape(y)
-        return rho
+        rho_list = [self.rho]
+        for t in range(1, steps):
+            self.Step()
+            rho_list.append(self.rho)
+
+        return rho_list
