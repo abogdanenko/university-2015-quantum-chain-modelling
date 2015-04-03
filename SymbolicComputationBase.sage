@@ -37,18 +37,25 @@ class SymbolicComputationBase(object):
         self.H_sum = self.H_field.tensor_product(I2) \
             + I2.tensor_product(self.H_at) + self.H_field_at
 
-        I4 = identity_matrix(SR, 4)
+        self.H_chain = matrix(SR, 2 ** (chain_len * 2))
+        for i in range(chain_len):
+            left = identity_matrix(SR, 2 ** (2 * i))
+            right = identity_matrix(SR, 2 ** (2 * (chain_len - i - 1)))
+            self.H_chain += left.tensor_product(self.H_sum).tensor_product(right)
 
-        self.H_chain = self.H_sum.tensor_product(I4) \
-            + I4.tensor_product(self.H_sum) \
-            + self.H_tun
+        for i in range(chain_len - 1):
+            left = identity_matrix(SR, 2 ** (2 * i))
+            right = identity_matrix(SR, 2 ** (2 * (chain_len - i - 2)))
+            self.H_chain += left.tensor_product(self.H_tun).tensor_product(right)
 
         self.H = self.H_chain.tensor_product(I2)
         self.InitTransform()
         self.H_e = self.ToExcBasis(self.H)
 
         gamma = SR.var('gamma', domain = 'positive')
-        self.L = gamma * I4.tensor_product(I2).tensor_product(
+        In1 = identity_matrix(SR, 2 ** (qubits_count - 2))
+
+        self.L = gamma * In1.tensor_product(
             self.sigma_minus).tensor_product(self.sigma_plus)
 
         self.L_e = self.ToExcBasis(self.L)
