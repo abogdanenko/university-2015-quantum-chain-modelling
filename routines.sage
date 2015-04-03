@@ -125,3 +125,11 @@ def partial_trace_sink11(rho, E):
             i = exc_index(state)
             s += rho[i, i]
     return abs(s)
+
+def get_subspace(state):
+    """
+    Returns subspace to which state belongs
+
+    """
+    E = exc_number(state)
+    return Subspace(E)
