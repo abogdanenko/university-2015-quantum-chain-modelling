@@ -48,7 +48,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
         Prepares default values for inner function
 
         """
-        def inner(subspace = slider(exc_list, default = 1)):
+        def inner(E = Subspace.selector):
             """
             Prints hilbert space subspace basis vectors
             User specifies subspace
@@ -56,10 +56,11 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             Should be passed to interact()
 
             """
+            subspace = Subspace(E)
             header = ['subspace_index', 'index_e', 'index',
                 'ph1', 'at1', 'ph2', 'at2', 'sink']
             rows = []
-            for i in e_states(subspace):
+            for i in subspace.states:
                 row = [exc_index(i), self.T_columns[i], i]
                 row.extend(bits(i, qubits_count))
                 rows.append(row)
