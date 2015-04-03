@@ -13,6 +13,11 @@ class NumericalParams(object):
         self.gamma = RDF(0.5)
         self.initial_state = 8
 
+        self.subspace_number = exc_number(self.initial_state)
+        self.subspace_index = exc_index(self.initial_state)
+        self.subspace_states = e_states(self.subspace_number)
+        self.subspace_size = exc_size(self.initial_state)
+
     def Dt(self):
         return RDF(self.time_end / self.time_steps)
 
