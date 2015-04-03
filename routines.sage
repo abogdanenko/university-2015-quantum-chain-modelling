@@ -87,21 +87,6 @@ def html_vars(l):
     for x in l:
         html_var(*x)
 
-def partial_trace_chain(rho_full):
-    """
-    Returns reduced density matrix of chain subsystem
-
-    """
-    rho = matrix(CDF, 16)
-    for i in range(16):
-        for j in range(16):
-             s = 0
-             for k in range(2):
-                 s += rho_full[i * 2 + k, j * 2 + k]
-
-             rho[i, j] = s
-    return rho
-
 def partial_trace_sink11(rho, E):
     """
     Returns rho_sink[1,1]
