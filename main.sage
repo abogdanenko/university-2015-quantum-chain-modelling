@@ -1,3 +1,8 @@
+qubits_count = 5
+states_count = 2^qubits_count
+exc_list = range(qubits_count + 1)
+states_list = range(states_count)
+
 load('routines.sage')
 load('Subspace.sage')
 load('SymbolicComputationBase.sage')
@@ -10,11 +15,6 @@ load('NumericalComputationInteractive.sage')
 load('NumericalComputationAnimation.sage')
 load('NumericalComputation.sage')
 load('Conductivity.sage')
-
-qubits_count = 5
-states_count = 2^qubits_count
-exc_list = range(qubits_count + 1)
-states_list = range(states_count)
 
 block_sizes = [binomial(qubits_count, E) for E in exc_list]
 left_indices = [sum([block_sizes[k] for k in range(E)])
