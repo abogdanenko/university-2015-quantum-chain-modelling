@@ -5,21 +5,25 @@ class NumericalComputationPlots(NumericalComputationBase):
     Makes plots
 
     """
+    def TimeList(self):
+        """
+        Returns list of time points
+
+        """
+        return [self.IterationTime(t) for t in range(self.params.time_steps)]
+
     def PlotState(self, state, color = 'red'):
         """
         Returns line plot of the state
 
         """
-        l = []
+        Y = []
         for t in range(self.params.time_steps):
-            x = self.IterationTime(t)
-
             rho = self.Rho(t)
             y = abs(rho[state, state])
+            Y.append(y)
 
-            point = (x, y)
-            l.append(point)
-
+        l = zip(self.TimeList(), Y)
 
         plot_object = line(l,
             ymin = 0,
@@ -131,14 +135,9 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns line plot of rho_sink[1,1]
 
         """
-        l = []
-        for t in range(self.params.time_steps):
-            x = self.IterationTime(t)
-            y = self.rho_sink11[t]
-            point = (x, y)
-            l.append(point)
-
+        l = zip(self.TimeList(), self.rho_sink11)
         legend_label = r'$\rho_{1,1}^{\rm sink}(t)$'
+
         plot_object = line(l,
             ymin = 0,
             ymax = 1,

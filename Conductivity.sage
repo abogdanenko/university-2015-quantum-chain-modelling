@@ -58,12 +58,7 @@ class Conductivity(object):
         Returns line plot of sink subsystem matrix elem
 
         """
-        l = []
-        for t in range(self.num.params.time_steps):
-            x = self.num.IterationTime(t)
-            y = self.rho_sink11_list[param_index][t]
-            point = (x, y)
-            l.append(point)
+        l = zip(self.num.TimeList(), self.rho_sink11_list[param_index])
 
         param = '{}'.format(self.param_list[param_index])
         label1 = r'\rho_{1,1}^{\rm sink}(t)'
