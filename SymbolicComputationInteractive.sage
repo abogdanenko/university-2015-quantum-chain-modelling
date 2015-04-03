@@ -3,6 +3,19 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
     Makes interactive tables
 
     """
+    def BitsHeader(self):
+        """
+        Returns table header for bit string output
+
+        """
+        header = []
+        for i in range(chain_len):
+            header.append('ph{}'.format(i + 1))
+            header.append('at{}'.format(i + 1))
+        header.append('sink')
+
+        return header
+
     def InteractiveState(self):
         """
         Returns inner function
@@ -37,9 +50,8 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             html.table([row], header = header)
 
             html('<h2>Bits</h2>')
-            header = ['ph1', 'at1', 'ph2', 'at2', 'sink']
             row = bits(state, qubits_count)
-            html.table([row], header = header)
+            html.table([row], header = self.BitsHeader())
 
         return inner
 
@@ -59,8 +71,8 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
 
             """
             subspace = Subspace(E)
-            header = ['subspace_index', 'index_e', 'index',
-                'ph1', 'at1', 'ph2', 'at2', 'sink']
+            header = ['subspace_index', 'index_e', 'index']
+            header.extend(self.BitsHeader())
             rows = []
             for i in subspace.states:
                 row = [exc_index(i), self.T_columns[i], i]
