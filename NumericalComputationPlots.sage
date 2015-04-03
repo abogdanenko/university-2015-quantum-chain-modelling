@@ -46,12 +46,9 @@ class NumericalComputationPlots(NumericalComputationBase):
         """
         html('<h2>Density matrix diagonal elems</h2>')
 
-        plot = sage.plot.graphics.Graphics()
-        states = self.params.subspace_states
-        colors = rainbow(self.params.subspace_size)
-
-        for x in zip(states, colors):
-            plot += self.PlotState(*x)
+        pairs = zip(self.subspace.states, self.subspace.colors)
+        plots = [self.PlotState(*x) for x in pairs]
+        plot = sum(plots)
 
         show(plot)
 

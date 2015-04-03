@@ -40,20 +40,21 @@ class NumericalComputationBase(object):
         Computes H, L by simple substitution
 
         """
-        self.H = self.SubsNum(self.sym.H)
-        self.L = self.SubsNum(self.sym.L)
+        self.subspace = self.params.subspace
+        H = self.subspace.GetBlock(self.sym.H)
+        L = self.subspace.GetBlock(self.sym.L)
+        self.H = self.SubsNum(H)
+        self.L = self.SubsNum(L)
 
     def ComputeTimeEvolution(self):
         """
         Computes time evolution
 
         """
-        E = self.params.subspace_number
-
         integrator = MEIntegrator(
-            rho = get_block(self.params.rho, E),
-            H = get_block(self.H, E),
-            L = get_block(self.L, E),
+            rho = self.params.rho,
+            H = self.H,
+            L = self.L,
             dt = self.params.Dt())
 
         self.rho_subspace_list = integrator.Integrate(self.params.time_steps)
@@ -67,4 +68,4 @@ class NumericalComputationBase(object):
         Evolution must have been computed beforehand
 
         """
-        return get_full(self.rho_subspace_list[t], self.params.subspace_number)
+        return self.subspace.GetFull(self.rho_subspace_list[t])
