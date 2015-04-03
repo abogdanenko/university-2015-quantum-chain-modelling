@@ -33,3 +33,15 @@ class Subspace(object):
         I = J = self.states
         A[I, J] = B
         return A
+
+    def partial_trace_sink11(self, rho):
+        """
+        Returns rho_sink[1,1]
+
+        """
+        s = 0
+        for state in self.states:
+            if state % 2: # sink bit is set
+                i = exc_index(state)
+                s += rho[i, i]
+        return abs(s)

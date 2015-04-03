@@ -87,18 +87,6 @@ def html_vars(l):
     for x in l:
         html_var(*x)
 
-def partial_trace_sink11(rho, E):
-    """
-    Returns rho_sink[1,1]
-
-    """
-    s = 0
-    for state in e_states(E):
-        if state % 2: # sink bit is set
-            i = exc_index(state)
-            s += rho[i, i]
-    return abs(s)
-
 def get_subspace(state):
     """
     Returns subspace to which state belongs
