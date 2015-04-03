@@ -17,10 +17,12 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns line plot of the state
 
         """
+        i = exc_index(state)
+
         Y = []
         for t in range(self.params.time_steps):
-            rho = self.Rho(t)
-            y = abs(rho[state, state])
+            rho = self.rho_subspace_list[t]
+            y = abs(rho[i, i])
             Y.append(y)
 
         l = zip(self.TimeList(), Y)
