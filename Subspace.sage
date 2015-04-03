@@ -18,9 +18,12 @@ class Subspace(object):
 
     def GetFull(self, B):
         """
-        Returns full matrix A given E-th block of A in exc basis
+        Returns full matrix A given subspace block of A
 
         Sets all elements of A to zero except elements in block B
 
         """
-        return get_full(B, self.number)
+        A = matrix(B.base_ring(), states_count)
+        I = J = self.states
+        A[I, J] = B
+        return A
