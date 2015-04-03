@@ -49,7 +49,8 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         html('<h2>Density matrix diagonal elems</h2>')
-        l = self.PlotStates(states_list)
+        E = exc_number(self.params.initial_state)
+        l = self.PlotStates(e_states(E))
         show(sum(l))
 
     def ProbabilityBarChart(
