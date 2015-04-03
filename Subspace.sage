@@ -3,6 +3,12 @@ class Subspace(object):
     Represents hilbert space subspace
 
     """
+    selector = selector(
+        label = 'Subspace: ',
+        values = exc_list,
+        default = 1,
+        buttons = True)
+
     def __init__(self, number):
         self.number = number
         self.states = e_states(number)
