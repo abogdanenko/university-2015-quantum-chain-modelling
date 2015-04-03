@@ -27,11 +27,13 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
                 state = choice
                 state_e = self.T_columns[choice]
 
+            subspace = get_subspace(state)
+
             html('<h2>Basis vector numbers</h2>')
             header = ['index', 'index_e', 'subspace', 'subspace_index',
                 'subspace_size']
-            row = [state, state_e, exc_number(state), exc_index(state),
-                exc_size(state)]
+            row = [state, state_e, subspace.number, exc_index(state),
+                subspace.size]
             html.table([row], header = header)
 
             html('<h2>Bits</h2>')
