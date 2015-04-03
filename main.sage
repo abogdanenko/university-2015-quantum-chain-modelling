@@ -1,4 +1,5 @@
 load('routines.sage')
+load('Subspace.sage')
 load('SymbolicComputationBase.sage')
 load('SymbolicComputationInteractive.sage')
 load('NumericalParams.sage')
