@@ -21,7 +21,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         Y = []
         for t in range(self.params.time_steps):
-            rho = self.rho_subspace_list[t]
+            rho = self.rho[t]
             y = abs(rho[i, i])
             Y.append(y)
 

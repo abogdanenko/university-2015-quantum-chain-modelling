@@ -57,9 +57,9 @@ class NumericalComputationBase(object):
             L = self.L,
             dt = self.params.Dt())
 
-        self.rho_subspace_list = integrator.Integrate(self.params.time_steps)
+        self.rho = integrator.Integrate(self.params.time_steps)
 
-        self.rho_sink11 = [partial_trace_sink11(x, E) for x in self.rho_subspace_list]
+        self.rho_sink11 = [partial_trace_sink11(x, E) for x in self.rho]
 
     def Rho(self, t):
         """
@@ -68,4 +68,4 @@ class NumericalComputationBase(object):
         Evolution must have been computed beforehand
 
         """
-        return self.subspace.GetFull(self.rho_subspace_list[t])
+        return self.subspace.GetFull(self.rho[t])
