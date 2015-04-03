@@ -78,7 +78,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.time_end = time_end
             self.params.time_steps = time_steps
             self.params.initial_state = initial_state
-            self.InitOperators()
+            self.ParamsChanged()
             self.params.ShowHTML()
 
         return inner

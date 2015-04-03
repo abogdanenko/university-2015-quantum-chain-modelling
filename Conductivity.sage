@@ -48,7 +48,7 @@ class Conductivity(object):
                 self.num.params.beta = param
             else:
                 self.num.params.gamma = param
-            self.num.InitOperators()
+            self.num.ParamsChanged()
             self.num.ComputeTimeEvolution()
             l = self.num.rho_sink11
             self.rho_sink11_list.append(l)

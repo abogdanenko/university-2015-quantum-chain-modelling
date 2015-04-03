@@ -6,7 +6,7 @@ class NumericalComputationBase(object):
     def __init__(self, sym):
         self.sym = sym
         self.params = NumericalParams()
-        self.InitOperators()
+        self.ParamsChanged()
 
     def IterationTime(self, t):
         """
@@ -35,7 +35,7 @@ class NumericalComputationBase(object):
         """
         return self.Subs(expr).change_ring(CDF)
 
-    def InitOperators(self):
+    def ParamsChanged(self):
         """
         Computes H, L by simple substitution
 
