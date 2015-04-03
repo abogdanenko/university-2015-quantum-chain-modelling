@@ -48,12 +48,10 @@ class NumericalComputationBase(object):
         Computes time evolution
 
         """
-        psi = basis_state(self.params.initial_state)
-        rho = vec2dm(psi)
-        E = exc_number(self.params.initial_state)
+        E = self.params.subspace_number
 
         integrator = MEIntegrator(
-            rho = get_block(rho, E),
+            rho = get_block(self.params.rho, E),
             H = get_block(self.H, E),
             L = get_block(self.L, E),
             dt = self.params.Dt())

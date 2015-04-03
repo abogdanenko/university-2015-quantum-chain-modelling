@@ -17,6 +17,8 @@ class NumericalParams(object):
         self.subspace_index = exc_index(self.initial_state)
         self.subspace_states = e_states(self.subspace_number)
         self.subspace_size = exc_size(self.initial_state)
+        psi = basis_state(self.initial_state)
+        self.rho = vec2dm(psi)
 
     def Dt(self):
         return RDF(self.time_end / self.time_steps)
