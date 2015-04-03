@@ -1,4 +1,5 @@
-qubits_count = 5
+chain_len = 2
+qubits_count = 2 * chain_len + 1
 states_count = 2^qubits_count
 exc_list = range(qubits_count + 1)
 states_list = range(states_count)
