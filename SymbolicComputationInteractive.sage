@@ -74,7 +74,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
         Prepares default values for inner function
 
         """
-        def inner(subspace = slider(exc_list, default = 1)):
+        def inner(E = Subspace.selector):
             """
             Prints H, L for given subspace
 
@@ -83,12 +83,14 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             Should be passed to interact()
 
             """
-            name = r'H_{}'.format(subspace)
-            var = get_block(self.H, subspace)
+            subspace = Subspace(E)
+
+            name = r'H_{}'.format(subspace.number)
+            var = subspace.GetBlock(self.H)
             l = [(name, var)]
 
-            name = r'L_{}'.format(subspace)
-            var = get_block(self.L, subspace)
+            name = r'L_{}'.format(subspace.number)
+            var = subspace.GetBlock(self.L)
             l.append((name, var))
 
             html_vars(l)
