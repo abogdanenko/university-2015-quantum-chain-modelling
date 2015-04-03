@@ -39,25 +39,21 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
-    def PlotStates(self, states):
-        """
-        Returns a list of line plots of the states
-
-        """
-        colors = rainbow(len(states))
-
-        return [self.PlotState(s, c) for s, c \
-            in zip(states, colors)]
-
     def ShowStates(self):
         """
         Shows multi-line plot of state evolution
 
         """
         html('<h2>Density matrix diagonal elems</h2>')
-        E = exc_number(self.params.initial_state)
-        l = self.PlotStates(e_states(E))
-        show(sum(l))
+
+        plot = sage.plot.graphics.Graphics()
+        states = self.params.subspace_states
+        colors = rainbow(self.params.subspace_size)
+
+        for x in zip(states, colors):
+            plot += self.PlotState(*x)
+
+        show(plot)
 
     def ProbabilityBarChart(
             self,
