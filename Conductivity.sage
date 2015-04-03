@@ -37,24 +37,12 @@ class Conductivity(object):
 
         return inner
 
-    def GetRhoSink11(self):
-        """
-        Return list of rho_sink[1,1] for each moment of time
-
-        """
-        l = []
-        for t in range(self.num.params.time_steps):
-            rho = self.num.rho_sink_list[t]
-            y = abs(rho[1, 1])
-            l.append(y)
-        return l
-
     def ComputeTimeEvolution(self):
         """
         Computes time evolution for each parameter value
 
         """
-        self.rho_sink_11_list = []
+        self.rho_sink11_list = []
         for param in self.param_list:
             if (self.param == 'beta'):
                 self.num.params.beta = param
@@ -62,8 +50,8 @@ class Conductivity(object):
                 self.num.params.gamma = param
             self.num.InitOperators()
             self.num.ComputeTimeEvolution()
-            l = self.GetRhoSink11()
-            self.rho_sink_11_list.append(l)
+            l = self.num.rho_sink11
+            self.rho_sink11_list.append(l)
 
     def PlotSink(self, param_index, color = 'red'):
         """
@@ -73,7 +61,7 @@ class Conductivity(object):
         l = []
         for t in range(self.num.params.time_steps):
             x = self.num.IterationTime(t)
-            y = self.rho_sink_11_list[param_index][t]
+            y = self.rho_sink11_list[param_index][t]
             point = (x, y)
             l.append(point)
 
@@ -136,7 +124,7 @@ class Conductivity(object):
 
         """
         l = []
-        for param, row in zip(self.param_list, self.rho_sink_11_list):
+        for param, row in zip(self.param_list, self.rho_sink11_list):
             c = RDF(average(array(row)))
             point = (param, c)
             l.append(point)

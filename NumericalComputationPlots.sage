@@ -126,24 +126,19 @@ class NumericalComputationPlots(NumericalComputationBase):
             title = title)
         return plot_object
 
-    def PlotSink(self, i, j):
+    def PlotSink(self):
         """
-        Returns line plot of sink subsystem matrix elem
+        Returns line plot of rho_sink[1,1]
 
         """
         l = []
         for t in range(self.params.time_steps):
             x = self.IterationTime(t)
-
-            rho = self.rho_sink_list[t]
-
-            y = abs(rho[i, j])
-
+            y = self.rho_sink11[t]
             point = (x, y)
             l.append(point)
 
-        index = r'{},{}'.format(i, j)
-        legend_label = r'$\rho_{' + index + r'}^{\rm sink}(t)$'
+        legend_label = r'$\rho_{1,1}^{\rm sink}(t)$'
         plot_object = line(l,
             ymin = 0,
             ymax = 1,
@@ -162,4 +157,4 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         html('<h2>Sink subsystem density matrix elem</h2>')
-        show(self.PlotSink(1, 1))
+        show(self.PlotSink())

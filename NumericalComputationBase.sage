@@ -61,7 +61,7 @@ class NumericalComputationBase(object):
         self.rho_subspace_list = integrator.Integrate(self.params.time_steps)
 
         self.rho_list = [get_full(x, E) for x in self.rho_subspace_list]
-        self.rho_sink_list = [partial_trace_sink(x) for x in self.rho_list]
+        self.rho_sink11 = [partial_trace_sink11(x, E) for x in self.rho_subspace_list]
 
     def Rho(self, t):
         """

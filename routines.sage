@@ -124,4 +124,4 @@ def partial_trace_sink11(rho, E):
         if state % 2: # sink bit is set
             i = exc_index(state)
             s += rho[i, i]
-    return s
+    return abs(s)
