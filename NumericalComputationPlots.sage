@@ -68,16 +68,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         if basis_e:
             rho = self.sym.ToExcBasis(rho)
         d = map(abs, rho.diagonal())
-
-        colors = []
-        if basis_e:
-            ylabel = r'$\rho_{j,j}^{\rm ex}$'
-            for E in exc_list:
-                colors.extend(block_sizes[E] * [exc_number_rainbow[E]])
-        else:
-            ylabel = r'$\rho_{j,j}$'
-            for state in states_list:
-                colors.append(exc_number_rainbow[exc_number(state)])
+        ylabel = r'$\rho_{j,j}$'
 
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
@@ -93,14 +84,8 @@ class NumericalComputationPlots(NumericalComputationBase):
         ax.set_xlabel('$j$')
         ax.set_ylabel(ylabel)
 
-        ax.set_xticks(states_list[::2])
+        b = ax.bar(states_list, d, align = 'center')
 
-        b = ax.bar(states_list, d, color = colors, align = 'center')
-
-        indices = left_indices if basis_e else first_indices
-        labels = [r'$N_{{\rm ex}} = {}$'.format(E) for E in exc_list]
-        points = [b[indices[E]] for E in exc_list]
-        ax.legend(points, labels, loc = 'upper center')
         fig.savefig(filename)
         plt.close(fig)
 
