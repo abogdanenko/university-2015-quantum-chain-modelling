@@ -128,3 +128,15 @@ def partial_trace_sink(rho_full):
 
              rho[i, j] = s
     return rho
+
+def partial_trace_sink11(rho, E):
+    """
+    Returns rho_sink[1,1]
+
+    """
+    s = 0
+    for state in e_states(E):
+        if state % 2: # sink bit is set
+            i = exc_index(state)
+            s += rho[i, i]
+    return s
