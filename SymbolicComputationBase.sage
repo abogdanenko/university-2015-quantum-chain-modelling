@@ -74,7 +74,7 @@ class SymbolicComputationBase(object):
 
         """
         self.T_rows = []
-        for E in exc_list:
+        for E in range(qubits_count + 1):
             self.T_rows.extend(e_states(E))
 
         self.T_columns = [0] * states_count

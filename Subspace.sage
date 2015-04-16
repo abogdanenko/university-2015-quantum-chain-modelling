@@ -5,7 +5,7 @@ class Subspace(object):
     """
     selector = selector(
         label = 'Subspace: ',
-        values = exc_list,
+        values = range(qubits_count + 1),
         default = 1,
         buttons = True)
 
