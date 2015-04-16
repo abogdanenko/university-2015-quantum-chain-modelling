@@ -12,7 +12,9 @@ class NumericalParams(object):
         self.time_end = RDF(40)
         self.gamma = RDF(0.5)
         self.initial_state = 8
+        self.Changed()
 
+    def Changed(self):
         self.subspace_index = exc_index(self.initial_state)
         psi = basis_state(self.initial_state)
         rho = vec2dm(psi)
