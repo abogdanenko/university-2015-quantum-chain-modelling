@@ -1,61 +1,3 @@
-def exc_number(i):
-    """
-    Returns number of ones in binary notation of i
-
-    Which is coincidentally total number of excitations
-    """
-    return Integer(i).bits().count(1)
-
-def e_states(E):
-    """
-    Returns a list of states with total number of excitations E
-
-    """
-    return [i for i in states_list if exc_number(i) == E]
-
-def exc_index(i):
-    """
-    Returns index of state i within its subspace
-
-    """
-    E = exc_number(i)
-    subspace = e_states(E)
-    return subspace.index(i)
-
-def exc_size(i):
-    """
-    Returns size of subspace to which i belongs
-
-    """
-    E = exc_number(i)
-    subspace = e_states(E)
-    return len(subspace)
-
-def vec2dm(psi):
-    """
-    Returns density matrix corresponding to state vector psi
-
-    """
-    c = psi.column()
-    return c * c.conjugate_transpose()
-
-def get_block(A, E):
-    """
-    Returns E-th block of A in exc basis
-
-    """
-    I = J = e_states(E)
-    return A[I, J]
-
-def basis_state(state):
-    """
-    Returns basis state number ``state``
-
-    """
-    psi = vector(CDF, states_count)
-    psi[state] = 1
-    return psi
-
 def bits(n, min_width = 1):
     """
     Returns binary representation of n as a list of ones and zeroes
@@ -86,11 +28,3 @@ def html_vars(l):
     """
     for x in l:
         html_var(*x)
-
-def get_subspace(state):
-    """
-    Returns subspace to which state belongs
-
-    """
-    E = exc_number(state)
-    return Subspace(E)

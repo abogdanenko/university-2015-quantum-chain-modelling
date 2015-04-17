@@ -1,9 +1,5 @@
-chain_len = 2
-qubits_count = 2 * chain_len + 1
-states_count = 2^qubits_count
-states_list = range(states_count)
-
 load('routines.sage')
+load('Space.sage')
 load('Subspace.sage')
 load('SymbolicComputationBase.sage')
 load('SymbolicComputationInteractive.sage')
