@@ -3,15 +3,10 @@ class Subspace(object):
     Represents hilbert space subspace
 
     """
-    selector = selector(
-        label = 'Subspace: ',
-        values = range(qubits_count + 1),
-        default = 1,
-        buttons = True)
-
-    def __init__(self, number):
+    def __init__(self, number, space):
         self.number = number
-        self.states = e_states(number)
+        self.space = space
+        self.states = self.space.GetSubspaceStates(number)
         self.size = len(self.states)
         self.colors = rainbow(self.size)
 
@@ -20,7 +15,8 @@ class Subspace(object):
         Returns subspace block of A in exc basis
 
         """
-        return get_block(A, self.number)
+        I = J = self.states
+        return A[I, J]
 
     def GetFull(self, B):
         """
@@ -34,6 +30,13 @@ class Subspace(object):
         A[I, J] = B
         return A
 
+    def Index(self, state):
+        """
+        Returns index of state within its subspace
+
+        """
+        return self.states.index(state)
+
     def partial_trace_sink11(self, rho):
         """
         Returns rho_sink[1,1]
@@ -42,6 +45,6 @@ class Subspace(object):
         s = 0
         for state in self.states:
             if state % 2: # sink bit is set
-                i = exc_index(state)
+                i = self.Index(state)
                 s += rho[i, i]
         return abs(s)

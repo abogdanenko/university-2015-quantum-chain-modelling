@@ -45,7 +45,7 @@ class Space(object):
 
         """
         subspace = self.GetSubspace(state)
-        return subspace.states.index(state)
+        return subspace.Index(state)
 
     def Bits(self, state):
         return bits(n = state, min_width = self.qubits_count)
@@ -66,11 +66,3 @@ class Space(object):
         """
         v = self.GetBasisVector(state)
         return v * v.conjugate_transpose()
-
-    def GetBlock(self, A, E):
-        """
-        Returns E-th block of A in exc basis
-
-        """
-        I = J = self.GetSubspaceStates(E)
-        return A[I, J]
