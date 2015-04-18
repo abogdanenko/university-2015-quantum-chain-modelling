@@ -84,7 +84,7 @@ class SpaceInteractive(SpaceBase):
             Should be passed to interact()
 
             """
-            subspace = Subspace(E, self)
+            subspace = self.GetSubspaceByNumber(E)
             header = ['subspace_index', 'index_e', 'index']
             header.extend(self.BitsHeader())
             rows = []

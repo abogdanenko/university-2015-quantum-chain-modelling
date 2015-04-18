@@ -19,7 +19,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             Should be passed to interact()
 
             """
-            subspace = Subspace(E, self.space)
+            subspace = self.space.GetSubspaceByNumber(E)
 
             name = r'H_{}'.format(subspace.number)
             var = subspace.GetBlock(self.H)
