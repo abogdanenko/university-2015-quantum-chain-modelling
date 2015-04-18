@@ -1,9 +1,11 @@
 class SymbolicComputationBase(object):
     """
-    Computes hamiltonian symbolically
+    Computes hamiltonian and lindblad operators symbolically
 
     """
-    def __init__(self):
+    def __init__(self, space):
+        self.space = space
+
         omega_a = SR.var('omega_a', domain = 'positive')
         omega_c = SR.var('omega_c', domain = 'positive')
         alpha = SR.var('alpha', domain = 'positive')
@@ -30,24 +32,24 @@ class SymbolicComputationBase(object):
         self.H_sum = self.H_field.tensor_product(I2) \
             + I2.tensor_product(self.H_at) + self.H_field_at
 
-        self.H_chain = matrix(SR, 2 ** (chain_len * 2))
-        for i in range(chain_len):
+        self.H_chain = matrix(SR, 2 ** (self.space.chain_len * 2))
+        for i in range(self.space.chain_len):
             left = identity_matrix(SR, 2 ** (2 * i))
-            right = identity_matrix(SR, 2 ** (2 * (chain_len - i - 1)))
+            right = identity_matrix(SR, 2 ** (2 * (self.space.chain_len - i - 1)))
             self.H_chain += left.tensor_product(self.H_sum).tensor_product(right)
 
-        for i in range(chain_len - 1):
+        for i in range(self.space.chain_len - 1):
             left = identity_matrix(SR, 2 ** (2 * i))
-            right = identity_matrix(SR, 2 ** (2 * (chain_len - i - 2)))
+            right = identity_matrix(SR, 2 ** (2 * (self.space.chain_len - i - 2)))
             self.H_chain += left.tensor_product(self.H_tun).tensor_product(right)
 
         self.H = self.H_chain.tensor_product(I2)
-        self.H_e = self.ToExcBasis(self.H)
+        self.H_e = self.space.ToExcBasis(self.H)
 
         gamma = SR.var('gamma', domain = 'positive')
-        In1 = identity_matrix(SR, 2 ** (qubits_count - 2))
+        In1 = identity_matrix(SR, 2 ** (self.space.qubits_count - 2))
 
         self.L = gamma * In1.tensor_product(
             self.sigma_minus).tensor_product(self.sigma_plus)
 
-        self.L_e = self.ToExcBasis(self.L)
+        self.L_e = self.space.ToExcBasis(self.L)
