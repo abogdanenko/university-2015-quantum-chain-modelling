@@ -4,12 +4,12 @@ class SpaceInteractive(SpaceBase):
 
     """
     def SubspaceSelector(self):
-        selector = selector(
+        result = selector(
             label = 'Subspace: ',
             values = range(self.qubits_count + 1),
             default = 1,
             buttons = True)
-        return selector
+        return result
 
     def StateSlider(self, default = 1):
         return slider(self.states, default = default)
@@ -23,7 +23,7 @@ class SpaceInteractive(SpaceBase):
 
         """
         header = []
-        for i in range(self.space.chain_len):
+        for i in range(self.chain_len):
             header.append('ph{}'.format(i + 1))
             header.append('at{}'.format(i + 1))
         header.append('sink')
@@ -37,7 +37,7 @@ class SpaceInteractive(SpaceBase):
         Prepares default values for inner function
 
         """
-        def inner(state = self.space.StateSlider(),
+        def inner(state = self.StateSlider(),
                 basis_e = [True, False]):
             """
             Prints hilbert space basis vectors and excitation numbers
@@ -76,7 +76,7 @@ class SpaceInteractive(SpaceBase):
         Prepares default values for inner function
 
         """
-        def inner(E = Subspace.selector):
+        def inner(E = self.SubspaceSelector()):
             """
             Prints hilbert space subspace basis vectors
             User specifies subspace
@@ -84,7 +84,7 @@ class SpaceInteractive(SpaceBase):
             Should be passed to interact()
 
             """
-            subspace = Subspace(E)
+            subspace = Subspace(E, self)
             header = ['subspace_index', 'index_e', 'index']
             header.extend(self.BitsHeader())
             rows = []
