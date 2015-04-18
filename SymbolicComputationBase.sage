@@ -3,13 +3,6 @@ class SymbolicComputationBase(object):
     Computes hamiltonian symbolically
 
     """
-    def ToExcBasis(self, A):
-        """
-        Returnes matrix A in excitation basis
-
-        """
-        return self.T.transpose() * A * self.T
-
     def __init__(self):
         omega_a = SR.var('omega_a', domain = 'positive')
         omega_c = SR.var('omega_c', domain = 'positive')
@@ -49,7 +42,6 @@ class SymbolicComputationBase(object):
             self.H_chain += left.tensor_product(self.H_tun).tensor_product(right)
 
         self.H = self.H_chain.tensor_product(I2)
-        self.InitTransform()
         self.H_e = self.ToExcBasis(self.H)
 
         gamma = SR.var('gamma', domain = 'positive')
@@ -59,28 +51,3 @@ class SymbolicComputationBase(object):
             self.sigma_minus).tensor_product(self.sigma_plus)
 
         self.L_e = self.ToExcBasis(self.L)
-
-    def InitTransform(self):
-        """
-        Initializes T, T_rows, T_columns
-
-        T - coordinate change matrix to excitation basis
-
-        Invariants:
-        T[i, T_columns[i]] = 1
-        T[T_rows[j], j] = 1
-        T_rows[T_columns[i]] = i
-        T_columns[T_rows[j]] = j
-
-        """
-        self.T_rows = []
-        for E in range(qubits_count + 1):
-            self.T_rows.extend(e_states(E))
-
-        self.T_columns = [0] * states_count
-        self.T = matrix(states_count)
-
-        for j in states_list:
-            i = self.T_rows[j]
-            self.T_columns[i] = j
-            self.T[i, j] = 1
