@@ -17,7 +17,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         Returns line plot of the state
 
         """
-        i = exc_index(state)
+        i = self.subspace.Index(state)
 
         Y = []
         for t in range(self.params.time_steps):
@@ -63,7 +63,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         """
         rho = self.Rho(t)
         if basis_e:
-            rho = self.sym.ToExcBasis(rho)
+            rho = self.space.ToExcBasis(rho)
         d = map(abs, rho.diagonal())
         ylabel = r'$\rho_{j,j}$'
 
@@ -94,7 +94,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         rho = self.Rho(t)
         title1 = r'\rho'
         if basis_e:
-            rho = self.sym.ToExcBasis(rho)
+            rho = self.space.ToExcBasis(rho)
             title1 = r'\rho^{\rm ex}'
 
         title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
