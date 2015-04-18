@@ -41,7 +41,7 @@ class NumericalComputationBase(object):
         Computes H, L by simple substitution
 
         """
-        self.subspace = self.space.GetSubspace(self.params.initial_state)
+        self.subspace = self.space.GetSubspaceByState(self.params.initial_state)
         H = self.subspace.GetBlock(self.sym.H)
         L = self.subspace.GetBlock(self.sym.L)
         self.H = self.SubsNum(H)

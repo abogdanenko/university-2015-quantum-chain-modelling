@@ -54,7 +54,7 @@ class SpaceInteractive(SpaceBase):
                 state = choice
                 state_e = self.T_columns[choice]
 
-            subspace = self.GetSubspace(state)
+            subspace = self.GetSubspaceByState(state)
 
             html('<h2>Basis vector numbers</h2>')
             header = ['index', 'index_e', 'subspace', 'subspace_index',
