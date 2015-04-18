@@ -7,11 +7,29 @@ load('main.sage')
 }}}
 
 <div style = "color:white;background-color:green">
+<h2>Hilbert space</h2>
+</div>
+
+{{{
+space = Space(chain_len = 2)
+}}}
+
+{{{
+interact(space.InteractiveSubspace())
+pass
+}}}
+
+{{{
+interact(space.InteractiveState())
+pass
+}}}
+
+<div style = "color:white;background-color:green">
 <h2>Symbolic computation</h2>
 </div>
 
 {{{
-sym = SymbolicComputation()
+sym = SymbolicComputation(space)
 }}}
 
 {{{
@@ -21,16 +39,6 @@ pass
 
 {{{
 interact(sym.InteractiveSubspaceOperators())
-pass
-}}}
-
-{{{
-interact(sym.InteractiveSubspace())
-pass
-}}}
-
-{{{
-interact(sym.InteractiveState())
 pass
 }}}
 
