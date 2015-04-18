@@ -25,7 +25,7 @@ class Subspace(object):
         Sets all elements of A to zero except elements in block B
 
         """
-        A = matrix(B.base_ring(), states_count)
+        A = matrix(B.base_ring(), self.space.states_count)
         I = J = self.states
         A[I, J] = B
         return A

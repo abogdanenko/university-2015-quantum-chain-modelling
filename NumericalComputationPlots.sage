@@ -76,12 +76,12 @@ class NumericalComputationPlots(NumericalComputationBase):
         title = r'${},\ {}$'.format(title1, title2)
         ax.set_title(title)
 
-        ax.set_xlim(left = -0.5, right = states_count - 0.5)
+        ax.set_xlim(left = -0.5, right = self.space.states_count - 0.5)
         ax.set_ylim(bottom = 0, top = 1.1)
         ax.set_xlabel('$j$')
         ax.set_ylabel(ylabel)
 
-        b = ax.bar(states_list, d, align = 'center')
+        b = ax.bar(self.space.states, d, align = 'center')
 
         fig.savefig(filename)
         plt.close(fig)

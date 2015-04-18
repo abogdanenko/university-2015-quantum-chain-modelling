@@ -45,8 +45,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             label = r'$t_{\rm end}$',
             type = RDF)
 
-        initial_state_slider = slider(
-            states_list,
+        initial_state_slider = self.space.StateSlider(
             default = defaults.initial_state)
 
         gamma_box = input_box(
@@ -83,9 +82,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.ShowHTML()
 
         return inner
-
-    def StateSlider(self):
-        return slider(states_list, default = 8)
 
     def TimeSlider(self):
         return slider(range(self.params.time_steps))

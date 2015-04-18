@@ -50,6 +50,9 @@ class Space(object):
             buttons = True)
         return selector
 
+    def StateSlider(self, default = 1):
+        return slider(self.states, default = default)
+
     def ExcCount(self, state):
         """
         Returns total number of excitations

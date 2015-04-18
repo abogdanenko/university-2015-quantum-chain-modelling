@@ -9,7 +9,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
 
         """
         header = []
-        for i in range(chain_len):
+        for i in range(self.space.chain_len):
             header.append('ph{}'.format(i + 1))
             header.append('at{}'.format(i + 1))
         header.append('sink')
@@ -23,7 +23,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
         Prepares default values for inner function
 
         """
-        def inner(state = slider(states_list),
+        def inner(state = self.space.StateSlider(),
                 basis_e = [True, False]):
             """
             Prints hilbert space basis vectors and excitation numbers
