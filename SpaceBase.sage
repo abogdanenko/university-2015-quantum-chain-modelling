@@ -86,5 +86,5 @@ class SpaceBase(object):
         Returns basis state number ``state`` as density matrix
 
         """
-        v = self.GetBasisVector(state)
+        v = self.GetBasisVector(state).column()
         return v * v.conjugate_transpose()
