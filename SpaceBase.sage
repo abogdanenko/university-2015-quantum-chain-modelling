@@ -1,4 +1,4 @@
-class Space(object):
+class SpaceBase(object):
     """
     Represents hilbert space
 
@@ -42,17 +42,6 @@ class Space(object):
         """
         return self.T.transpose() * A * self.T
 
-    def SubSpaceSelector(self):
-        selector = selector(
-            label = 'Subspace: ',
-            values = range(self.qubits_count + 1),
-            default = 1,
-            buttons = True)
-        return selector
-
-    def StateSlider(self, default = 1):
-        return slider(self.states, default = default)
-
     def ExcCount(self, state):
         """
         Returns total number of excitations
@@ -82,9 +71,6 @@ class Space(object):
         """
         subspace = self.GetSubspace(state)
         return subspace.Index(state)
-
-    def Bits(self, state):
-        return bits(n = state, min_width = self.qubits_count)
 
     def GetBasisVector(self, state):
         """

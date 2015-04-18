@@ -3,85 +3,6 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
     Makes interactive tables
 
     """
-    def BitsHeader(self):
-        """
-        Returns table header for bit string output
-
-        """
-        header = []
-        for i in range(self.space.chain_len):
-            header.append('ph{}'.format(i + 1))
-            header.append('at{}'.format(i + 1))
-        header.append('sink')
-
-        return header
-
-    def InteractiveState(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(state = self.space.StateSlider(),
-                basis_e = [True, False]):
-            """
-            Prints hilbert space basis vectors and excitation numbers
-            User specifies initial state and basis
-
-            Should be passed to interact()
-
-            """
-            choice = state
-            if basis_e:
-                state = self.T_rows[choice]
-                state_e = choice
-            else:
-                state = choice
-                state_e = self.T_columns[choice]
-
-            subspace = get_subspace(state)
-
-            html('<h2>Basis vector numbers</h2>')
-            header = ['index', 'index_e', 'subspace', 'subspace_index',
-                'subspace_size']
-            row = [state, state_e, subspace.number, exc_index(state),
-                subspace.size]
-            html.table([row], header = header)
-
-            html('<h2>Bits</h2>')
-            row = bits(state, qubits_count)
-            html.table([row], header = self.BitsHeader())
-
-        return inner
-
-    def InteractiveSubspace(self):
-        """
-        Returns inner function
-
-        Prepares default values for inner function
-
-        """
-        def inner(E = Subspace.selector):
-            """
-            Prints hilbert space subspace basis vectors
-            User specifies subspace
-
-            Should be passed to interact()
-
-            """
-            subspace = Subspace(E)
-            header = ['subspace_index', 'index_e', 'index']
-            header.extend(self.BitsHeader())
-            rows = []
-            for i in subspace.states:
-                row = [exc_index(i), self.T_columns[i], i]
-                row.extend(bits(i, qubits_count))
-                rows.append(row)
-            html.table(rows, header = header)
-
-        return inner
-
     def InteractiveSubspaceOperators(self):
         """
         Returns inner function
@@ -89,7 +10,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
         Prepares default values for inner function
 
         """
-        def inner(E = Subspace.selector):
+        def inner(E = self.space.SubspaceSelector()):
             """
             Prints H, L for given subspace
 
@@ -98,7 +19,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             Should be passed to interact()
 
             """
-            subspace = Subspace(E)
+            subspace = Subspace(E, self.space)
 
             name = r'H_{}'.format(subspace.number)
             var = subspace.GetBlock(self.H)
@@ -138,7 +59,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             (r'H_{\rm chain}', self.H_chain),
             (r'H', self.H),
 
-            (r'T', self.T),
+            (r'T', self.space.T),
             (r'H^{\rm ex}', self.H_e),
 
             (r'L', self.L),

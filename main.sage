@@ -1,5 +1,6 @@
 load('routines.sage')
-load('Space.sage')
+load('SpaceBase.sage')
+load('SpaceInteractive.sage')
 load('Subspace.sage')
 load('SymbolicComputationBase.sage')
 load('SymbolicComputationInteractive.sage')
@@ -14,3 +15,4 @@ load('Conductivity.sage')
 
 # alias
 SymbolicComputation = SymbolicComputationInteractive
+Space = SpaceInteractive
