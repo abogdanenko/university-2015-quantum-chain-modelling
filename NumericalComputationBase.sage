@@ -5,6 +5,7 @@ class NumericalComputationBase(object):
     """
     def __init__(self, sym):
         self.sym = sym
+        self.space = self.sym.space
         self.params = NumericalParams()
         self.ParamsChanged()
 
@@ -40,7 +41,7 @@ class NumericalComputationBase(object):
         Computes H, L by simple substitution
 
         """
-        self.subspace = self.params.subspace
+        self.subspace = self.space.GetSubspace(self.params.initial_state)
         H = self.subspace.GetBlock(self.sym.H)
         L = self.subspace.GetBlock(self.sym.L)
         self.H = self.SubsNum(H)
@@ -51,8 +52,10 @@ class NumericalComputationBase(object):
         Computes time evolution
 
         """
+        rho_full = self.space.GetBasisDM(self.params.initial_state)
+        rho = self.subspace.GetBlock(rho_full)
         integrator = MEIntegrator(
-            rho = self.params.rho,
+            rho = rho,
             H = self.H,
             L = self.L,
             dt = self.params.Dt())
