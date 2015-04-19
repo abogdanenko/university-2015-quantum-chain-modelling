@@ -74,6 +74,11 @@ num.ShowSink()
 }}}
 
 {{{
+interact(num.InteractiveState())
+pass
+}}}
+
+{{{
 interact(num.InteractiveProbabilityBarChart())
 pass
 }}}

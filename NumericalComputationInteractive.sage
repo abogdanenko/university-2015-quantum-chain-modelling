@@ -115,7 +115,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         """
         html('<h2>Density matrix diagonal elem</h2>')
         def inner(
-                state = self.StateSlider(),
+                state = self.space.StateSlider(),
                 auto_update = False):
             """
             Shows line plot of state vector component
