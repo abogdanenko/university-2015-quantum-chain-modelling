@@ -4,9 +4,9 @@ class SymbolicComputationBase(ComputationBase):
 
     """
     def __init__(self, space):
-        super(SymbolicComputationBase, self).__init__(
-            space = space,
-            ring = SR,
+        super(SymbolicComputationBase, self).__init__(space = space, ring = SR)
+
+        self.ComputeOperators(
             omega_a = SR.var('omega_a', domain = 'positive'),
             omega_c = SR.var('omega_c', domain = 'positive'),
             alpha = SR.var('alpha', domain = 'positive'),
