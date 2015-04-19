@@ -43,6 +43,7 @@ class Conductivity(object):
 
         """
         self.rho_sink11_list = []
+        self.conductivity = []
         for param in self.param_list:
             if (self.param == 'beta'):
                 self.num.params.beta = param
@@ -52,6 +53,8 @@ class Conductivity(object):
             self.num.ComputeTimeEvolution()
             l = self.num.rho_sink11
             self.rho_sink11_list.append(l)
+            c = self.num.Conductivity()
+            self.conductivity.append(c)
 
     def PlotSink(self, param_index, color = 'red'):
         """
@@ -109,6 +112,7 @@ class Conductivity(object):
 
             """
             index = self.param_list.index(param)
+            html('Conductivity = {:.4f}'.format(float(self.conductivity[index])))
             show(self.PlotSink(index))
 
         return inner
@@ -118,15 +122,11 @@ class Conductivity(object):
         Returns line plot of chain conductivity
 
         """
-        l = []
-        for param, row in zip(self.param_list, self.rho_sink11_list):
-            c = RDF(average(array(row)))
-            point = (param, c)
-            l.append(point)
-
+        l = zip(self.param_list, self.conductivity)
         legend_label = r'$\langle\rho_{1,1}^{\rm sink}\rangle$'
         labelx = r'$\{}$'.format(self.param)
         labely = '$C$'
+
         plot_object = line(l,
             ymin = 0,
             ymax = 1,

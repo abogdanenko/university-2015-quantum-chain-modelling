@@ -56,3 +56,10 @@ class NumericalComputationBase(ComputationBase):
 
         """
         return self.subspace.GetFull(self.rho[t])
+
+    def Conductivity(self):
+        """
+        Return chain conductivity
+
+        """
+        return RDF(average(array(self.rho_sink11)))

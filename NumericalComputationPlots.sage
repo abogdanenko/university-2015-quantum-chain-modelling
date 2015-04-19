@@ -136,4 +136,5 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         html('<h2>Sink subsystem density matrix elem</h2>')
+        html('Conductivity = {:.4f}'.format(float(self.Conductivity())))
         show(self.PlotSink())
