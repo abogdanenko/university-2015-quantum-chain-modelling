@@ -86,16 +86,22 @@ class NumericalComputationPlots(NumericalComputationBase):
         fig.savefig(filename)
         plt.close(fig)
 
-    def PlotRho(self, t, basis_e = False):
+    def PlotRho(self, t, mode = 'subspace'):
         """
         Return matrix plot of rho at time t
 
         """
-        rho = self.Rho(t)
         title1 = r'\rho'
-        if basis_e:
-            rho = self.space.ToExcBasis(rho)
+
+        if (mode == 'subspace'):
+            rho = self.rho[t]
+
+        if (mode == 'transformed'):
+            rho = self.space.ToExcBasis(self.Rho(t))
             title1 = r'\rho^{\rm ex}'
+
+        if (mode == 'full'):
+            rho = self.Rho(t)
 
         title2 = 't = {:7.2f}'.format(float(self.IterationTime(t)))
         title3 = r'\rho(0) = |{0}\rangle \langle {0}|'.format(

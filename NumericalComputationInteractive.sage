@@ -138,13 +138,13 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         html('<h2>Density matrix</h2>')
         def inner(
                 t = self.TimeSlider(),
-                basis_e = [True, False]):
+                mode = ['subspace', 'transformed', 'full']):
             """
             Displays density matrix at time t
 
             Should be passed to interact()
 
             """
-            show(self.PlotRho(t, basis_e))
+            show(self.PlotRho(t, mode))
 
         return inner
