@@ -17,7 +17,7 @@ class NumericalComputationAnimation(NumericalComputationPlots):
 
         return dirname
 
-    def SaveProbabilityBarChartAnimation(self, basis_e = False):
+    def SaveProbabilityBarChartAnimation(self, mode = 'subspace'):
         """
         Saves bar chart png image for each moment of time
 
@@ -26,6 +26,6 @@ class NumericalComputationAnimation(NumericalComputationPlots):
 
         for t in range(self.params.time_steps):
             filename = os.path.join(dirname, '{:08d}.png'.format(t))
-            self.ProbabilityBarChart(t, basis_e, filename)
+            self.ProbabilityBarChart(t, mode, filename)
 
         return dirname

@@ -55,15 +55,23 @@ class NumericalComputationPlots(NumericalComputationBase):
     def ProbabilityBarChart(
             self,
             t,
-            basis_e = False,
+            mode = 'subspace',
             filename = 'ProbabilityBarChart'):
         """
         Returns bar chart of state at time t
 
         """
-        rho = self.Rho(t)
-        if basis_e:
-            rho = self.space.ToExcBasis(rho)
+        rho = self.rho[t]
+        x = range(self.subspace.size)
+
+        if (mode == 'transformed'):
+            rho = self.space.ToExcBasis(self.Rho(t))
+            x = self.space.states
+
+        if (mode == 'full'):
+            rho = self.Rho(t)
+            x = self.space.states
+
         d = map(abs, rho.diagonal())
         ylabel = r'$\rho_{j,j}$'
 
@@ -76,12 +84,12 @@ class NumericalComputationPlots(NumericalComputationBase):
         title = r'${},\ {}$'.format(title1, title2)
         ax.set_title(title)
 
-        ax.set_xlim(left = -0.5, right = self.space.states_count - 0.5)
+        ax.set_xlim(left = -0.5, right = len(d) - 0.5)
         ax.set_ylim(bottom = 0, top = 1.1)
         ax.set_xlabel('$j$')
         ax.set_ylabel(ylabel)
 
-        b = ax.bar(self.space.states, d, align = 'center')
+        b = ax.bar(x, d, align = 'center')
 
         fig.savefig(filename)
         plt.close(fig)
@@ -92,9 +100,7 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         title1 = r'\rho'
-
-        if (mode == 'subspace'):
-            rho = self.rho[t]
+        rho = self.rho[t]
 
         if (mode == 'transformed'):
             rho = self.space.ToExcBasis(self.Rho(t))

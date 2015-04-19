@@ -95,14 +95,14 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         html('<h2>Density matrix diagonal</h2>')
         def inner(
                 t = self.TimeSlider(),
-                basis_e = [True, False]):
+                mode = ['subspace', 'transformed', 'full']):
             """
             Displays state at time t
 
             Should be passed to interact()
 
             """
-            self.ProbabilityBarChart(t, basis_e)
+            self.ProbabilityBarChart(t, mode)
 
         return inner
 
