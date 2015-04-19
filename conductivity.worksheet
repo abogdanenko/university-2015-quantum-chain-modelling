@@ -12,8 +12,7 @@ load('main.sage')
 
 {{{
 space = Space(chain_len = 2)
-sym = SymbolicComputation(space)
-num = NumericalComputation(sym)
+num = NumericalComputation(space)
 con = Conductivity(num)
 }}}
 

@@ -47,7 +47,7 @@ pass
 </div>
 
 {{{
-num = NumericalComputation(sym)
+num = NumericalComputation(space)
 }}}
 
 {{{
