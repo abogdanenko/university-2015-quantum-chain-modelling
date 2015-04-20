@@ -50,7 +50,7 @@ class ComputationBase(object):
         self.H_e = self.space.ToExcBasis(self.H)
 
     def ComputeLindbladOperator(self, gamma):
-        In1 = identity_matrix(self.ring, 2 ** (self.space.qubits_count - 2))
+        In1 = identity_matrix(self.ring, 2 ** (self.space.QubitsCount() - 2))
 
         self.L = gamma * In1.tensor_product(
             self.sigma_minus).tensor_product(self.sigma_plus)

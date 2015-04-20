@@ -10,6 +10,13 @@ class SpaceBase(object):
         self.states = range(self.states_count)
         self.InitTransform()
 
+    def QubitsCount(self):
+        """
+        Returns number of qubits
+
+        """
+        return 2 * self.chain_len + 1
+
     def InitTransform(self):
         """
         Initializes T, T_rows, T_columns

@@ -15,7 +15,7 @@ class SpaceInteractive(SpaceBase):
         return slider(self.states, default = default)
 
     def Bits(self, state):
-        return bits(n = state, min_width = self.qubits_count)
+        return bits(n = state, min_width = self.QubitsCount())
 
     def BitsHeader(self):
         """
