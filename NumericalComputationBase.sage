@@ -20,7 +20,8 @@ class NumericalComputationBase(ComputationBase):
         Computes operators and subspace
 
         """
-        self.subspace = self.space.GetSubspaceByState(self.params.initial_state)
+        self.initial_state = self.space.states[self.params.initial_state]
+        self.subspace = self.initial_state.subspace
 
         self.ComputeOperators(
             omega_a = self.params.omega_a,
