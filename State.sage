@@ -47,7 +47,7 @@ class State(object):
 
         """
         psi = vector(CDF, self.space.StatesCount())
-        psi[self.Index()] = 1
+        psi[self.index] = 1
         return psi
 
     def DensityMatrix(self):
