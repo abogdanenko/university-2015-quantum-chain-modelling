@@ -89,3 +89,12 @@ class Subspace(object):
             row.extend(state.Bits())
             rows.append(row)
         html.table(rows, header = header)
+
+    def StateSlider(self, default = 1):
+        """
+        Returns slider of states
+
+        To be used inside interact
+
+        """
+        return slider(self.StatesIndices(), default = default)
