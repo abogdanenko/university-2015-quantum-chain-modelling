@@ -47,7 +47,7 @@ class NumericalComputationPlots(NumericalComputationBase):
         """
         html('<h2>Density matrix diagonal elems</h2>')
 
-        pairs = zip(self.subspace.states, self.subspace.Colors())
+        pairs = zip(self.subspace.StatesIndices(), self.subspace.Colors())
         plots = [self.PlotState(*x) for x in pairs]
         plot = sum(plots)
 
