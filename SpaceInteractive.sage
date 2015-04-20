@@ -60,7 +60,7 @@ class SpaceInteractive(SpaceBase):
             header = ['index', 'index_e', 'subspace', 'subspace_index',
                 'subspace_size']
             row = [state, state_e, subspace.number, subspace.Index(state),
-                subspace.size]
+                subspace.Size()]
             html.table([row], header = header)
 
             html('<h2>Bits</h2>')

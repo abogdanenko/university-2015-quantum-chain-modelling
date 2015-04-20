@@ -7,8 +7,20 @@ class Subspace(object):
         self.number = number
         self.space = space
         self.states = self.space.GetSubspaceStates(number)
-        self.size = len(self.states)
-        self.colors = rainbow(self.size)
+
+    def Size(self):
+        """
+        Returns number of states
+
+        """
+        return len(self.states)
+
+    def Colors(self):
+        """
+        Returns list of colors, one color for one state
+
+        """
+        return rainbow(self.Size())
 
     def GetBlock(self, A):
         """
