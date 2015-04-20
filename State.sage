@@ -26,3 +26,10 @@ class State(object):
 
         """
         return bits(self.index).count(1)
+
+    def SubspaceIndex(self):
+        """
+        Returns index of state within its subspace
+
+        """
+        return self.subspace.Index(self)

@@ -96,14 +96,6 @@ class SpaceBase(object):
         """
         return self.GetSubspaceByIndex(self.ExcCount(state))
 
-    def GetStateSubspaceIndex(state):
-        """
-        Returns index of state within its subspace
-
-        """
-        subspace = self.GetSubspaceByState(state)
-        return subspace.Index(state)
-
     def GetBasisVector(self, state):
         """
         Returns basis state number ``state``
