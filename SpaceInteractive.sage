@@ -38,7 +38,7 @@ class SpaceInteractive(SpaceBase):
 
         """
         def inner(state = self.StateSlider(),
-                basis_e = [True, False]):
+                mode = ['transformed', 'full']):
             """
             Prints hilbert space basis vectors and excitation numbers
             User specifies initial state and basis
@@ -47,7 +47,7 @@ class SpaceInteractive(SpaceBase):
 
             """
             choice = state
-            if basis_e:
+            if (mode == 'transformed'):
                 state = self.T_rows[choice]
                 state_e = choice
             else:
