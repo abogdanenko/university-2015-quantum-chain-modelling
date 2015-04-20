@@ -6,6 +6,7 @@ class Subspace(object):
     def __init__(self, index, space):
         self.index = index
         self.space = space
+        self.states = []
 
     def AddState(self, state):
         """
