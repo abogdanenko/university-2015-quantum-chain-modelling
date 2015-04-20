@@ -12,12 +12,13 @@ class NumericalComputationPlots(NumericalComputationBase):
         """
         return [self.IterationTime(t) for t in range(self.params.time_steps)]
 
-    def PlotState(self, state, color = 'red'):
+    def PlotState(self, index, color = 'red'):
         """
         Returns line plot of the state
 
         """
-        i = self.subspace.Index(state)
+        state = self.space.states[index]
+        i = state.SubspaceIndex()
 
         Y = []
         for t in range(self.params.time_steps):
@@ -33,7 +34,7 @@ class NumericalComputationPlots(NumericalComputationBase):
             color = color,
             tick_formatter = 'latex',
             axes_labels = ['$t$', '$P$'],
-            legend_label = r'$\rho_{{{0},{0}}}(t)$'.format(state))
+            legend_label = r'$\rho_{{{0},{0}}}(t)$'.format(index))
 
         plot_object.set_legend_options(back_color = 'white', ncol = 2)
 
