@@ -74,3 +74,17 @@ class Subspace(object):
                 i = self.Index(state)
                 s += rho[i, i]
         return abs(s)
+
+    def Show(self):
+        """
+        Shows states
+
+        """
+        header = ['subspace_index', 'index_e', 'index']
+        header.extend(self.space.BitsHeader())
+        rows = []
+        for state in self.states:
+            row = [state.SubspaceIndex(), state.TransformedIndex(), state.index]
+            row.extend(state.Bits())
+            rows.append(row)
+        html.table(rows, header = header)

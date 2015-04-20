@@ -79,7 +79,7 @@ class SpaceInteractive(SpaceBase):
         Prepares default values for inner function
 
         """
-        def inner(E = self.SubspaceSelector()):
+        def inner(index = self.SubspaceSelector()):
             """
             Prints hilbert space subspace basis vectors
             User specifies subspace
@@ -87,14 +87,6 @@ class SpaceInteractive(SpaceBase):
             Should be passed to interact()
 
             """
-            subspace = self.GetSubspaceByIndex(E)
-            header = ['subspace_index', 'index_e', 'index']
-            header.extend(self.BitsHeader())
-            rows = []
-            for i in subspace.states:
-                row = [subspace.Index(i), self.T_columns[i], i]
-                row.extend(self.Bits(i))
-                rows.append(row)
-            html.table(rows, header = header)
+            self.subspaces[index].Show()
 
         return inner
