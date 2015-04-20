@@ -81,7 +81,7 @@ class Subspace(object):
         Shows states
 
         """
-        header = ['subspace_index', 'index_e', 'index']
+        header = ['index_subspace', 'index_e', 'index']
         header.extend(self.space.BitsHeader())
         rows = []
         for state in self.states:
