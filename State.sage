@@ -6,6 +6,10 @@ class State(object):
     def __init__(self, index):
         self.index = index
 
+    def __repr__(self):
+        return "ind={}, ind_e={}, ss={}, ind_ss={}".format(self.index,
+            self.TransformedIndex(), self.subspace.index, self.SubspaceIndex())
+
     def SetSpace(self, space):
         """
         Sets space
