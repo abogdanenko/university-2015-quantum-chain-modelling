@@ -36,7 +36,7 @@ class NumericalComputationBase(ComputationBase):
         Computes time evolution
 
         """
-        rho_full = self.space.GetBasisDM(self.params.initial_state)
+        rho_full = self.initial_state.DensityMatrix()
 
         integrator = MEIntegrator(
             rho = self.subspace.GetBlock(rho_full),
