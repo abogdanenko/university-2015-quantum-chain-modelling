@@ -63,15 +63,15 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         """
         rho = self.rho[t]
-        x = range(self.subspace.size)
+        x = range(self.subspace.Size())
 
         if (mode == 'transformed'):
             rho = self.space.ToExcBasis(self.Rho(t))
-            x = self.space.states
+            x = self.space.StatesIndices()
 
         if (mode == 'full'):
             rho = self.Rho(t)
-            x = self.space.states
+            x = self.space.StatesIndices()
 
         d = map(abs, rho.diagonal())
         ylabel = r'$\rho_{j,j}$'
