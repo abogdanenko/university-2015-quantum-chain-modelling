@@ -35,7 +35,7 @@ class Subspace(object):
         Returns subspace block of A in exc basis
 
         """
-        I = J = self.states
+        I = J = self.StatesIndices()
         return A[I, J]
 
     def GetFull(self, B):
@@ -46,7 +46,7 @@ class Subspace(object):
 
         """
         A = matrix(B.base_ring(), self.space.StatesCount())
-        I = J = self.states
+        I = J = self.StatesIndices()
         A[I, J] = B
         return A
 
