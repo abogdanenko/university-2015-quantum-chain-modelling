@@ -70,13 +70,6 @@ class SpaceBase(object):
         """
         return self.Bits(state).count(1)
 
-    def GetSubspaceStates(self, E):
-        """
-        Returns a list of states with total number of excitations E
-
-        """
-        return [i for i in self.states if self.ExcCount(i) == E]
-
     def GetSubspaceByIndex(self, index):
         """
         Returns subspace by index
