@@ -40,35 +40,14 @@ class SpaceInteractive(SpaceBase):
         Prepares default values for inner function
 
         """
-        def inner(state = self.StateSlider(),
-                mode = ['transformed', 'full']):
+        def inner(index = self.StateSlider()):
             """
-            Prints hilbert space basis vectors and excitation numbers
-            User specifies initial state and basis
+            Shows state interactively
 
             Should be passed to interact()
 
             """
-            choice = state
-            if (mode == 'transformed'):
-                state = self.T_rows[choice]
-                state_e = choice
-            else:
-                state = choice
-                state_e = self.T_columns[choice]
-
-            subspace = self.GetSubspaceByState(state)
-
-            html('<h2>Basis vector numbers</h2>')
-            header = ['index', 'index_e', 'subspace', 'subspace_index',
-                'subspace_size']
-            row = [state, state_e, subspace.index, subspace.Index(state),
-                subspace.Size()]
-            html.table([row], header = header)
-
-            html('<h2>Bits</h2>')
-            row = self.Bits(state)
-            html.table([row], header = self.BitsHeader())
+            self.states[index].Show()
 
         return inner
 

@@ -34,6 +34,13 @@ class State(object):
         """
         return self.subspace.Index(self)
 
+    def TransformedIndex(self):
+        """
+        Returns index of state in e_basis
+
+        """
+        return self.space.T_columns[self.index]
+
     def Vector(self):
         """
         Returns vector representation of the state
@@ -57,3 +64,17 @@ class State(object):
 
         """
         return bits(n = self.index, min_width = self.space.QubitsCount())
+
+    def Show(self):
+        """
+        Shows indices in default and transformed bases, shows bits
+
+        """
+        html('<h2>State indices</h2>')
+        header = ['index', 'index_e', 'subspace_index', 'subspace', 'subspace_size']
+        row = [self.index, self.TransformedIndex(), self.SubspaceIndex(),
+            self.subspace.index, subspace.Size()]
+        html.table([row], header = header)
+
+        html('<h2>Bits</h2>')
+        html.table([self.Bits()], header = self.BitsHeader())
