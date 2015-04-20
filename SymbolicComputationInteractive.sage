@@ -10,7 +10,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
         Prepares default values for inner function
 
         """
-        def inner(E = self.space.SubspaceSelector()):
+        def inner(index = self.space.SubspaceSelector()):
             """
             Prints H, L for given subspace
 
@@ -19,13 +19,13 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             Should be passed to interact()
 
             """
-            subspace = self.space.GetSubspaceByIndex(E)
+            subspace = self.space.subspaces[index]
 
-            name = r'H_{}'.format(subspace.index)
+            name = r'H_{}'.format(index)
             var = subspace.GetBlock(self.H)
             l = [(name, var)]
 
-            name = r'L_{}'.format(subspace.index)
+            name = r'L_{}'.format(index)
             var = subspace.GetBlock(self.L)
             l.append((name, var))
 
