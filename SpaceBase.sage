@@ -17,6 +17,13 @@ class SpaceBase(object):
         """
         return 2 * self.chain_len + 1
 
+    def SubspacesCount(self):
+        """
+        Returns number of subspaces
+
+        """
+        return len(self.subspaces)
+
     def InitTransform(self):
         """
         Initializes T, T_rows, T_columns

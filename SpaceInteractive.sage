@@ -6,7 +6,7 @@ class SpaceInteractive(SpaceBase):
     def SubspaceSelector(self):
         result = selector(
             label = 'Subspace: ',
-            values = range(self.qubits_count + 1),
+            values = range(self.SubspacesCount()),
             default = 1,
             buttons = True)
         return result
