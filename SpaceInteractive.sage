@@ -18,7 +18,13 @@ class SpaceInteractive(SpaceBase):
         return result
 
     def StateSlider(self, default = 1):
-        return slider(self.states, default = default)
+        """
+        Returns slider of states
+
+        To be used inside interact
+
+        """
+        return slider(self.StatesIndices(), default = default)
 
     def BitsHeader(self):
         """
