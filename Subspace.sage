@@ -71,8 +71,8 @@ class Subspace(object):
         """
         s = 0
         for state in self.states:
-            if state % 2: # sink bit is set
-                i = self.Index(state)
+            if state.index % 2: # sink bit is set
+                i = state.SubspaceIndex()
                 s += rho[i, i]
         return abs(s)
 
