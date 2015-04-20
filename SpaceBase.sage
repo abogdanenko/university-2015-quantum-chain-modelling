@@ -5,10 +5,29 @@ class SpaceBase(object):
     """
     def __init__(self, chain_len):
         self.chain_len = chain_len
-        self.qubits_count = 2 * self.chain_len + 1
-        self.states_count = 2 ** self.qubits_count
-        self.states = range(self.states_count)
+        self.InitStatesSubspaces()
         self.InitTransform()
+
+    def InitStatesSubspaces(self):
+        """
+        Initializes states, subspaces
+
+        """
+        states_count = 2 ** self.QubitsCount()
+        self.states = []
+        subspaces = {}
+        for i in range(states_count):
+            state = State(i)
+            subspace_index = state.ExcCount()
+            if subspace_index not in subspaces:
+                subspaces[subspace_index] = Subspace(subspace_index, self)
+            subspaces[subspace_index].AddState(state)
+
+            state.SetSpace(self)
+            self.states.append(state)
+
+        # get list of values ordered by key
+        self.subspaces = [subspaces[i] for i in range(len(subspaces))]
 
     def QubitsCount(self):
         """
