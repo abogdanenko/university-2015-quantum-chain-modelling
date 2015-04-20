@@ -50,3 +50,10 @@ class State(object):
         """
         v = self.Vector().column()
         return v * v.conjugate_transpose()
+
+    def Bits(self):
+        """
+        Returns list of bits
+
+        """
+        return bits(n = self.index, min_width = self.space.QubitsCount())

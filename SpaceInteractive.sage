@@ -20,9 +20,6 @@ class SpaceInteractive(SpaceBase):
     def StateSlider(self, default = 1):
         return slider(self.states, default = default)
 
-    def Bits(self, state):
-        return bits(n = state, min_width = self.QubitsCount())
-
     def BitsHeader(self):
         """
         Returns table header for bit string output
