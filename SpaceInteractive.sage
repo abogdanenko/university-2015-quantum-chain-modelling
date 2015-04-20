@@ -17,14 +17,14 @@ class SpaceInteractive(SpaceBase):
             buttons = True)
         return result
 
-    def StateSlider(self, default = 1):
+    def StateSlider(self, default = None):
         """
         Returns slider of states
 
         To be used inside interact
 
         """
-        return slider(self.StatesIndices(), default = default)
+        return slider(self.states, label = 'State:', default = default)
 
     def BitsHeader(self):
         """
@@ -46,14 +46,14 @@ class SpaceInteractive(SpaceBase):
         Prepares default values for inner function
 
         """
-        def inner(index = self.StateSlider()):
+        def inner(state = self.StateSlider()):
             """
             Shows state interactively
 
             Should be passed to interact()
 
             """
-            self.states[index].Show()
+            state.Show()
 
         return inner
 

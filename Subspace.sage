@@ -90,11 +90,12 @@ class Subspace(object):
             rows.append(row)
         html.table(rows, header = header)
 
-    def StateSlider(self, default = 1):
+    def StateSlider(self, default = None):
         """
         Returns slider of states
 
         To be used inside interact
 
         """
-        return slider(self.StatesIndices(), default = default)
+
+        return slider(self.states, label = 'State:', default = default)

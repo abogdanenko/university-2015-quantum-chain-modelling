@@ -46,7 +46,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             type = RDF)
 
         initial_state_slider = self.space.StateSlider(
-            default = defaults.initial_state)
+            default = self.space.states[defaults.initial_state])
 
         gamma_box = input_box(
             defaults.gamma,
@@ -76,7 +76,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.omega_c = omega_c
             self.params.time_end = time_end
             self.params.time_steps = time_steps
-            self.params.initial_state = initial_state
+            self.params.initial_state = initial_state.index
             self.ParamsChanged()
             self.params.ShowHTML()
 
@@ -118,9 +118,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         """
         html('<h2>Density matrix diagonal elem</h2>')
-        def inner(
-                state_subspace_index = self.subspace.StateSlider(),
-                auto_update = False):
+        def inner(state = self.subspace.StateSlider()):
             """
             Shows line plot of state vector component
             User specifies initial state and component to plot
@@ -128,7 +126,6 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            state = self.subspace.states[state_subspace_index]
             show(self.PlotState(state.index))
 
         return inner
