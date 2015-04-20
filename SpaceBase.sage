@@ -88,17 +88,3 @@ class SpaceBase(object):
 
         """
         return self.T.transpose() * A * self.T
-
-    def GetSubspaceByIndex(self, index):
-        """
-        Returns subspace by index
-
-        """
-        return Subspace(index, self)
-
-    def GetSubspaceByState(self, state):
-        """
-        Returns subspace to which state belongs
-
-        """
-        return self.GetSubspaceByIndex(self.ExcCount(state))
