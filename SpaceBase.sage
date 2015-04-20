@@ -82,13 +82,6 @@ class SpaceBase(object):
         """
         return self.T.transpose() * A * self.T
 
-    def ExcCount(self, state):
-        """
-        Returns total number of excitations
-
-        """
-        return self.Bits(state).count(1)
-
     def GetSubspaceByIndex(self, index):
         """
         Returns subspace by index

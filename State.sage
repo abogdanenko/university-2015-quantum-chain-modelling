@@ -19,3 +19,10 @@ class State(object):
 
         """
         self.subspace = subspace
+
+    def ExcCount(self):
+        """
+        Returns total number of excitations
+
+        """
+        return bits(self.index).count(1)
