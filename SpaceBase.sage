@@ -17,6 +17,13 @@ class SpaceBase(object):
         """
         return 2 * self.chain_len + 1
 
+    def StatesCount(self):
+        """
+        Returns number of states
+
+        """
+        return len(self.states)
+
     def SubspacesCount(self):
         """
         Returns number of subspaces
@@ -41,8 +48,8 @@ class SpaceBase(object):
         for E in range(self.qubits_count + 1):
             self.T_rows.extend(self.GetSubspaceStates(E))
 
-        self.T_columns = [0] * self.states_count
-        self.T = matrix(self.states_count)
+        self.T_columns = [0] * self.StatesCount()
+        self.T = matrix(self.StatesCount())
 
         for j in self.states:
             i = self.T_rows[j]
@@ -97,7 +104,7 @@ class SpaceBase(object):
         Returns basis state number ``state``
 
         """
-        psi = vector(CDF, self.states_count)
+        psi = vector(CDF, self.StatesCount())
         psi[state] = 1
         return psi
 
