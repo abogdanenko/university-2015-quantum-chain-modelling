@@ -50,6 +50,13 @@ class SpaceBase(object):
         """
         return len(self.subspaces)
 
+    def StatesIndices(self):
+        """
+        Returns list of indices of states
+
+        """
+        return [state.index for state in self.states]
+
     def InitTransform(self):
         """
         Initializes T, T_rows, T_columns

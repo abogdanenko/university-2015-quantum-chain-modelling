@@ -56,6 +56,13 @@ class Subspace(object):
         """
         return self.states.index(state)
 
+    def StatesIndices(self):
+        """
+        Returns list of indices of states
+
+        """
+        return [state.index for state in self.states]
+
     def partial_trace_sink11(self, rho):
         """
         Returns rho_sink[1,1]
