@@ -73,8 +73,8 @@ class State(object):
         html('<h2>State indices</h2>')
         header = ['index', 'index_e', 'subspace_index', 'subspace', 'subspace_size']
         row = [self.index, self.TransformedIndex(), self.SubspaceIndex(),
-            self.subspace.index, subspace.Size()]
+            self.subspace.index, self.subspace.Size()]
         html.table([row], header = header)
 
         html('<h2>Bits</h2>')
-        html.table([self.Bits()], header = self.BitsHeader())
+        html.table([self.Bits()], header = self.space.BitsHeader())
