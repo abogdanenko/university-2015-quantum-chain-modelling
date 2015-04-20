@@ -56,12 +56,12 @@ class SpaceBase(object):
         """
         return [i for i in self.states if self.ExcCount(i) == E]
 
-    def GetSubspaceByIndex(self, number):
+    def GetSubspaceByIndex(self, index):
         """
-        Returns subspace by number
+        Returns subspace by index
 
         """
-        return Subspace(number, self)
+        return Subspace(index, self)
 
     def GetSubspaceByState(self, state):
         """

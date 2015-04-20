@@ -21,11 +21,11 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             """
             subspace = self.space.GetSubspaceByIndex(E)
 
-            name = r'H_{}'.format(subspace.number)
+            name = r'H_{}'.format(subspace.index)
             var = subspace.GetBlock(self.H)
             l = [(name, var)]
 
-            name = r'L_{}'.format(subspace.number)
+            name = r'L_{}'.format(subspace.index)
             var = subspace.GetBlock(self.L)
             l.append((name, var))
 

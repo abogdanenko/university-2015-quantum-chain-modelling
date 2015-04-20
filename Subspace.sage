@@ -3,10 +3,10 @@ class Subspace(object):
     Represents hilbert space subspace
 
     """
-    def __init__(self, number, space):
-        self.number = number
+    def __init__(self, index, space):
+        self.index = index
         self.space = space
-        self.states = self.space.GetSubspaceStates(number)
+        self.states = self.space.GetSubspaceStates(index)
 
     def Size(self):
         """

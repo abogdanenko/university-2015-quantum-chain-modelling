@@ -59,7 +59,7 @@ class SpaceInteractive(SpaceBase):
             html('<h2>Basis vector numbers</h2>')
             header = ['index', 'index_e', 'subspace', 'subspace_index',
                 'subspace_size']
-            row = [state, state_e, subspace.number, subspace.Index(state),
+            row = [state, state_e, subspace.index, subspace.Index(state),
                 subspace.Size()]
             html.table([row], header = header)
 
