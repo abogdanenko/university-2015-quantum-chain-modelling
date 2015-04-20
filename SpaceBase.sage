@@ -102,20 +102,3 @@ class SpaceBase(object):
 
         """
         return self.GetSubspaceByIndex(self.ExcCount(state))
-
-    def GetBasisVector(self, state):
-        """
-        Returns basis state number ``state``
-
-        """
-        psi = vector(CDF, self.StatesCount())
-        psi[state] = 1
-        return psi
-
-    def GetBasisDM(self, state):
-        """
-        Returns basis state number ``state`` as density matrix
-
-        """
-        v = self.GetBasisVector(state).column()
-        return v * v.conjugate_transpose()

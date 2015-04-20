@@ -33,3 +33,20 @@ class State(object):
 
         """
         return self.subspace.Index(self)
+
+    def Vector(self):
+        """
+        Returns vector representation of the state
+
+        """
+        psi = vector(CDF, self.space.StatesCount())
+        psi[self.Index()] = 1
+        return psi
+
+    def DensityMatrix(self):
+        """
+        Returns density matrix representation of the state
+
+        """
+        v = self.Vector().column()
+        return v * v.conjugate_transpose()
