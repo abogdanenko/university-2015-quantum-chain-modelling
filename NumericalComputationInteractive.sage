@@ -119,7 +119,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         """
         html('<h2>Density matrix diagonal elem</h2>')
         def inner(
-                state = self.space.StateSlider(),
+                state_subspace_index = self.subspace.StateSlider(),
                 auto_update = False):
             """
             Shows line plot of state vector component
@@ -128,7 +128,8 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             Should be passed to interact()
 
             """
-            show(self.PlotState(state))
+            state = self.subspace.states[state_subspace_index]
+            show(self.PlotState(state.index))
 
         return inner
 
