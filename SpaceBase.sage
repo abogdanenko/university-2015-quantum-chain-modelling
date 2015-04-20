@@ -64,13 +64,13 @@ class SpaceBase(object):
 
         """
         self.T_rows = []
-        for E in range(self.qubits_count + 1):
-            self.T_rows.extend(self.GetSubspaceStates(E))
+        for subspace in self.subspaces:
+            self.T_rows.extend(subspace.StatesIndices())
 
         self.T_columns = [0] * self.StatesCount()
         self.T = matrix(self.StatesCount())
 
-        for j in self.states:
+        for j in self.StatesIndices():
             i = self.T_rows[j]
             self.T_columns[i] = j
             self.T[i, j] = 1
