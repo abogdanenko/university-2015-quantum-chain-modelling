@@ -4,6 +4,12 @@ class SpaceInteractive(SpaceBase):
 
     """
     def SubspaceSelector(self):
+        """
+        Returns selector of subspaces
+
+        To be used inside interact
+
+        """
         result = selector(
             label = 'Subspace: ',
             values = range(self.SubspacesCount()),
