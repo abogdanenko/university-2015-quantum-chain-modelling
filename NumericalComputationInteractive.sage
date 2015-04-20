@@ -83,6 +83,10 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         return inner
 
     def TimeSlider(self):
+        """
+        Returns slider to select point in time
+
+        """
         return slider(range(self.params.time_steps))
 
     def InteractiveProbabilityBarChart(self):
