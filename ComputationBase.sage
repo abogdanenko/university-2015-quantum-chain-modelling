@@ -29,6 +29,15 @@ class ComputationBase(object):
         self.sigma_minus = self.a
         self.sigma_plus = self.sigma_minus.conjugate_transpose()
 
+    def SandwichOperator(self, operator, qubits_left, qubits_right):
+        """
+        Returns operator acting in larger space
+
+        """
+        left = identity_matrix(self.ring, 2 ** qubits_left)
+        right = identity_matrix(self.ring, 2 ** qubits_right)
+        return left.tensor_product(operator).tensor_product(right)
+
     def ComputeHamiltonian(self, omega_a, omega_c, alpha, beta):
         """
         Computes hamiltonian of one cavity and of the whole system
