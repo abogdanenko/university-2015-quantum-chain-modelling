@@ -56,16 +56,16 @@ class ComputationBase(object):
         self.H_sum = self.H_field.tensor_product(I2) \
             + I2.tensor_product(self.H_at) + self.H_field_at
 
-        self.H_chain = matrix(self.ring, 2 ** (self.space.chain_len * 2))
+        chain_qubits = self.space.QubitsCount() - 1
+        self.H_chain = matrix(self.ring, 2 ** chain_qubits)
+
         for i in range(self.space.chain_len):
-            left = identity_matrix(self.ring, 2 ** (2 * i))
-            right = identity_matrix(self.ring, 2 ** (2 * (self.space.chain_len - i - 1)))
-            self.H_chain += left.tensor_product(self.H_sum).tensor_product(right)
+            self.H_chain += self.SandwichOperator(self.H_sum, 2 * i,
+                chain_qubits - 2 * i - 2)
 
         for i in range(self.space.chain_len - 1):
-            left = identity_matrix(self.ring, 2 ** (2 * i))
-            right = identity_matrix(self.ring, 2 ** (2 * (self.space.chain_len - i - 2)))
-            self.H_chain += left.tensor_product(self.H_tun).tensor_product(right)
+            self.H_chain += self.SandwichOperator(self.H_tun, 2 * i,
+                chain_qubits - 2 * i - 4)
 
         self.H = self.H_chain.tensor_product(I2)
         self.H_e = self.space.ToExcBasis(self.H)
@@ -83,13 +83,12 @@ class ComputationBase(object):
         self.L = [L_sink]
 
         for i in range(self.space.chain_len):
-            L_at = self.sigma_plus * self.sigma_minus
-            left_qubits = 2 * i + 1
-            right_qubits = self.space.QubitsCount() - left_qubits - 1
-            left = identity_matrix(self.ring, 2 ** left_qubits)
-            right = identity_matrix(self.ring, 2 ** right_qubits)
-            L = gamma_d * left.tensor_product(L_at).tensor_product(right)
-            self.L.append(L)
+            L = self.SandwichOperator(
+                operator = self.sigma_plus * self.sigma_minus,
+                qubits_left = 2 * i + 1,
+                qubits_right = self.space.QubitsCount() - 2 * i - 2)
+
+            self.L.append(gamma_d * L)
 
     def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma_s, gamma_d):
         """
