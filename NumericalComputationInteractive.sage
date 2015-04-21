@@ -37,12 +37,12 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         time_steps_box = input_box(
             defaults.time_steps,
-            label = '$n_t$',
+            label = '$n_t = $',
             type = Integer)
 
         time_end_box = input_box(
             defaults.time_end,
-            label = r'$t_{\rm end}$',
+            label = r'$t_{\rm end} = $',
             type = RDF)
 
         initial_state_slider = self.space.StateSlider(
