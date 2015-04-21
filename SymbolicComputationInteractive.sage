@@ -62,9 +62,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             (r'T', self.space.T),
             (r'H^{\rm ex}', self.H_e),
 
-            (r'L', self.L),
-
-            (r'L^{\rm ex}', self.L_e)
+            (r'L', self.L)
         ]
 
         d = dict(l)

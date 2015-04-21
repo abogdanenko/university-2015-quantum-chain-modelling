@@ -71,8 +71,6 @@ class ComputationBase(object):
         self.L = gamma_s * In1.tensor_product(
             self.sigma_minus).tensor_product(self.sigma_plus)
 
-        self.L_e = self.space.ToExcBasis(self.L)
-
     def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma_s, gamma_d):
         """
         Computes hamiltonian and lindblad operators
