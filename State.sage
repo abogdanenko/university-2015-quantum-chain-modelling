@@ -50,7 +50,7 @@ class State(object):
         Returns vector representation of the state
 
         """
-        psi = vector(CDF, self.space.StatesCount())
+        psi = vector(CDF, self.space.Size())
         psi[self.index] = 1
         return psi
 

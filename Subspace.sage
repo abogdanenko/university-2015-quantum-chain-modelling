@@ -45,7 +45,7 @@ class Subspace(object):
         Sets all elements of A to zero except elements in block B
 
         """
-        A = matrix(B.base_ring(), self.space.StatesCount())
+        A = matrix(B.base_ring(), self.space.Size())
         I = J = self.StatesIndices()
         A[I, J] = B
         return A

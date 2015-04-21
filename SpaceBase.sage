@@ -36,7 +36,7 @@ class SpaceBase(object):
         """
         return 2 * self.chain_len + 1
 
-    def StatesCount(self):
+    def Size(self):
         """
         Returns number of states
 
@@ -74,8 +74,8 @@ class SpaceBase(object):
         for subspace in self.subspaces:
             self.T_rows.extend(subspace.StatesIndices())
 
-        self.T_columns = [0] * self.StatesCount()
-        self.T = matrix(self.StatesCount())
+        self.T_columns = [0] * self.Size()
+        self.T = matrix(self.Size())
 
         for j in self.StatesIndices():
             i = self.T_rows[j]
