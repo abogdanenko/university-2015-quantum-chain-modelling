@@ -48,15 +48,15 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         initial_state_slider = self.space.StateSlider(
             default = self.space.states[defaults.initial_state])
 
-        gamma_box = input_box(
-            defaults.gamma,
-            label = r'$\gamma = $',
+        gamma_s_box = input_box(
+            defaults.gamma_s,
+            label = r'$\gamma_s = $',
             type = RDF)
 
         def inner(
                 alpha = alpha_box,
                 beta = beta_box,
-                gamma = gamma_box,
+                gamma_s = gamma_s_box,
                 omega_a = omega_a_box,
                 omega_c = omega_c_box,
                 time_steps = time_steps_box,
@@ -71,7 +71,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             """
             self.params.alpha = alpha
             self.params.beta = beta
-            self.params.gamma = gamma
+            self.params.gamma_s = gamma_s
             self.params.omega_a = omega_a
             self.params.omega_c = omega_c
             self.params.time_end = time_end

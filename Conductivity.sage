@@ -20,7 +20,7 @@ class Conductivity(object):
 
         """
         html('<h2>Please pick parameter below</h2>')
-        param_picker = selector(values = [r'$\beta$', r'$\gamma$'],
+        param_picker = selector(values = [r'$\beta$', r'$\gamma_s$'],
             label = 'Parameter:', buttons = True)
 
         def inner(param = param_picker):
@@ -34,7 +34,7 @@ class Conductivity(object):
             if (param == r'$\beta$'):
                 self.param = 'beta'
             else:
-                self.param = 'gamma'
+                self.param = 'gamma_s'
 
         return inner
 
@@ -49,7 +49,7 @@ class Conductivity(object):
             if (self.param == 'beta'):
                 self.num.params.beta = param
             else:
-                self.num.params.gamma = param
+                self.num.params.gamma_s = param
             self.num.ParamsChanged()
             self.num.ComputeTimeEvolution()
             l = self.num.rho_sink11

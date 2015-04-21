@@ -11,5 +11,5 @@ class SymbolicComputationBase(ComputationBase):
             omega_c = SR.var('omega_c', domain = 'positive'),
             alpha = SR.var('alpha', domain = 'positive'),
             beta = SR.var('beta', domain = 'positive'),
-            gamma = SR.var('gamma', domain = 'positive')
+            gamma_s = SR.var('gamma_s', domain = 'positive')
         )
