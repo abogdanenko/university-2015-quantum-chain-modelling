@@ -73,6 +73,15 @@ class ComputationBase(object):
 
         self.L = [L_sink]
 
+        for i in range(self.space.chain_len):
+            L_at = self.sigma_plus * self.sigma_minus
+            left_qubits = 2 * i + 1
+            right_qubits = self.space.QubitsCount() - left_qubits - 1
+            left = identity_matrix(self.ring, 2 ** left_qubits)
+            right = identity_matrix(self.ring, 2 ** right_qubits)
+            L = gamma_d * left.tensor_product(L_at).tensor_product(right)
+            self.L.append(L)
+
     def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma_s, gamma_d):
         """
         Computes hamiltonian and lindblad operators
