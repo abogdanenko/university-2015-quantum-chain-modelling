@@ -68,8 +68,10 @@ class ComputationBase(object):
         """
         In1 = identity_matrix(self.ring, 2 ** (self.space.QubitsCount() - 2))
 
-        self.L = gamma_s * In1.tensor_product(
+        L_sink = gamma_s * In1.tensor_product(
             self.sigma_minus).tensor_product(self.sigma_plus)
+
+        self.L = [L_sink]
 
     def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma_s, gamma_d):
         """

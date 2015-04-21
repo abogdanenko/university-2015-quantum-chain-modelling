@@ -54,9 +54,13 @@ class MEIntegrator(object):
         """
         unitary_term = CDF(-I) * self.H.commutator(rho)
 
-        L = self.L
-        Lc = L.conjugate_transpose()
-        lindblad_term = L * rho * Lc - 0.5 * rho.anticommutator(Lc * L)
+        matrix_space = rho.parent()
+        zero_matrix = matrix_space.matrix()
+
+        lindblad_term = zero_matrix
+        for L in self.L:
+            Lc = L.conjugate_transpose()
+            lindblad_term += L * rho * Lc - 0.5 * rho.anticommutator(Lc * L)
 
         return unitary_term + lindblad_term
 

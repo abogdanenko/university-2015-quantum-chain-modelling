@@ -25,9 +25,10 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             var = subspace.GetBlock(self.H)
             l = [(name, var)]
 
-            name = 'L'
-            var = subspace.GetBlock(self.L)
-            l.append((name, var))
+            for i, L in enumerate(self.L):
+                name = 'L_{}'.format(i)
+                var = subspace.GetBlock(L)
+                l.append((name, var))
 
             html_vars(l)
 
@@ -60,9 +61,7 @@ class SymbolicComputationInteractive(SymbolicComputationBase):
             (r'H', self.H),
 
             (r'T', self.space.T),
-            (r'H^{\rm ex}', self.H_e),
-
-            (r'L', self.L)
+            (r'H^{\rm ex}', self.H_e)
         ]
 
         d = dict(l)

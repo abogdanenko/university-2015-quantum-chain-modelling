@@ -42,7 +42,7 @@ class NumericalComputationBase(ComputationBase):
         integrator = MEIntegrator(
             rho = self.subspace.GetBlock(rho_full),
             H = self.subspace.GetBlock(self.H),
-            L = self.subspace.GetBlock(self.L),
+            L = [self.subspace.GetBlock(L) for L in self.L],
             dt = self.params.Dt())
 
         self.rho = integrator.Integrate(self.params.time_steps)
