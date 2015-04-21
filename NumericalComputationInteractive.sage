@@ -89,6 +89,14 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         """
         return slider(range(self.params.time_steps), label = 'Time:')
 
+    def ModeSelector(self):
+        """
+        Returns selector that selects mode
+
+        """
+        return selector(values = ['subspace', 'transformed', 'full'],
+            label = 'Mode:', buttons = True)
+
     def InteractiveProbabilityBarChart(self):
         """
         Returns inner function
@@ -97,9 +105,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         """
         html('<h2>Density matrix diagonal</h2>')
-        def inner(
-                t = self.TimeSlider(),
-                mode = ['subspace', 'transformed', 'full']):
+        def inner(t = self.TimeSlider(), mode = self.ModeSelector()):
             """
             Displays state at time t
 
@@ -138,9 +144,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
 
         """
         html('<h2>Density matrix</h2>')
-        def inner(
-                t = self.TimeSlider(),
-                mode = ['subspace', 'transformed', 'full']):
+        def inner(t = self.TimeSlider(), mode = self.ModeSelector()):
             """
             Displays density matrix at time t
 
