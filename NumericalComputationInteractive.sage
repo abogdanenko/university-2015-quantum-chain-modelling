@@ -87,7 +87,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         Returns slider to select point in time
 
         """
-        return slider(range(self.params.time_steps))
+        return slider(range(self.params.time_steps), label = 'Time:')
 
     def InteractiveProbabilityBarChart(self):
         """
