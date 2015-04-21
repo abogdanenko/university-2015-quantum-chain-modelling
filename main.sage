@@ -1,5 +1,6 @@
 load('routines.sage')
 load('State.sage')
+load('SpaceCommon.sage')
 load('SpaceBase.sage')
 load('SpaceInteractive.sage')
 load('Subspace.sage')

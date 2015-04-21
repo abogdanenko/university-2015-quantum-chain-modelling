@@ -1,4 +1,4 @@
-class SpaceBase(object):
+class SpaceBase(SpaceCommon):
     """
     Represents hilbert space
 
@@ -36,26 +36,12 @@ class SpaceBase(object):
         """
         return 2 * self.chain_len + 1
 
-    def Size(self):
-        """
-        Returns number of states
-
-        """
-        return len(self.states)
-
     def SubspacesCount(self):
         """
         Returns number of subspaces
 
         """
         return len(self.subspaces)
-
-    def StatesIndices(self):
-        """
-        Returns list of indices of states
-
-        """
-        return [state.index for state in self.states]
 
     def InitTransform(self):
         """

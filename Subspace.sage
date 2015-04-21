@@ -1,4 +1,4 @@
-class Subspace(object):
+class Subspace(SpaceCommon):
     """
     Represents hilbert space subspace
 
@@ -15,13 +15,6 @@ class Subspace(object):
         """
         state.SetSubspace(self)
         self.states.append(state)
-
-    def Size(self):
-        """
-        Returns number of states
-
-        """
-        return len(self.states)
 
     def Colors(self):
         """
@@ -57,13 +50,6 @@ class Subspace(object):
         """
         return self.states.index(state)
 
-    def StatesIndices(self):
-        """
-        Returns list of indices of states
-
-        """
-        return [state.index for state in self.states]
-
     def partial_trace_sink11(self, rho):
         """
         Returns rho_sink[1,1]
@@ -89,13 +75,3 @@ class Subspace(object):
             row.extend(state.Bits())
             rows.append(row)
         html.table(rows, header = header)
-
-    def StateSlider(self, default = None):
-        """
-        Returns slider of states
-
-        To be used inside interact
-
-        """
-
-        return slider(self.states, label = 'State:', default = default)
