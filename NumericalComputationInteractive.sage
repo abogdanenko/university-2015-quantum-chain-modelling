@@ -53,10 +53,16 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             label = r'$\gamma_s = $',
             type = RDF)
 
+        gamma_d_box = input_box(
+            defaults.gamma_d,
+            label = r'$\gamma_d = $',
+            type = RDF)
+
         def inner(
                 alpha = alpha_box,
                 beta = beta_box,
                 gamma_s = gamma_s_box,
+                gamma_d = gamma_d_box,
                 omega_a = omega_a_box,
                 omega_c = omega_c_box,
                 time_steps = time_steps_box,
@@ -72,6 +78,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
             self.params.alpha = alpha
             self.params.beta = beta
             self.params.gamma_s = gamma_s
+            self.params.gamma_d = gamma_d
             self.params.omega_a = omega_a
             self.params.omega_c = omega_c
             self.params.time_end = time_end

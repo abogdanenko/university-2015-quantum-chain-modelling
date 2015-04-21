@@ -28,7 +28,8 @@ class NumericalComputationBase(ComputationBase):
             omega_c = self.params.omega_c,
             alpha = self.params.alpha,
             beta = self.params.beta,
-            gamma_s = self.params.gamma_s
+            gamma_s = self.params.gamma_s,
+            gamma_d = self.params.gamma_d
         )
 
     def ComputeTimeEvolution(self):

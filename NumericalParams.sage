@@ -11,6 +11,7 @@ class NumericalParams(object):
         self.time_steps = 500
         self.time_end = RDF(40)
         self.gamma_s = RDF(0.5)
+        self.gamma_d = RDF(0.5)
         self.initial_state = 8
 
     def Dt(self):
@@ -28,6 +29,7 @@ class NumericalParams(object):
         l.append((r'\alpha', self.alpha))
         l.append((r'\beta', self.beta))
         l.append((r'\gamma_s', self.gamma_s))
+        l.append((r'\gamma_d', self.gamma_d))
         l.append((r'\omega_a', self.omega_a))
         l.append((r'\omega_c', self.omega_c))
         l.append((r'n_t', self.time_steps))

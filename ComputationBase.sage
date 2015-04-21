@@ -61,7 +61,7 @@ class ComputationBase(object):
         self.H = self.H_chain.tensor_product(I2)
         self.H_e = self.space.ToExcBasis(self.H)
 
-    def ComputeLindbladOperators(self, gamma_s):
+    def ComputeLindbladOperators(self, gamma_s, gamma_d):
         """
         Computes lindblad operators
 
@@ -73,10 +73,10 @@ class ComputationBase(object):
 
         self.L_e = self.space.ToExcBasis(self.L)
 
-    def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma_s):
+    def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma_s, gamma_d):
         """
         Computes hamiltonian and lindblad operators
 
         """
         self.ComputeHamiltonian(omega_a, omega_c, alpha, beta)
-        self.ComputeLindbladOperators(gamma_s)
+        self.ComputeLindbladOperators(gamma_s, gamma_d)
