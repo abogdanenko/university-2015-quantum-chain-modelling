@@ -20,7 +20,8 @@ class Conductivity(object):
 
         """
         html('<h2>Please pick parameter below</h2>')
-        param_picker = ('Parameter: ', [r'$\beta$', r'$\gamma$'])
+        param_picker = selector(values = [r'$\beta$', r'$\gamma$'],
+            label = 'Parameter:', buttons = True)
 
         def inner(param = param_picker):
             """
@@ -102,7 +103,10 @@ class Conductivity(object):
 
         """
         html('<h2>Sink subsystem density matrix elem</h2>')
-        param_value_picker = ('{}: '.format(self.param), self.param_list)
+
+        param_value_picker = selector(values = self.param_list,
+            label = '{}:'.format(self.param))
+
         def inner(param = param_value_picker):
             """
             Shows line plot of sink subsystem matrix elem
