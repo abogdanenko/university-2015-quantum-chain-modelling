@@ -10,18 +10,30 @@ class ComputationBase(object):
         self.InitOperatorsASigma()
 
     def InitBasisVectors(self):
+        """
+        Initializes atom and photon states for one cavity
+
+        """
         self.psi_g = matrix(self.ring, 2, 1, [1, 0])
         self.psi_e = matrix(self.ring, 2, 1, [0, 1])
         self.psi_ph0 = self.psi_g
         self.psi_ph1 = self.psi_e
 
     def InitOperatorsASigma(self):
+        """
+        Initializes operators a, a_plus, sigma_minus, sigma_plus
+
+        """
         self.a = self.psi_ph0 * self.psi_ph1.conjugate_transpose()
         self.a_plus = self.a.conjugate_transpose()
         self.sigma_minus = self.a
         self.sigma_plus = self.sigma_minus.conjugate_transpose()
 
     def ComputeHamiltonian(self, omega_a, omega_c, alpha, beta):
+        """
+        Computes hamiltonian of one cavity and of the whole system
+
+        """
         self.H_field = omega_c * self.a_plus * self.a
         self.H_at = omega_a * self.sigma_plus * self.sigma_minus
         self.H_field_at = alpha * (self.a.tensor_product(self.sigma_plus) \
@@ -50,6 +62,10 @@ class ComputationBase(object):
         self.H_e = self.space.ToExcBasis(self.H)
 
     def ComputeLindbladOperator(self, gamma):
+        """
+        Computes lindblad operator
+
+        """
         In1 = identity_matrix(self.ring, 2 ** (self.space.QubitsCount() - 2))
 
         self.L = gamma * In1.tensor_product(
@@ -58,5 +74,9 @@ class ComputationBase(object):
         self.L_e = self.space.ToExcBasis(self.L)
 
     def ComputeOperators(self, omega_a, omega_c, alpha, beta, gamma):
+        """
+        Computes hamiltonian and lindblad operators
+
+        """
         self.ComputeHamiltonian(omega_a, omega_c, alpha, beta)
         self.ComputeLindbladOperator(gamma)
