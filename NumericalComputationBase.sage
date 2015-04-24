@@ -5,7 +5,7 @@ class NumericalComputationBase(ComputationBase):
     """
     def __init__(self, space):
         super(NumericalComputationBase, self).__init__(space = space, ring = CDF)
-        self.params = NumericalParams()
+        self.params = NumericalParams(self.space)
         self.ParamsChanged()
 
     def IterationTime(self, t):

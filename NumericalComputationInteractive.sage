@@ -13,7 +13,7 @@ class NumericalComputationInteractive(NumericalComputationPlots):
         html('<h2>Set parameters, number of points, time interval '
             'and initial condition</h2>')
 
-        defaults = NumericalParams()
+        defaults = NumericalParams(self.space)
 
         alpha_box = input_box(
             defaults.alpha,

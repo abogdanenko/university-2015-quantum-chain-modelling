@@ -3,7 +3,7 @@ class NumericalParams(object):
     Initializes, stores and prints current values of computation parameters
 
     """
-    def __init__(self):
+    def __init__(self, space):
         self.alpha = RDF(1)
         self.beta = RDF(1)
         self.omega_a = RDF(1)
@@ -12,7 +12,8 @@ class NumericalParams(object):
         self.time_end = RDF(40)
         self.gamma_s = RDF(0.5)
         self.gamma_d = RDF(0.5)
-        self.initial_state = 8
+        # second to last state from subspace 1 has exciton 1 in first cavity
+        self.initial_state = space.subspaces[1].states[-2].index
 
     def Dt(self):
         return RDF(self.time_end / self.time_steps)
