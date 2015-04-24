@@ -15,6 +15,7 @@ load('NumericalComputationInteractive.sage')
 load('NumericalComputationAnimation.sage')
 load('NumericalComputation.sage')
 load('Conductivity.sage')
+load('ConductivityLongChain.sage')
 
 # alias
 SymbolicComputation = SymbolicComputationInteractive
