@@ -20,7 +20,7 @@ class ConductivityLongChain(object):
             num.ComputeTimeEvolution()
             self.num_list.append(num)
 
-        self.conductivity = [num.Conductivity() for num in num_list]
+        self.conductivity = [num.Conductivity() for num in self.num_list]
 
     def PlotConductivity(self):
         """
