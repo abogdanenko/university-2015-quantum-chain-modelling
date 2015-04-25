@@ -4,14 +4,14 @@ class NumericalParams(object):
 
     """
     def __init__(self, space):
-        self.alpha = RDF(1)
-        self.beta = RDF(1)
-        self.omega_a = RDF(1)
-        self.omega_c = RDF(1)
+        self.alpha = RDF(0.7)
+        self.beta = RDF(1.3)
+        self.omega_a = RDF(0.8)
+        self.omega_c = RDF(1.2)
+        self.gamma_s = RDF(3.0)
+        self.gamma_d = RDF(0.5)
         self.time_steps = 500
         self.time_end = RDF(40)
-        self.gamma_s = RDF(0.5)
-        self.gamma_d = RDF(0.5)
         # second to last state from subspace 1 has exciton 1 in first cavity
         self.initial_state = space.subspaces[1].states[-2].index
 
