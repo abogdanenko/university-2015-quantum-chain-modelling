@@ -15,6 +15,19 @@ class NumericalParams(object):
         # second to last state from subspace 1 has exciton 1 in first cavity
         self.initial_state = space.subspaces[1].states[-2].index
 
+    def __repr__(self):
+        s = ''
+        s += 'alpha = {}; '.format(self.alpha)
+        s += 'beta = {}; '.format(self.beta)
+        s += 'omega_a = {}; '.format(self.omega_a)
+        s += 'omega_c = {}; '.format(self.omega_c)
+        s += 'gamma_s = {}; '.format(self.gamma_s)
+        s += 'gamma_d = {}; '.format(self.gamma_d)
+        s += 'time_steps = {}; '.format(self.time_steps)
+        s += 'time_end = {}; '.format(self.time_end)
+        s += 'initial_state = {}'.format(self.initial_state)
+        return s
+
     def Dt(self):
         return RDF(self.time_end / self.time_steps)
 
