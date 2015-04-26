@@ -42,10 +42,10 @@ class NumericalParams(object):
 
         l.append((r'\alpha', self.alpha))
         l.append((r'\beta', self.beta))
-        l.append((r'\gamma_s', self.gamma_s))
-        l.append((r'\gamma_d', self.gamma_d))
         l.append((r'\omega_a', self.omega_a))
         l.append((r'\omega_c', self.omega_c))
+        l.append((r'\gamma_s', self.gamma_s))
+        l.append((r'\gamma_d', self.gamma_d))
         l.append((r'n_t', self.time_steps))
         l.append((r't_{\rm end}', self.time_end))
 
