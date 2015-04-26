@@ -40,18 +40,22 @@ class NumericalComputationPlots(NumericalComputationBase):
 
         return plot_object
 
+    def PlotStates(self):
+        """
+        Returns multi-line plot of state evolution
+
+        """
+        pairs = zip(self.subspace.StatesIndices(), self.subspace.Colors())
+        plots = [self.PlotState(*x) for x in pairs]
+        return sum(plots)
+
     def ShowStates(self):
         """
         Shows multi-line plot of state evolution
 
         """
         html('<h2>Density matrix diagonal elems</h2>')
-
-        pairs = zip(self.subspace.StatesIndices(), self.subspace.Colors())
-        plots = [self.PlotState(*x) for x in pairs]
-        plot = sum(plots)
-
-        show(plot)
+        show(self.PlotStates())
 
     def ProbabilityBarChart(
             self,
