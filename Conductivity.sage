@@ -80,12 +80,11 @@ class Conductivity(object):
 
         return plot_object
 
-    def ShowSink(self):
+    def PlotSinks(self):
         """
-        Shows multi-line plot of rho_sink[1,1] with different param values
+        Returns multi-line plot of rho_sink[1,1] with different param values
 
         """
-        html('<h2>Sink subsystem density matrix elem</h2>')
         n = len(self.param_list)
         colors = rainbow(n)
 
@@ -94,6 +93,14 @@ class Conductivity(object):
             plot += self.PlotSink(i, colors[i])
 
         return plot
+
+    def ShowSink(self):
+        """
+        Shows multi-line plot of rho_sink[1,1] with different param values
+
+        """
+        html('<h2>Sink subsystem density matrix elem</h2>')
+        show(self.PlotSinks())
 
     def InteractiveSink(self):
         """
