@@ -20,7 +20,8 @@ class Conductivity(object):
 
         """
         html('<h2>Please pick parameter below</h2>')
-        param_picker = selector(values = [r'$\beta$', r'$\gamma_s$', r'$\gamma_d$'],
+        param_picker = selector(
+            values = [r'$\beta$', r'$\gamma_s$', r'$\gamma_d$'],
             label = 'Parameter:', buttons = True)
 
         def inner(param = param_picker):
@@ -123,7 +124,8 @@ class Conductivity(object):
 
             """
             index = self.param_list.index(param)
-            html('Conductivity = {:.4f}'.format(float(self.conductivity[index])))
+            html('Conductivity = {:.4f}'.format(float(
+                self.conductivity[index])))
             show(self.PlotSink(index))
 
         return inner

@@ -75,7 +75,8 @@ class State(object):
 
         """
         html('<h2>State indices</h2>')
-        header = ['index', 'index_e', 'index_subspace', 'subspace', 'subspace_size']
+        header = ['index', 'index_e', 'index_subspace', 'subspace',
+            'subspace_size']
         row = [self.index, self.TransformedIndex(), self.SubspaceIndex(),
             self.subspace.index, self.subspace.Size()]
         html.table([row], header = header)
